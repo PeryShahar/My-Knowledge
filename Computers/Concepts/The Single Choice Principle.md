@@ -1,0 +1,5 @@
+## The Single Choice Principle
+
+The Single Choice Principle (SCP) is a principle in software engineering that states that for any given decision, there should be only one place in the code where that decision is made. This means that if a value or configuration needs to be changed, it can be done in one place, rather than scattered throughout the codebase. This makes the code easier to maintain and less prone to bugs.
+
+An example of the Single Choice Principle would be a web application that allows users to customize the color scheme. Rather than hard-coding the colors throughout the application code, the application would have a single configuration file where the color options are defined. This way, if the color scheme needs to be changed, it can be done in one place, rather than having to search through the entire codebase for every instance of the color values.
