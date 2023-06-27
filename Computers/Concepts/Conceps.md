@@ -1,9 +1,5 @@
-*Reverse engineering*
 
-Reverse engineering is the process of analyzing a product or system to understand how it was designed and how it operates. This can involve taking apart a product, examining its components, and analyzing its behavior. The goal of reverse engineering is often to create a new product or system that is similar to the original, or to identify weaknesses or vulnerabilities in the original design. Reverse engineering can be used in many fields, including software engineering, mechanical engineering, and electronics, among others.
 
-*Design Pattern*
-Design patterns are reusable solutions to common software engineering problems. They are often used to address specific challenges that arise during the development process, such as organizing code for maintainability, improving performance, or ensuring scalability. Design patterns are usually grouped into categories based on their purpose and characteristics, such as creational patterns, structural patterns, and behavioral patterns. By using design patterns, developers can save time and effort by leveraging existing solutions to common problems rather than having to reinvent the wheel each time they encounter a challenge.
 
 *The Single Choice Principle*
 The Single Choice Principle (SCP) is a principle in software engineering that states that for any given decision, there should be only one place in the code where that decision is made. This means that if a value or configuration needs to be changed, it can be done in one place, rather than scattered throughout the codebase. This makes the code easier to maintain and less prone to bugs.
