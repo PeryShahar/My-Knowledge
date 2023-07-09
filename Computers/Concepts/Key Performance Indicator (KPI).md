@@ -1,9 +1,7 @@
 ## Key Performance Indicator (KPI)
 
 <aside>
-💡
-
-KPI stands for Key Performance Indicator. KPIs are measurable metrics or indicators that are used to assess the performance and effectiveness of a software development process, project, or product. They provide quantifiable data that helps evaluate progress, track goals, and make informed decisions.
+💡 KPI stands for Key Performance Indicator. KPIs are measurable metrics or indicators that are used to assess the performance and effectiveness of a software development process, project, or product. They provide quantifiable data that helps evaluate progress, track goals, and make informed decisions.
 
 To provide a metaphor from real life, let's consider a car dashboard. In a car, the dashboard provides various indicators that allow the driver to monitor the vehicle's performance and make informed decisions while driving. These indicators include the speedometer, fuel gauge, temperature gauge, and warning lights. Each of these indicators serves as a KPI for different aspects of the car's performance.
 
