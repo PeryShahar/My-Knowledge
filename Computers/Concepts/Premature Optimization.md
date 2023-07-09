@@ -1,3 +1,4 @@
 ## Premature Optimization
 
 Premature optimization refers to the practice of attempting to optimize the performance of a system or program before it is necessary or before the code has been fully developed and tested. This can occur when developers focus too much on performance at the expense of other factors such as readability, maintainability, and flexibility.
+Premature optimization refers to the practice of attempting to optimize the performance of a system or program before it is necessary or before the code has been fully developed and tested. This can occur when developers focus too much on performance at the expense of other factors such as readability, maintainability, and flexibility.![Screenshot from 2023-02-27 12-09-40](https://github.com/PeryShahar/my-knowledge/assets/89962400/2bcbaa68-95d4-4fa1-9946-cf7c890f870c)
