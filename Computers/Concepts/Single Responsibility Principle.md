@@ -1,3 +1,5 @@
+## Single Responsibility Principle
+
 <aside>
 💡 The Single Responsibility Principle (SRP) is a fundamental principle of object-oriented design. It states that a class should have only one reason to change, meaning it should have a single responsibility or purpose. In other words, a class should have a clear and well-defined responsibility and should encapsulate that responsibility within itself.
 

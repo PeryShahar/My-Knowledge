@@ -1,3 +1,5 @@
+## Single Point Of Failure
+
 <aside>
 💡 A single point of failure refers to a component, system, or process within a larger system that, if it fails, would cause the entire system to fail or significantly disrupt its operation.
 

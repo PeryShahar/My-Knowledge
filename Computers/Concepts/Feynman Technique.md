@@ -1,3 +1,5 @@
+## Feynman Technique
+
 <aside>
 💡 The Feynman Technique is a learning and comprehension strategy named after the physicist Richard Feynman. It involves explaining a concept or topic in simple terms as if you were teaching it to someone else. The technique is based on the idea that if you can effectively explain a concept, you have a deeper understanding of it.
 

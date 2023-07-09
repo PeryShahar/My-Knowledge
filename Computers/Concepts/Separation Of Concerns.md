@@ -1,3 +1,5 @@
+## Separation Of Concerns
+
 <aside>
 💡 Separation of concerns is a design principle that suggests breaking down a complex system into distinct and independent parts, each focusing on a specific aspect or responsibility. This division helps to manage complexity, improve maintainability, and promote modularity in software development.
 

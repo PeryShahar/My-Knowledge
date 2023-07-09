@@ -1,3 +1,5 @@
+## SOLID (object-oriented design)
+
 <aside>
 💡 SOLID is an acronym that represents a set of principles for object-oriented design. These principles aim to guide developers in writing software that is easy to understand, maintain, and extend. Each letter in SOLID represents a specific principle:
 

@@ -1,3 +1,5 @@
+## Static Analysis
+
 <aside>
 💡 Static analysis, also known as static code analysis, is a technique used in software development to examine the source code or program's structure, syntax, and semantics without executing it. It analyzes the code statically, i.e., by examining the code as it is written, without actually running the program.
 
