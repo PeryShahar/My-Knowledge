@@ -1,0 +1,680 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title> Concepts</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-interactiveBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="0f4847fa-1458-45f6-84e6-7e4712f29f81" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">🪡</span></div><h1 class="page-title"> Concepts</h1><p class="page-description"></p></header><div class="page-body"><p id="1c049308-9776-4d65-8c7d-7a2192e3bbf8" class=""> </p><ul id="276c5523-6e2d-4d89-99fa-fc9bf45f9af6" class="toggle"><li><details open=""><summary>Reverse Engineering</summary><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="35d47cc5-b91b-4e4e-9da7-affd2bf912ed"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Reverse engineering is the process of analyzing a product or system to understand how it was designed and how it operates. This can involve taking apart a product, examining its components, and analyzing its behavior. The goal of reverse engineering is often to create a new product or system that is similar to the original, or to identify weaknesses or vulnerabilities in the original design. Reverse engineering can be used in many fields, including software engineering, mechanical engineering, and electronics, among others.</div></figure></details></li></ul><ul id="d197ae8a-cfe2-479f-93d4-d218eaf7c9ce" class="toggle"><li><details open=""><summary>Design Pattern (תבניות עיצוב)</summary><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="aeee46d9-e742-4133-a361-e3219a00b3d5"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><strong>Design patterns</strong> are reusable solutions to common software engineering problems. They are often used to address specific challenges that arise during the development process, such as organizing code for maintainability, improving performance, or ensuring scalability. Design patterns are usually grouped into categories based on their purpose and characteristics, such as creational patterns, structural patterns, and behavioral patterns. By using design patterns, developers can save time and effort by leveraging existing solutions to common problems rather than having to reinvent the wheel each time they encounter a challenge.</div></figure><p id="0794c885-0ef0-411f-a18a-2c80871bee6e" class=""><a href="https://www.patterns.dev/posts/classic-design-patterns/">https://www.patterns.dev/posts/classic-design-patterns/</a></p></details></li></ul><ul id="c23c3463-05f0-4662-8b6e-ad0a147f29e1" class="toggle"><li><details open=""><summary>The Single Choice Principle</summary><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="634bb929-554e-43d4-a90f-b19fd2d3f338"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">The Single Choice Principle (SCP) is a principle in software engineering that states that for any given decision, there should be only one place in the code where that decision is made. This means that if a value or configuration needs to be changed, it can be done in one place, rather than scattered throughout the codebase. This makes the code easier to maintain and less prone to bugs.
+
+An example of the Single Choice Principle would be a web application that allows users to customize the color scheme. Rather than hard-coding the colors throughout the application code, the application would have a single configuration file where the color options are defined. This way, if the color scheme needs to be changed, it can be done in one place, rather than having to search through the entire codebase for every instance of the color values.</div></figure></details></li></ul><ul id="6d0a12cb-2c87-4043-8c13-0b3170681165" class="toggle"><li><details open=""><summary>A Single Source Of Truth (SSoT)</summary><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="4b2a6a03-1409-450c-98f8-bdcbd4b3ab17"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">A Single Source of Truth (SSoT) is a concept commonly used in software development and data management. It refers to the practice of having a central, authoritative source that holds and manages a specific set of information. This source becomes the definitive and reliable reference for that information within a system or organization.<p id="441764a8-7f35-462d-9002-99ad37ec20e8" class="">The purpose of establishing a Single Source of Truth is to ensure data consistency, accuracy, and reliability across different components or systems that rely on that information. By having a single, trusted source, the risk of data inconsistencies, conflicts, and discrepancies is minimized.</p><p id="0ebad890-7aad-4fc9-bca3-fa406c5d5d5e" class="">Here are some key characteristics and benefits of a Single Source of Truth:</p><ol type="1" id="f73bd217-e0a6-4c26-aec2-73f5be16836b" class="numbered-list" start="1"><li>Centralized and Authoritative: The Single Source of Truth acts as the central repository that holds the definitive version of the data. It is considered the authoritative and most up-to-date source that all other components or systems rely on.</li></ol><ol type="1" id="de8db143-a713-458f-b13a-ae91031b5b12" class="numbered-list" start="2"><li>Data Consistency: Having a Single Source of Truth helps to maintain data consistency across different parts of a system or organization. Instead of having multiple copies or versions of the same data, all components refer to the same source, eliminating potential discrepancies or conflicts.</li></ol><ol type="1" id="df8609e6-b7e1-40bd-8562-70205e7a37a8" class="numbered-list" start="3"><li>Improved Decision Making: With a Single Source of Truth, decision-making processes can be more reliable and efficient. Stakeholders can rely on accurate and consistent data to make informed decisions, rather than dealing with conflicting or outdated information.</li></ol><ol type="1" id="72e61af3-2268-408b-9d82-1a47634cc90f" class="numbered-list" start="4"><li>Reduced Complexity and Maintenance: By consolidating data into a Single Source of Truth, the complexity of managing and synchronizing multiple sources is reduced. It simplifies the data management process and reduces maintenance efforts, as there is only one source to update and maintain.</li></ol><ol type="1" id="ad796f16-e3cb-4315-b03c-79b801732a0c" class="numbered-list" start="5"><li>Enhanced Collaboration and Communication: A Single Source of Truth promotes better collaboration and communication within a team or organization. All members can reference the same data source, fostering a shared understanding and reducing misunderstandings or misinterpretations.</li></ol><ol type="1" id="d0fe72b0-6f0e-4d67-8653-d65ef6075fa5" class="numbered-list" start="6"><li>Data Integrity and Quality Control: With a Single Source of Truth, it becomes easier to enforce data integrity and quality control measures. Data validation and verification can be centralized, ensuring that the data adheres to predefined rules and standards.</li></ol><p id="f277f7f1-2808-45f4-9d3e-9ee45b7ea576" class="">Examples of Single Source of Truth implementations include centralized databases, content management systems, or version control systems, where a specific set of information is maintained and accessed by various components or systems.</p><p id="1cfd446f-b57a-4dc2-ba70-0fe9002ee038" class="">However, it&#x27;s important to note that not all data can or should be centralized into a Single Source of Truth. Some data may be better suited for distributed or decentralized management based on specific requirements and use cases.</p><p id="e183811f-fc98-439b-b7ed-ad08b1819e05" class="">In summary, a Single Source of Truth provides a centralized, authoritative, and consistent reference for specific information within a system or organization. It promotes data integrity, accuracy, and reliability, simplifies data management, and enhances collaboration and decision-making processes.</p></div></figure></details></li></ul><ul id="285b5e8d-76aa-4964-bb9f-e542b2f699f7" class="toggle"><li><details open=""><summary>Single Responsibility Principle</summary><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="5792e89b-b8f2-4817-bd26-03af09a892b6"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">The Single Responsibility Principle (SRP) is a fundamental principle of object-oriented design. It states that a class should have only one reason to change, meaning it should have a single responsibility or purpose. In other words, a class should have a clear and well-defined responsibility and should encapsulate that responsibility within itself.<p id="ea50321c-5694-4351-9929-e9aebbc5ae23" class="">The goal of the SRP is to promote modularity, maintainability, and reusability in software systems. When a class has a single responsibility, it becomes focused and easier to understand. It also becomes less prone to bugs and easier to test in isolation.</p><p id="f761976e-96e4-4a98-96b3-82122d8d92d8" class="">By adhering to the SRP, we can achieve the following benefits:</p><ol type="1" id="a685dbec-8d05-4d90-a9ce-3249bee21420" class="numbered-list" start="1"><li>Improved Readability: A class with a single responsibility is easier to understand and navigate. Developers can quickly grasp the purpose and functionality of the class, making the codebase more readable and maintainable.</li></ol><ol type="1" id="7c78b13a-04a0-4f6b-9532-86464998d814" class="numbered-list" start="2"><li>Enhanced Modularity: With a clear responsibility, a class becomes a modular building block that can be reused in different contexts. Changes in one area of the system are less likely to impact other unrelated areas, promoting code stability and reducing the risk of introducing unintended side effects.</li></ol><ol type="1" id="380da1df-e97a-4538-a2d9-27bc7050efe5" class="numbered-list" start="3"><li>Easier Testing: When a class has a single responsibility, it is easier to write focused and targeted unit tests. Testing specific functionality becomes simpler, as there is less need to account for multiple responsibilities and potential interactions.</li></ol><ol type="1" id="b798f4cb-059d-4799-9f55-fe614c424782" class="numbered-list" start="4"><li>Flexible Evolution: When a class has a single responsibility, changes to that responsibility are isolated. This allows for easier maintenance and evolution of the codebase. Adding new features or modifying existing functionality can be done with minimal impact on other parts of the system.</li></ol><p id="9db15b3c-5f38-4f4d-a4d7-f05370cf41bb" class="">To adhere to the SRP, it is essential to carefully analyze and define the responsibilities of each class. If a class is found to have multiple responsibilities, it is recommended to split it into multiple classes, each with a single responsibility. This ensures that each class has a clear purpose and promotes a more maintainable and flexible software architecture.</p><p id="9c03283a-371d-4086-9239-0b7379fc386b" class="">In summary, the Single Responsibility Principle encourages the design of classes that have a single responsibility or purpose. By adhering to this principle, we can achieve more readable, modular, and maintainable code, facilitating easier testing and future development.</p></div></figure></details></li></ul><ul id="0ed2ae64-e6a2-49a2-8956-3f843012917c" class="toggle"><li><details open=""><summary>SOLID (<a href="https://en.wikipedia.org/wiki/Object-oriented">object-oriented</a> design)</summary><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="d069aa76-1652-42d1-b44f-6439181127d7"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">SOLID is an acronym that represents a set of principles for object-oriented design. These principles aim to guide developers in writing software that is easy to understand, maintain, and extend. Each letter in SOLID represents a specific principle:<ol type="1" id="060bf54a-e795-4b63-965a-9790a99fc8f7" class="numbered-list" start="1"><li>Single Responsibility Principle (SRP): This principle states that a class should have only one reason to change. It suggests that a class should have a single responsibility or purpose, and it should encapsulate that responsibility. By adhering to the SRP, classes become more focused, modular, and easier to test and maintain.</li></ol><ol type="1" id="58b665da-1ed3-4155-9ab7-933a780660b7" class="numbered-list" start="2"><li>Open-Closed Principle (OCP): The OCP states that software entities (classes, modules, functions) should be open for extension but closed for modification. This means that when new functionality needs to be added, the existing code should not be modified. Instead, the code should be designed in a way that allows new features to be added through inheritance, composition, or other means, without altering the existing codebase.</li></ol><ol type="1" id="390cfefb-4ec6-4631-93c6-2f303d936980" class="numbered-list" start="3"><li>Liskov Substitution Principle (LSP): The LSP states that objects of a superclass should be replaceable with objects of its subclasses without affecting the correctness of the program. In other words, if a class is derived from a base class, it should be able to substitute the base class in any context without introducing unexpected behavior or violating the expected contract of the base class.</li></ol><ol type="1" id="f5872a9d-af83-4c2d-9de4-4042ecf36827" class="numbered-list" start="4"><li>Interface Segregation Principle (ISP): The ISP emphasizes that clients should not be forced to depend on interfaces they do not use. It promotes the idea of creating specific interfaces for different client needs, rather than having large, monolithic interfaces. This principle helps to prevent interface pollution and ensures that clients only depend on the functionality they actually need.</li></ol><ol type="1" id="67505f9b-9bd8-45c7-aced-01d9b619b328" class="numbered-list" start="5"><li>Dependency Inversion Principle (DIP): The DIP states that high-level modules should not depend on low-level modules. Both should depend on abstractions. It also states that abstractions should not depend on details; details should depend on abstractions. This principle encourages the use of dependency injection, inversion of control containers, and programming to interfaces, allowing for flexible and loosely coupled systems.</li></ol><p id="b8e427a3-c34c-46ea-80d7-5092a330d0f9" class="">By following the SOLID principles, developers can create more maintainable, scalable, and testable object-oriented code. These principles promote code reusability, modularity, and flexibility, ultimately leading to better software design and development practices.</p></div></figure></details></li></ul><ul id="dea2bc0a-1b6c-4d6b-a023-4c7e3fe718bc" class="toggle"><li><details open=""><summary>Agile</summary><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="fca42a6e-c680-4f68-814d-e13cb43323ef"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Agile is a software development methodology that emphasizes flexibility and collaboration. It involves working in short sprints, with a focus on delivering working software quickly and frequently. Agile teams are self-organizing and cross-functional, with a focus on continuous improvement and responding to change.</div></figure></details></li></ul><ul id="e097e605-7812-463c-87c6-369b007dae4f" class="toggle"><li><details open=""><summary>Proof Of Concept (POC)</summary><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="ba6e31ac-d643-4b88-a58d-9712cb96ba25"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">A Proof of Concept (POC) is a small-scale test or demonstration conducted to evaluate the feasibility and viability of an idea, concept, or technology. It serves as a way to gather evidence and determine whether a proposed solution can deliver the desired outcomes or solve a particular problem.<p id="e846b32c-be45-4f7a-adc4-45f4ad2d4177" class="">To explain it with an example, let&#x27;s imagine a company that wants to introduce a new mobile app for grocery shopping. Before investing significant resources in developing the complete app, they decide to conduct a POC to validate the feasibility of their idea.</p><p id="bd23b06c-5ed9-41bd-85d3-5e6ea9ca369f" class="">During the POC, the company develops a simplified version of the app with basic features. They might focus on functionalities like browsing products, adding items to a shopping cart, and placing orders. The objective is to assess whether the core functionalities work as intended and whether users find the app useful and intuitive.</p><p id="9d2d8d28-ce4f-420e-b92f-58031218b94c" class="">The company then conducts a limited trial or test of the POC, involving a small group of users or internal testers. They gather feedback, monitor user interactions, and evaluate the performance of the app. Based on the findings, they can make informed decisions about the future development and investment in the full-fledged mobile app.</p><p id="99841c21-82f1-4640-b9dd-3a6ce255df5b" class="">For instance, if the POC reveals positive user feedback, smooth functionality, and high user engagement, it provides evidence that the concept is promising and worth pursuing. On the other hand, if the POC identifies significant usability issues or technical challenges, the company can revise their approach, make adjustments, or even reconsider the viability of the idea.</p><p id="e4813c93-7021-4afd-a376-84d9aca37375" class="">In summary, a Proof of Concept involves conducting a small-scale test or demonstration to evaluate the feasibility and potential success of an idea or solution. It allows organizations to gather evidence, validate assumptions, and make informed decisions before committing extensive resources to the full development and implementation of a concept.</p></div></figure></details></li></ul><ul id="0343a8ae-6258-42fd-9f12-4e93d9221811" class="toggle"><li><details open=""><summary>Premature Optimization</summary><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="d6d3f790-403e-4785-a713-a8d0f95664f8"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Premature optimization refers to the practice of attempting to optimize the performance of a system or program before it is necessary or before the code has been fully developed and tested. This can occur when developers focus too much on performance at the expense of other factors such as readability, maintainability, and flexibility.</div></figure><figure id="7cbbbd4f-a2ac-4f3a-ad0e-ae424b9b691d"><div class="source"><a href="https://www.youtube.com/watch?v=tKbV6BpH-C8&amp;ab_channel=CodeAesthetic">https://www.youtube.com/watch?v=tKbV6BpH-C8&amp;ab_channel=CodeAesthetic</a></div></figure><figure id="fc91851e-e83d-4748-a399-80e6549e3d5e" class="image"><a href="Concepts%200f4847fa145845f684e67e4712f29f81/Screenshot_from_2023-02-27_12-09-40.png"><img style="width:945px" src="Concepts%200f4847fa145845f684e67e4712f29f81/Screenshot_from_2023-02-27_12-09-40.png"/></a></figure></details></li></ul><ul id="9d43758b-9bb9-4f37-ad2c-3aac837c32fb" class="toggle"><li><details open=""><summary>Bus Factor</summary><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="8cff412c-276f-414e-b0f8-ccec9179a420"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">The bus factor refers to the number of people in a team who can get hit by a bus (or leave the project for any other reason) before the project becomes in danger or stuck. The lower the number, the higher the risk. Essentially, it measures how dependent a project is on a small number of individuals. It&#x27;s important to ensure that there are multiple team members who are familiar with the project and can step in if necessary to mitigate risks.</div></figure></details></li></ul><ul id="07031038-9634-4433-8706-3dac824f125b" class="toggle"><li><details open=""><summary>Feynman Technique </summary><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="e56786c3-ccaf-4749-a115-7f13d8ec3e07"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">The Feynman Technique is a learning and comprehension strategy named after the physicist Richard Feynman. It involves explaining a concept or topic in simple terms as if you were teaching it to someone else. The technique is based on the idea that if you can effectively explain a concept, you have a deeper understanding of it.<p id="c7425f73-3567-4301-9de4-49b848fc7143" class="">Here&#x27;s a step-by-step breakdown of the Feynman Technique:</p><ol type="1" id="a6d3d107-bbec-42d8-9008-cdb8ac42f84e" class="numbered-list" start="1"><li>Choose a concept: Select the concept or topic you want to understand or learn better. It can be anything from a scientific principle to a historical event or a complex idea.</li></ol><ol type="1" id="693ab037-6d9c-4851-932b-633395b76cc3" class="numbered-list" start="2"><li>Study the concept: Dive into studying the concept, gathering information, and taking notes. Read textbooks, articles, watch videos, or attend lectures to gain a solid understanding of the topic.</li></ol><ol type="1" id="f759471f-2506-4c15-ae95-59fd67785f77" class="numbered-list" start="3"><li>Explain the concept in simple terms: Pretend that you are teaching the concept to someone who has no prior knowledge of it. Use simple language and avoid jargon. Try to break down complex ideas into smaller, understandable parts.</li></ol><ol type="1" id="29986e30-f99e-4776-a7a5-b1fd6fd237ff" class="numbered-list" start="4"><li>Identify knowledge gaps: As you explain the concept, pay attention to areas where you struggle to explain clearly or encounter gaps in your understanding. These areas indicate points where you need to further study and strengthen your knowledge.</li></ol><ol type="1" id="2a09067b-0a57-4a0c-96ae-afa908cfd1aa" class="numbered-list" start="5"><li>Review and simplify: Go back to your study materials and review the parts where you encountered difficulties. Make an effort to simplify and clarify these areas. Use analogies, examples, and visuals to aid in understanding.</li></ol><ol type="1" id="d45c5dd3-b269-4e17-8cfd-b34c36c5c4a3" class="numbered-list" start="6"><li>Repeat and refine: Continuously repeat the process of explaining the concept in simple terms and reviewing areas of difficulty. Refine your explanation each time to make it more concise and understandable.</li></ol><p id="aa02f7fa-c811-4780-b4bb-3a78d557e818" class="">The Feynman Technique encourages active learning and helps identify areas of weakness or incomplete understanding. By teaching a concept in simple terms, you are forced to break it down into fundamental components and ensure that you truly grasp the underlying principles.</p><p id="4345db5f-f061-4f8d-a25d-cde118a5f61d" class="">Remember, the goal of the technique is not to impress others with your explanation, but rather to solidify your own understanding. By using this method, you can enhance your comprehension and retain knowledge more effectively.</p></div></figure></details></li></ul><ul id="aa90a5ff-b0c1-4581-b0c7-85d27c439881" class="toggle"><li><details open=""><summary>A/B Testing</summary><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="c7cffb96-b682-4923-8773-5d68aa807390"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">A/B testing is a method of comparing two versions of a webpage or app against each other to determine which one performs better. The goal of A/B testing is to identify changes that increase or maximize an outcome of interest, such as click-through rate or conversion rate. The test is usually performed by randomly assigning users to either the A or B version of the webpage or app and comparing the results. A/B testing can be used to test changes to anything from website copy to entire user interfaces.</div></figure><p id="1067e3dc-3595-4c84-84b3-94af14f8e9a6" class=""><a href="https://www.optimizely.com/optimization-glossary/ab-testing/">https://www.optimizely.com/optimization-glossary/ab-testing/</a></p></details></li></ul><ul id="3060244d-f00f-4615-8385-0a08fe6132eb" class="toggle"><li><details open=""><summary>MVP</summary><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="f7f931c3-ea20-4127-9444-cf8de0d7e359"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">MVP stands for Minimum Viable Product. It is an early version of a product that is designed to test the market and gather feedback from users. The MVP is usually stripped down to its core features and functionality, with an emphasis on speed and simplicity. This allows the development team to quickly iterate and improve the product based on user feedback, without investing too much time and resources into features that may not be necessary. The MVP is often used in agile development methodologies and is a key component of the lean startup approach.</div></figure><p id="c4156520-32d2-464e-bec8-0f40afdef0b7" class=""><a href="https://www.investopedia.com/terms/m/minimum-viable-product-mvp.asp">https://www.investopedia.com/terms/m/minimum-viable-product-mvp.asp</a></p></details></li></ul><ul id="fce433da-7b12-43f7-91e3-90dafe2c358c" class="toggle"><li><details open=""><summary>Over Engineering </summary><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="8ba76aac-596b-46b5-9d73-f9f62459cab3"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Overengineering refers to the practice of designing a product, system, or solution with more complexity, features, or capabilities than necessary for its intended purpose. In simple words, it means making something more complicated or sophisticated than it needs to be.<p id="d22e09a5-08ce-44a4-bfec-261c64fd6ba6" class="">When a product or system is overengineered, it often involves using excessive resources, time, and effort to create something that goes beyond what is required to meet the desired goals or requirements. Overengineering can occur due to various reasons, such as a desire to future-proof the design, a lack of clear understanding of the requirements, or a belief that more is always better.</p><p id="c5a50e12-a6ad-4a64-b915-ae39a40940d8" class="">The consequences of overengineering can include increased costs, longer development times, unnecessary complexity, and difficulties in maintenance and scalability. It can also lead to inefficiencies, as resources are allocated to features or capabilities that are not essential or used.</p><p id="d57935c4-237e-4b8f-a4ab-d9139e84e1af" class="">To avoid overengineering, it is important to have a clear understanding of the requirements and objectives of a project or product. By focusing on the core needs and avoiding unnecessary complexity, it is possible to create simpler, more efficient, and cost-effective solutions.</p></div></figure></details></li></ul><ul id="6e511ec3-9efa-40c0-9212-13c6383e8b52" class="toggle"><li><details open=""><summary>Separation Of Concerns</summary><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="9964194f-723a-464d-ae02-a9b08eca63ff"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Separation of concerns is a design principle that suggests breaking down a complex system into distinct and independent parts, each focusing on a specific aspect or responsibility. This division helps to manage complexity, improve maintainability, and promote modularity in software development.<p id="516e4789-855b-41f5-945d-5fcd53b3d282" class="">To understand this concept with a metaphor from real life, let&#x27;s consider a restaurant. In a well-organized restaurant, there are different roles assigned to different individuals, each with their own specific responsibilities:</p><ol type="1" id="2b2a7f43-c97b-4173-acdf-3ddec574ea33" class="numbered-list" start="1"><li>Chefs: The chefs specialize in preparing the food. They focus on cooking delicious dishes using their culinary skills and expertise.</li></ol><ol type="1" id="242dbafd-902c-4e42-af00-fc1bab1b7769" class="numbered-list" start="2"><li>Waitstaff: The waitstaff is responsible for taking orders, serving food, and ensuring customer satisfaction. They focus on providing excellent service and addressing any customer requests or concerns.</li></ol><ol type="1" id="87e3dfe5-99d7-45e7-88d4-1bdd3cd4caa4" class="numbered-list" start="3"><li>Managers: The managers oversee the overall operations of the restaurant. They handle administrative tasks, such as managing inventory, scheduling staff, and ensuring the smooth running of the establishment.</li></ol><p id="852389b1-d72b-4765-80d4-3173c7eadf14" class="">By separating these concerns, the restaurant can operate efficiently and effectively. Each role focuses on its specific responsibilities without interfering with the tasks of others. The chefs can concentrate on cooking, the waitstaff can focus on serving customers, and the managers can handle the administrative aspects.</p><p id="1ecb2a0a-ac72-4be4-85cd-1f9ec19e8bbf" class="">Similarly, in software development, separation of concerns helps create modular and maintainable code. Different modules or components handle specific tasks, such as user interface, data storage, and business logic. Each component operates independently, with well-defined interfaces, allowing developers to work on different parts of the system without affecting others. This promotes code reusability, easier debugging, and scalability of the software.</p><p id="4c31889e-aa34-4a1b-8f21-f3e8d959cdd2" class="">In both cases, the separation of concerns enables individuals or components to specialize in their respective areas, leading to a more efficient and organized system.</p></div></figure></details></li></ul><ul id="cce2d893-1356-4935-8fba-36ec48614a87" class="toggle"><li><details open=""><summary>Single Point Of Failure</summary><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="5cd2969c-489a-4375-8a34-dca79eaa9627"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">A single point of failure refers to a component, system, or process within a larger system that, if it fails, would cause the entire system to fail or significantly disrupt its operation.<p id="69163dc9-ee05-4a55-bec3-7c355cafbf2f" class="">In simpler terms, it&#x27;s like having a critical piece in a machine that, if it breaks, the entire machine stops working. This vulnerable component becomes a single point of failure because its failure has a cascading effect on the entire system, causing it to malfunction or become unavailable.</p><p id="f36aeda1-6fa8-4e84-8ea9-fef6decd915e" class="">Having a single point of failure poses a risk because it lacks redundancy or alternative options. If that particular component fails, there is no backup or alternative in place to keep the system running smoothly. This can lead to downtime, loss of data, or disruptions in services.</p><p id="fbaf3966-0093-45b7-9dbe-7168f41c4204" class="">To mitigate the risk of a single point of failure, system designers and engineers employ redundancy and fault-tolerant measures. This involves introducing backup components, duplicating critical systems, or implementing failover mechanisms. By doing so, if one component fails, another can take over seamlessly, minimizing the impact on the overall system.</p><p id="05ce991a-f585-4783-9e69-10178ade284c" class="">Identifying and addressing single points of failure is crucial in ensuring the reliability, resilience, and continuous operation of complex systems, such as networks, servers, power systems, and critical infrastructure.</p></div></figure></details></li></ul><ul id="e7db295f-07e0-46a9-a753-3176b41fc27e" class="toggle"><li><details open=""><summary>Static Analysis </summary><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="cf0e1cd2-5c6f-4e5e-b5bf-2bace191e6df"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Static analysis, also known as static code analysis, is a technique used in software development to examine the source code or program&#x27;s structure, syntax, and semantics without executing it. It analyzes the code statically, i.e., by examining the code as it is written, without actually running the program.<p id="5f869faa-503e-401e-aa70-30330d215fd2" class="">The primary goal of static analysis is to identify potential issues, vulnerabilities, and coding errors early in the development process. It helps developers ensure code quality, improve software reliability, and reduce the likelihood of bugs and security vulnerabilities in the deployed application.
+
+Imagine you are constructing a building. Before the construction begins, architects and engineers carefully analyze the blueprints and designs of the building. They perform static analysis by examining the structure, materials, and various elements of the building without actually building it.</p><p id="605cf5d8-5b2b-4e3e-91e9-9c6b321d4baf" class="">In this scenario, static analysis acts like a thorough examination of the plans and designs to identify potential issues, errors, or weaknesses. Architects and engineers can detect structural flaws, improper material usage, or design inconsistencies by analyzing the plans statically. They can catch problems like weak foundations, load-bearing issues, or inadequate safety measures before the construction process even begins.</p><p id="d75df40b-24cb-4899-b611-8f4d0970ea9c" class="">Similarly, in software development, static analysis tools examine the code statically, analyzing the syntax, structure, and patterns to identify potential issues, bugs, or vulnerabilities. By performing static analysis, developers can catch coding errors, identify potential security weaknesses, ensure adherence to coding standards, and assess code complexity before the code is executed or deployed.</p><p id="2058c09b-6040-4806-9a99-db5e6b375287" class="">Here are some common types of issues that static analysis tools can detect:</p><ol type="1" id="f9c2f6cf-2886-4593-960c-05a3d1a363b7" class="numbered-list" start="1"><li>Coding standards and style violations: Static analysis tools can enforce coding standards and guidelines, ensuring consistency and readability across the codebase. They can flag issues such as indentation, naming conventions, code formatting, and other style-related violations.</li></ol><ol type="1" id="75179acb-dd3c-45af-bc88-d84c87dc517b" class="numbered-list" start="2"><li>Code complexity and maintainability: Static analysis tools can assess the complexity of the codebase by analyzing factors like cyclomatic complexity, code duplication, and method length. High complexity and duplication can make the code harder to understand, maintain, and debug. Static analysis helps identify such areas for refactoring and improvement.</li></ol><ol type="1" id="5d46eeb5-a46c-4f1d-8853-522b1e1b63b4" class="numbered-list" start="3"><li>Potential bugs and logical errors: Static analysis tools can detect potential bugs and logical errors in the code, such as null pointer dereferences, memory leaks, unused variables, improper error handling, and resource management issues. These tools use static analysis techniques to analyze control flow, data flow, and variable usage to identify code paths that may lead to errors.</li></ol><ol type="1" id="56063148-1d4d-4842-818e-b25ea0c7ec41" class="numbered-list" start="4"><li>Security vulnerabilities: Static analysis tools can identify common security vulnerabilities, such as SQL injection, cross-site scripting (XSS), security misconfigurations, and insecure cryptographic practices. They can analyze the code for patterns that are known to be associated with security weaknesses and provide developers with early detection and guidance to address these issues.</li></ol><ol type="1" id="43c15bce-d680-4a51-b280-ba1894c2af19" class="numbered-list" start="5"><li>Performance optimization: Static analysis tools can help identify performance bottlenecks and inefficiencies in the code. They can flag areas that might lead to excessive memory usage, unnecessary computations, or inefficient algorithms, allowing developers to optimize the code for better performance.</li></ol><p id="15a3c0a8-4b08-4417-88b4-1d732a1cccfb" class="">By performing static analysis on the codebase, developers can catch potential issues and improve code quality before the code is even executed. This reduces the likelihood of encountering bugs, security vulnerabilities, and performance problems in the deployed application, resulting in more reliable and maintainable software.</p></div></figure></details></li></ul><ul id="a6d3f3b7-2f88-4c3f-a6ca-9a9d11500997" class="toggle"><li><details open=""><summary>Design Doc</summary><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="3faf4c6e-bf4b-4963-a828-9927451fe5b6"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">A design document, also known as a technical design document or software design document, is a comprehensive written description that outlines the design and architecture of a software system or application. It serves as a guide for developers, designers, and stakeholders involved in the software development process.<p id="5885e892-411f-4b4e-884a-209eba395e49" class="">The purpose of a design document is to provide a clear and detailed understanding of how the software will be structured, how different components will interact, and how the system will meet the specified requirements. It helps align the development team and stakeholders by documenting the decisions made during the design phase.</p><p id="4c97ac18-0cad-4709-ade7-f1de6203a20d" class="">A typical design document includes the following components:</p><ol type="1" id="d03a6f69-df3a-41ae-b388-b71f05c8d95b" class="numbered-list" start="1"><li>Introduction: This section provides an overview of the software system, its purpose, and the intended audience of the document.</li></ol><ol type="1" id="b829def9-24d6-4764-9f69-8b9340f03722" class="numbered-list" start="2"><li>Functional Requirements: This section outlines the specific features and functionalities that the software system needs to implement. It describes the behavior and interactions of the system from a user&#x27;s perspective.</li></ol><ol type="1" id="35b9afef-1d3e-42ed-933e-48d74081a130" class="numbered-list" start="3"><li>Architecture and High-Level Design: This section describes the overall architecture of the software system, including its major components, modules, and their relationships. It may include architectural diagrams, such as block diagrams or flowcharts, to illustrate the system&#x27;s structure.</li></ol><ol type="1" id="6ce7cea3-3688-4caa-95d7-2bfd819d1c5e" class="numbered-list" start="4"><li>Detailed Design: This section delves into the specifics of each component, module, or subsystem of the software system. It includes detailed descriptions of the internal workings, interfaces, data structures, algorithms, and interactions of these components.</li></ol><ol type="1" id="d50cf098-380b-43d6-a9ef-33d69c786e9c" class="numbered-list" start="5"><li>User Interface Design: If applicable, this section outlines the design of the user interface, including visual mockups, interaction flows, and user experience considerations.</li></ol><ol type="1" id="f384f976-e0b7-48a8-b457-77a4d3a59538" class="numbered-list" start="6"><li>Data Design: This section focuses on the data structures, databases, and data flows within the system. It describes how data will be stored, organized, and accessed.</li></ol><ol type="1" id="df5b0f5f-7791-440a-b30a-cfa2ae4209af" class="numbered-list" start="7"><li>External Interfaces: This section details any external systems, APIs, or services that the software system will interact with, specifying the integration methods and protocols.</li></ol><ol type="1" id="2f756853-5a81-4d28-9aec-7a988917e2fb" class="numbered-list" start="8"><li>Security and Performance Considerations: This section addresses security measures and considerations, such as authentication, authorization, encryption, and data privacy. It also includes performance-related considerations, like scalability, optimization techniques, and potential bottlenecks.</li></ol><ol type="1" id="2c9cfff6-973a-43a9-aa6b-cebebc2d5936" class="numbered-list" start="9"><li>Testing and Quality Assurance: This section outlines the testing strategies, methodologies, and quality assurance processes that will be employed to ensure the software system&#x27;s reliability and functionality.</li></ol><ol type="1" id="3bb4c160-3585-4258-bcd6-d8e8c7be50e7" class="numbered-list" start="10"><li>Deployment and Maintenance: This section covers deployment strategies, installation instructions, configuration requirements, and ongoing maintenance considerations.</li></ol><p id="9b5a2b7d-df48-41c2-8dd3-87b4fc5db0a1" class="">Design documents are crucial in facilitating collaboration, providing a reference for developers, and ensuring the software system&#x27;s consistency and integrity. They serve as a blueprint for implementation, guiding the development process and allowing stakeholders to have a clear understanding of the software system&#x27;s design decisions and functionality.</p></div></figure></details></li></ul><ul id="63ea9d0e-90ac-4a50-bf9b-8c6116437c67" class="toggle"><li><details open=""><summary>Centralized</summary></details></li></ul><ul id="d88e2af8-3777-4988-944f-4b3e97b248d7" class="toggle"><li><details open=""><summary>Key Performance Indicator (KPI)</summary></details></li></ul></div></article></body></html>

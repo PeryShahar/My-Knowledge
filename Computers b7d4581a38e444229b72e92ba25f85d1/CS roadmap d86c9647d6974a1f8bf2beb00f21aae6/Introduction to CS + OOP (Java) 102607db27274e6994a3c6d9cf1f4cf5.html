@@ -1,0 +1,722 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Introduction to CS + OOP (Java)</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-interactiveBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="102607db-2727-4e69-94a3-c6d9cf1f4cf5" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">🐣</span></div><h1 class="page-title">Introduction to CS + OOP (Java)</h1><p class="page-description"></p></header><div class="page-body"><ul id="5a05cb6c-aa84-4487-834f-2a629f2bedd2" class="toggle"><li><details open=""><summary>Basic (in my own words)</summary></details></li></ul><ul id="b7f5cbdc-c904-4cfc-964e-068ed602e577" class="toggle"><li><details open=""><summary>Open University</summary><ul id="4667aa55-a6f9-470b-9891-3b55978bbc0c" class="toggle"><li><details open=""><summary>Open University - Chapter 3</summary><ul id="4b1d9949-c124-4dca-a76c-fefaa6d98388" class="bulleted-list"><li style="list-style-type:disc">important to remember when we declare primitive values (like int/numbers), in memory the name of the variable is store in binary and after the number itself in binary.
+so first we initialize number (int num = 5), memory is putting the name num in memory, then give us the the size for the number (4byets) and put the number 5 in binary in this space<figure id="04422a30-b5c5-43fd-936f-5042b18d067c" class="image"><a href="Introduction%20to%20CS%20+%20OOP%20(Java)%20102607db27274e6994a3c6d9cf1f4cf5/Screenshot_from_2023-01-03_11-31-34.png"><img style="width:1416px" src="Introduction%20to%20CS%20+%20OOP%20(Java)%20102607db27274e6994a3c6d9cf1f4cf5/Screenshot_from_2023-01-03_11-31-34.png"/></a></figure></li></ul><p id="5b3abdb1-bcd2-4a1b-b4d6-73499d856898" class="">
+</p><ul id="c3a8e0d4-62bd-4a10-a6ce-c4b2d4a144bb" class="bulleted-list"><li style="list-style-type:disc">String is object so when we create String/Object in memory there is the name of the object and then a pointer in different location in memory to the string itself.
+so first we initialize string (String str = “shahar”), memory is putting the name str in memory and point to different location to the string itself.<figure id="c3e9fb1d-acb0-4b91-9e13-ebd77159995a" class="image"><a href="Introduction%20to%20CS%20+%20OOP%20(Java)%20102607db27274e6994a3c6d9cf1f4cf5/Screenshot_from_2023-01-03_11-33-22.png"><img style="width:1416px" src="Introduction%20to%20CS%20+%20OOP%20(Java)%20102607db27274e6994a3c6d9cf1f4cf5/Screenshot_from_2023-01-03_11-33-22.png"/></a></figure></li></ul><ul id="430f2cbd-3bba-4d15-b31d-48f7b569ae4d" class="bulleted-list"><li style="list-style-type:disc">Important to remember is when we use object we always need to create instance of this object with the “new” keyword.
+With the word new we actually call the constructor function of the class. </li></ul><figure id="30db6697-7bf7-4758-b8e5-d4661d12bbbf" class="image"><a href="Introduction%20to%20CS%20+%20OOP%20(Java)%20102607db27274e6994a3c6d9cf1f4cf5/Screenshot_from_2023-01-03_12-04-18.png"><img style="width:1369px" src="Introduction%20to%20CS%20+%20OOP%20(Java)%20102607db27274e6994a3c6d9cf1f4cf5/Screenshot_from_2023-01-03_12-04-18.png"/></a></figure></details></li></ul><ul id="5140ef23-d250-47a3-8e35-ce952d250da3" class="toggle"><li><details open=""><summary>Open University - Chapter 4 (Classes)</summary><ul id="f66e8a7f-2da4-462a-b104-3a883b02fe62" class="toggle"><li><details open=""><summary>Class, Constructor and Overloading</summary><ul id="ede10882-ee1f-483d-bdde-93eff152307f" class="bulleted-list"><li style="list-style-type:disc">Constructor (בנאי)<figure id="f8b39a07-b899-46bf-bd45-0c356256a812" class="image"><a href="Introduction%20to%20CS%20+%20OOP%20(Java)%20102607db27274e6994a3c6d9cf1f4cf5/Screenshot_from_2023-01-05_16-35-42.png"><img style="width:1359px" src="Introduction%20to%20CS%20+%20OOP%20(Java)%20102607db27274e6994a3c6d9cf1f4cf5/Screenshot_from_2023-01-05_16-35-42.png"/></a></figure></li></ul><ul id="d203a35a-1806-4c10-a70e-e4acdcb975c4" class="bulleted-list"><li style="list-style-type:disc">Overloading (העמסה)<figure id="0b4aacbd-7e0b-4894-8c04-bae796812399" class="image"><a href="Introduction%20to%20CS%20+%20OOP%20(Java)%20102607db27274e6994a3c6d9cf1f4cf5/Screenshot_from_2023-01-08_09-57-55.png"><img style="width:1683px" src="Introduction%20to%20CS%20+%20OOP%20(Java)%20102607db27274e6994a3c6d9cf1f4cf5/Screenshot_from_2023-01-08_09-57-55.png"/></a></figure></li></ul><ul id="f2f62f00-9076-49ec-b163-93c5c61e54a4" class="bulleted-list"><li style="list-style-type:disc">class has attributes and methods<figure id="8be691f3-977b-4270-8be0-4e9dde473250" class="image"><a href="Introduction%20to%20CS%20+%20OOP%20(Java)%20102607db27274e6994a3c6d9cf1f4cf5/Screenshot_from_2023-01-04_09-41-33.png"><img style="width:1244px" src="Introduction%20to%20CS%20+%20OOP%20(Java)%20102607db27274e6994a3c6d9cf1f4cf5/Screenshot_from_2023-01-04_09-41-33.png"/></a></figure></li></ul></details></li></ul><ul id="372f8ddd-83ab-434f-8e26-91dc2ecc3267" class="toggle"><li><details open=""><summary>Encapsulation</summary><ul id="9d1bc895-14f0-49d3-914d-8f651817de2c" class="bulleted-list"><li style="list-style-type:disc">We can create getters and setters to deal with the access.</li></ul><figure id="d34fe0b2-b273-4cec-b5a2-ddc3465551dc" class="image"><a href="Introduction%20to%20CS%20+%20OOP%20(Java)%20102607db27274e6994a3c6d9cf1f4cf5/Screenshot_from_2023-01-08_10-14-15.png"><img style="width:1378px" src="Introduction%20to%20CS%20+%20OOP%20(Java)%20102607db27274e6994a3c6d9cf1f4cf5/Screenshot_from_2023-01-08_10-14-15.png"/></a></figure><figure id="bf62b19f-87e6-4fcb-b8d4-83f0bca6661c" class="image"><a href="Introduction%20to%20CS%20+%20OOP%20(Java)%20102607db27274e6994a3c6d9cf1f4cf5/Screenshot_from_2023-01-08_11-44-26.png"><img style="width:1367px" src="Introduction%20to%20CS%20+%20OOP%20(Java)%20102607db27274e6994a3c6d9cf1f4cf5/Screenshot_from_2023-01-08_11-44-26.png"/></a></figure></details></li></ul><ul id="e6db739e-9441-46d2-99ff-2ed03b991c18" class="toggle"><li><details open=""><summary>Object in Memory and Garbage collector</summary><figure id="0961ce90-3cac-4ba6-9ac3-069a08e4fa5f" class="image"><a href="Introduction%20to%20CS%20+%20OOP%20(Java)%20102607db27274e6994a3c6d9cf1f4cf5/Screenshot_from_2023-01-08_14-52-28.png"><img style="width:1286px" src="Introduction%20to%20CS%20+%20OOP%20(Java)%20102607db27274e6994a3c6d9cf1f4cf5/Screenshot_from_2023-01-08_14-52-28.png"/></a></figure><ul id="8e7384e7-130a-4db3-8860-134128d883a8" class="bulleted-list"><li style="list-style-type:disc">Garbage collector is automatic in java, it’s understands if there are objects in the heap that noting in the stack memory points on them and delete them.</li></ul><ul id="5567d42c-5756-4a83-8f46-48d1c614a910" class="bulleted-list"><li style="list-style-type:disc">Remember when you compare between 2 primitive numbers - the comparison  checks if the values in binary are the same.
+With objects it checks if the pointers and point on the same object in the heap memory. </li></ul></details></li></ul><ul id="437554bf-7cfb-4012-bbc6-7b20592f8570" class="toggle"><li><details open=""><summary>This</summary><ul id="8d51e62c-a610-432a-b528-e2d7582e32c3" class="bulleted-list"><li style="list-style-type:disc">The <code>this</code>
+ keyword refers to the current object in a method or constructor.</li></ul><ul id="70e19141-689d-42af-991d-fb6c80145161" class="bulleted-list"><li style="list-style-type:disc">The most common use of the <code>this</code>
+ keyword is to eliminate the confusion between class attributes and parameters with the same name</li></ul><figure id="34a2baac-ef4b-4c72-bb0e-0d85535879c9" class="image"><a href="Introduction%20to%20CS%20+%20OOP%20(Java)%20102607db27274e6994a3c6d9cf1f4cf5/Screenshot_from_2023-01-09_10-56-36.png"><img style="width:1329px" src="Introduction%20to%20CS%20+%20OOP%20(Java)%20102607db27274e6994a3c6d9cf1f4cf5/Screenshot_from_2023-01-09_10-56-36.png"/></a></figure></details></li></ul><ul id="7a66e2ad-f43a-44cb-9d22-cdd158146343" class="toggle"><li><details open=""><summary>Object class</summary><figure id="8c69e7c6-86a5-47df-97eb-5fa7a54d1207" class="image"><a href="Introduction%20to%20CS%20+%20OOP%20(Java)%20102607db27274e6994a3c6d9cf1f4cf5/Screenshot_from_2023-01-09_11-28-14.png"><img style="width:1329px" src="Introduction%20to%20CS%20+%20OOP%20(Java)%20102607db27274e6994a3c6d9cf1f4cf5/Screenshot_from_2023-01-09_11-28-14.png"/></a></figure></details></li></ul><ul id="f793e3f3-8383-4988-857c-603c1b9002fc" class="toggle"><li><details open=""><summary>Static variable and Static method</summary><ul id="7e0dcfaf-2f9d-4a24-a8e8-7c5797ed2132" class="bulleted-list"><li style="list-style-type:disc">Static variable</li></ul><pre id="e64e53e6-0cff-45af-969a-ea1449c86870" class="code"><code>public class SonyTV {
+private static int counter = 0;
+
+	// Constructor
+	public SonyTV(String model, double price) {
+		_model = model
+		_price = price;
+		counter++;
+	}
+}</code></pre><figure id="709e99ec-cfde-49b2-9672-0b701ab1cf63" class="image"><a href="Introduction%20to%20CS%20+%20OOP%20(Java)%20102607db27274e6994a3c6d9cf1f4cf5/Screenshot_from_2023-01-11_10-19-07.png"><img style="width:975px" src="Introduction%20to%20CS%20+%20OOP%20(Java)%20102607db27274e6994a3c6d9cf1f4cf5/Screenshot_from_2023-01-11_10-19-07.png"/></a></figure><p id="8341ecdf-b220-4c6d-b24a-0fd59f98fad9" class="">
+</p><ul id="42f2ffde-ccff-4668-bb10-b14efeb06ef5" class="bulleted-list"><li style="list-style-type:disc">Static method</li></ul><pre id="cd41f6cf-5d89-4e7a-b23d-981b69593089" class="code"><code>public static void main(String[] args) {
+SonyTV tv1 = new SonyTv(&quot;XRX32&quot;, 150.0);
+SonyTV tv2 = new SonyTv(&quot;XRX33&quot;, 180.0);
+System.out.println(&quot;the total num of tvs is &quot; + SonyTV.getCounter()); // we use the class itself and get counter is a static method
+}</code></pre><figure id="6142e366-5b94-44e0-b33b-84992e655902" class="image"><a href="Introduction%20to%20CS%20+%20OOP%20(Java)%20102607db27274e6994a3c6d9cf1f4cf5/Screenshot_from_2023-01-11_10-33-33.png"><img style="width:1378px" src="Introduction%20to%20CS%20+%20OOP%20(Java)%20102607db27274e6994a3c6d9cf1f4cf5/Screenshot_from_2023-01-11_10-33-33.png"/></a></figure><p id="152952fd-6ed4-4cf6-9dad-b9a81f40ac8b" class="">
+</p></details></li></ul></details></li></ul><ul id="b1a88ca9-57b3-423e-a387-55ce228a7926" class="toggle"><li><details open=""><summary>Open University - Chapter 6 (Arrays)</summary><figure id="87af9c7c-4650-4a1a-b5b7-d1c829b1b1ab" class="image"><a href="Introduction%20to%20CS%20+%20OOP%20(Java)%20102607db27274e6994a3c6d9cf1f4cf5/Screenshot_from_2023-01-11_10-56-51.png"><img style="width:1378px" src="Introduction%20to%20CS%20+%20OOP%20(Java)%20102607db27274e6994a3c6d9cf1f4cf5/Screenshot_from_2023-01-11_10-56-51.png"/></a></figure></details></li></ul><ul id="d932d5d6-b8c2-4c24-bc8f-f9d0fbbfd580" class="toggle"><li><details open=""><summary>Open University - Chapter 7 (Inheritance)</summary><ul id="5ed2bf66-c388-4f52-8c6e-c89b10062286" class="toggle"><li><details open=""><summary>Basic Inheritance</summary><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="37faccdf-43ff-4dcf-b355-f5c6f49a9b18"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><strong>All the classes in java inherit from the Object class.</strong></div></figure><ul id="999dafb2-1bad-41b6-b172-5506a834d6f9" class="bulleted-list"><li style="list-style-type:disc">inheritance (IS-A relationship) vs object composition (HAS-A relationship).</li></ul><figure id="05ffc07b-0696-47b7-b5bb-8abd1b70346c" class="image"><a href="Introduction%20to%20CS%20+%20OOP%20(Java)%20102607db27274e6994a3c6d9cf1f4cf5/Screenshot_from_2023-01-15_14-40-49.png"><img style="width:1341px" src="Introduction%20to%20CS%20+%20OOP%20(Java)%20102607db27274e6994a3c6d9cf1f4cf5/Screenshot_from_2023-01-15_14-40-49.png"/></a></figure><figure id="8e183b5d-1c1d-474d-8ea2-62d5c0e7df5b" class="image"><a href="Introduction%20to%20CS%20+%20OOP%20(Java)%20102607db27274e6994a3c6d9cf1f4cf5/Screenshot_from_2023-01-15_14-29-05.png"><img style="width:1379px" src="Introduction%20to%20CS%20+%20OOP%20(Java)%20102607db27274e6994a3c6d9cf1f4cf5/Screenshot_from_2023-01-15_14-29-05.png"/></a></figure><figure id="fd5273fe-2bc3-4f34-bbff-b7dc0484bfe9" class="image"><a href="Introduction%20to%20CS%20+%20OOP%20(Java)%20102607db27274e6994a3c6d9cf1f4cf5/Screenshot_from_2023-01-15_14-36-32.png"><img style="width:1386px" src="Introduction%20to%20CS%20+%20OOP%20(Java)%20102607db27274e6994a3c6d9cf1f4cf5/Screenshot_from_2023-01-15_14-36-32.png"/></a></figure></details></li></ul><ul id="eb33588f-10a7-4e62-aaa9-ee03d9b0b631" class="toggle"><li><details open=""><summary>Constructors</summary><figure id="15d8b385-0495-4d32-984c-8656d2d9434c" class="image"><a href="Introduction%20to%20CS%20+%20OOP%20(Java)%20102607db27274e6994a3c6d9cf1f4cf5/Screenshot_from_2023-01-15_14-50-21.png"><img style="width:1305px" src="Introduction%20to%20CS%20+%20OOP%20(Java)%20102607db27274e6994a3c6d9cf1f4cf5/Screenshot_from_2023-01-15_14-50-21.png"/></a></figure></details></li></ul><ul id="0312cbcb-36fe-46e1-9812-3c3a4f6bdba4" class="toggle"><li><details open=""><summary>Overriding</summary><figure id="61903d76-f10b-4bed-97d6-2f8a718b941e" class="image"><a href="Introduction%20to%20CS%20+%20OOP%20(Java)%20102607db27274e6994a3c6d9cf1f4cf5/Screenshot_from_2023-01-15_15-47-09.png"><img style="width:1321px" src="Introduction%20to%20CS%20+%20OOP%20(Java)%20102607db27274e6994a3c6d9cf1f4cf5/Screenshot_from_2023-01-15_15-47-09.png"/></a></figure></details></li></ul><ul id="6bc29665-2333-403e-aad7-ead5ba2c5d6f" class="toggle"><li><details open=""><summary>Access Modifiers</summary><figure id="a5b17af7-fbe1-43fa-bb91-9957979294cd" class="image"><a href="Introduction%20to%20CS%20+%20OOP%20(Java)%20102607db27274e6994a3c6d9cf1f4cf5/Screenshot_from_2023-01-15_15-59-23.png"><img style="width:1322px" src="Introduction%20to%20CS%20+%20OOP%20(Java)%20102607db27274e6994a3c6d9cf1f4cf5/Screenshot_from_2023-01-15_15-59-23.png"/></a></figure><figure id="7feb2897-60bc-4ec0-8b4d-2898ce2b8feb" class="image"><a href="Introduction%20to%20CS%20+%20OOP%20(Java)%20102607db27274e6994a3c6d9cf1f4cf5/Screenshot_from_2023-01-15_16-01-28.png"><img style="width:1370px" src="Introduction%20to%20CS%20+%20OOP%20(Java)%20102607db27274e6994a3c6d9cf1f4cf5/Screenshot_from_2023-01-15_16-01-28.png"/></a></figure><figure id="70c366d9-4b5e-4959-a95a-aa2d4660f79e" class="image"><a href="Introduction%20to%20CS%20+%20OOP%20(Java)%20102607db27274e6994a3c6d9cf1f4cf5/Screenshot_from_2023-01-15_16-05-00.png"><img style="width:1102px" src="Introduction%20to%20CS%20+%20OOP%20(Java)%20102607db27274e6994a3c6d9cf1f4cf5/Screenshot_from_2023-01-15_16-05-00.png"/></a></figure><figure id="56f8f1da-0764-419c-a069-38fc9cb172d9" class="image"><a href="Introduction%20to%20CS%20+%20OOP%20(Java)%20102607db27274e6994a3c6d9cf1f4cf5/Screenshot_from_2023-01-16_09-56-19.png"><img style="width:1722px" src="Introduction%20to%20CS%20+%20OOP%20(Java)%20102607db27274e6994a3c6d9cf1f4cf5/Screenshot_from_2023-01-16_09-56-19.png"/></a></figure></details></li></ul></details></li></ul><ul id="f8c710d7-ca4a-4322-88ae-564ec61814aa" class="toggle"><li><details open=""><summary>Open University - Chapter 8 (Polymorphism)</summary><ul id="6b142a0f-8bee-4d8c-bec4-f9391059e3c9" class="toggle"><li><details open=""><summary>Basic Polymorphism</summary><figure id="599c51a2-15d9-4139-ba19-c10d8aa3b5ae" class="image"><a href="Introduction%20to%20CS%20+%20OOP%20(Java)%20102607db27274e6994a3c6d9cf1f4cf5/Screenshot_from_2023-01-16_10-31-32.png"><img style="width:1381px" src="Introduction%20to%20CS%20+%20OOP%20(Java)%20102607db27274e6994a3c6d9cf1f4cf5/Screenshot_from_2023-01-16_10-31-32.png"/></a></figure><figure id="00c4601c-576f-4089-be17-0367035886e0" class="image"><a href="Introduction%20to%20CS%20+%20OOP%20(Java)%20102607db27274e6994a3c6d9cf1f4cf5/Screenshot_from_2023-01-16_10-32-26.png"><img style="width:1381px" src="Introduction%20to%20CS%20+%20OOP%20(Java)%20102607db27274e6994a3c6d9cf1f4cf5/Screenshot_from_2023-01-16_10-32-26.png"/></a></figure><figure id="f08dceeb-94b5-4628-a299-09c00c6ce695" class="image"><a href="Introduction%20to%20CS%20+%20OOP%20(Java)%20102607db27274e6994a3c6d9cf1f4cf5/Screenshot_from_2023-01-16_10-22-48.png"><img style="width:1462px" src="Introduction%20to%20CS%20+%20OOP%20(Java)%20102607db27274e6994a3c6d9cf1f4cf5/Screenshot_from_2023-01-16_10-22-48.png"/></a></figure><figure id="43c0f15a-073a-4a6e-b01e-b6a7ddba8a18" class="image"><a href="Introduction%20to%20CS%20+%20OOP%20(Java)%20102607db27274e6994a3c6d9cf1f4cf5/Screenshot_from_2023-01-16_10-26-23.png"><img style="width:1462px" src="Introduction%20to%20CS%20+%20OOP%20(Java)%20102607db27274e6994a3c6d9cf1f4cf5/Screenshot_from_2023-01-16_10-26-23.png"/></a></figure></details></li></ul><ul id="5f818221-3203-4119-9fed-f2758f21d0d0" class="toggle"><li><details open=""><summary>Dynamic Polymorphism vs Static Polymorphism</summary><p id="4e7fd318-197c-4e0f-96b7-577eac4b1581" class=""><a href="https://www.javatpoint.com/static-binding-and-dynamic-binding">https://www.javatpoint.com/static-binding-and-dynamic-binding</a></p><figure id="4fb2f63a-8fae-4122-b1d7-315ab36fce6b"><a href="https://www.javatpoint.com/static-binding-and-dynamic-binding" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">https://www.javatpoint.com/static-binding-and-dynamic-binding</div></div><div class="bookmark-href">https://www.javatpoint.com/static-binding-and-dynamic-binding</div></div></a></figure></details></li></ul><ul id="1b410549-3cab-4888-9be6-33051075e571" class="toggle"><li><details open=""><summary>Upcasting &amp; Downcasting</summary><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="7225d35e-8bc7-4b76-8cfc-34425be51625"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Remember that up-casting is from son to parent and it’s always work!</div></figure><pre id="40c565db-dd62-42ee-92a4-de7041531058" class="code"><code>class  Parent{  
+   void PrintData() {  
+      System.out.println(&quot;method of parent class&quot;);  
+   }  
+}  
+  
+class Child extends Parent {  
+   void PrintData() {  
+      System.out.println(&quot;method of child class&quot;);  
+   }  
+}  
+class UpcastingExample{  
+   public static void main(String args[]) {  
+        
+      Parent obj1 = new Child();  
+      Parent obj2 = (Parent) new Child();   
+      obj1.PrintData(); // method of child class
+      obj2.PrintData(); // method of child class
+   }  
+}</code></pre><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="cb09aa85-76f9-46cc-ab61-75fcdff7c6e4"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Remember the down-casting is from father to sun and you need check mostly the instanceof</div></figure><figure id="2aa0ad19-bc16-4869-a193-d1cedf94cb5e"><div class="source"><a href="https://www.youtube.com/watch?v=HpuH7n9VOYk&amp;t=434s&amp;ab_channel=CodingwithJohn">https://www.youtube.com/watch?v=HpuH7n9VOYk&amp;t=434s&amp;ab_channel=CodingwithJohn</a></div></figure><figure id="961e0170-03b4-4cda-8dde-b303b1d09122"><a href="https://www.javatpoint.com/upcasting-and-downcasting-in-java" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Upcasting and Downcasting in Java - Javatpoint</div><div class="bookmark-description">A process of converting one data type to another is known as Typecasting and Upcasting and Downcasting is the type of object typecasting. In Java, the object can also be typecasted like the datatypes. Parent and Child objects are two types of objects.</div></div><div class="bookmark-href"><img src="https://static.javatpoint.com/images/favicon2.png" class="icon bookmark-icon"/>https://www.javatpoint.com/upcasting-and-downcasting-in-java</div></div><img src="https://static.javatpoint.com/core/images/upcasting-and-downcasting-in-java.png" class="bookmark-image"/></a></figure></details></li></ul><ul id="371781e6-2af4-459b-8205-ddc383ea10aa" class="toggle"><li><details open=""><summary>Abstract Class</summary><ul id="d5b2b1d0-a3d3-42b3-84a9-91cb2ae5118c" class="bulleted-list"><li style="list-style-type:disc"><strong>Every class that inherit the abstract method must override it</strong><figure id="6f2f845e-0961-459a-826b-78b2141981b2" class="image"><a href="Introduction%20to%20CS%20+%20OOP%20(Java)%20102607db27274e6994a3c6d9cf1f4cf5/Screenshot_from_2023-01-16_11-26-19.png"><img style="width:1330px" src="Introduction%20to%20CS%20+%20OOP%20(Java)%20102607db27274e6994a3c6d9cf1f4cf5/Screenshot_from_2023-01-16_11-26-19.png"/></a></figure><figure id="bf79895f-acd6-4e34-a92c-0d2270663ad1" class="image"><a href="Introduction%20to%20CS%20+%20OOP%20(Java)%20102607db27274e6994a3c6d9cf1f4cf5/Screenshot_from_2023-01-16_11-28-42.png"><img style="width:1340px" src="Introduction%20to%20CS%20+%20OOP%20(Java)%20102607db27274e6994a3c6d9cf1f4cf5/Screenshot_from_2023-01-16_11-28-42.png"/></a></figure><figure id="8efb1817-98b7-49be-af20-01d501c9fb4e" class="image"><a href="Introduction%20to%20CS%20+%20OOP%20(Java)%20102607db27274e6994a3c6d9cf1f4cf5/Screenshot_from_2023-01-16_11-29-50.png"><img style="width:1225px" src="Introduction%20to%20CS%20+%20OOP%20(Java)%20102607db27274e6994a3c6d9cf1f4cf5/Screenshot_from_2023-01-16_11-29-50.png"/></a></figure><figure id="db92e46f-c318-405b-bdcf-60b03c6b5496" class="image"><a href="Introduction%20to%20CS%20+%20OOP%20(Java)%20102607db27274e6994a3c6d9cf1f4cf5/Screenshot_from_2023-01-16_11-31-04.png"><img style="width:1311px" src="Introduction%20to%20CS%20+%20OOP%20(Java)%20102607db27274e6994a3c6d9cf1f4cf5/Screenshot_from_2023-01-16_11-31-04.png"/></a></figure></li></ul></details></li></ul><ul id="4f67d34d-4eeb-406e-aee4-33b6afeebe04" class="toggle"><li><details open=""><summary>Interfaces</summary><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="910d730d-412f-4e45-968e-f6e01bf8cbbd"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><strong>as you know a class can inherit just from one super class, if you want to “inherit” more we can use interfaces.</strong></div></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="329939ea-42b2-45cc-bc2f-310ec5f8e1aa"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">הממשק מכיל את ההגדרה התנהגותית ללא המימוש של אותה התנהגות</div></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="d5a03057-1300-4954-9914-6803131ae577"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><strong>We can’t create instance of interface/abstract class.</strong></div></figure><figure id="b1bcfd7c-0f32-4887-a150-3741a4c7c737" class="image"><a href="Introduction%20to%20CS%20+%20OOP%20(Java)%20102607db27274e6994a3c6d9cf1f4cf5/Screenshot_from_2023-01-18_09-49-12.png"><img style="width:1316px" src="Introduction%20to%20CS%20+%20OOP%20(Java)%20102607db27274e6994a3c6d9cf1f4cf5/Screenshot_from_2023-01-18_09-49-12.png"/></a></figure><figure id="98cbbe74-3aa3-4db8-9e30-9c2d9b4bfecf" class="image"><a href="Introduction%20to%20CS%20+%20OOP%20(Java)%20102607db27274e6994a3c6d9cf1f4cf5/Screenshot_from_2023-01-18_09-53-46.png"><img style="width:1357px" src="Introduction%20to%20CS%20+%20OOP%20(Java)%20102607db27274e6994a3c6d9cf1f4cf5/Screenshot_from_2023-01-18_09-53-46.png"/></a></figure><p id="f514bc47-5e0e-43f8-a01a-efb7fbca23a5" class="">
+</p></details></li></ul><ul id="bab786aa-6686-4268-851e-95d149aa9051" class="toggle"><li><details open=""><summary>Object Class</summary><figure id="70009b1e-989e-4007-95aa-5a4b28014879" class="image"><a href="Introduction%20to%20CS%20+%20OOP%20(Java)%20102607db27274e6994a3c6d9cf1f4cf5/Screenshot_from_2023-01-19_10-18-00.png"><img style="width:1378px" src="Introduction%20to%20CS%20+%20OOP%20(Java)%20102607db27274e6994a3c6d9cf1f4cf5/Screenshot_from_2023-01-19_10-18-00.png"/></a></figure><figure id="257761d1-5191-4aec-96d8-cda7264dacd7" class="image"><a href="Introduction%20to%20CS%20+%20OOP%20(Java)%20102607db27274e6994a3c6d9cf1f4cf5/Screenshot_from_2023-01-19_10-19-01.png"><img style="width:1386px" src="Introduction%20to%20CS%20+%20OOP%20(Java)%20102607db27274e6994a3c6d9cf1f4cf5/Screenshot_from_2023-01-19_10-19-01.png"/></a></figure></details></li></ul></details></li></ul><ul id="884cefff-db4e-4436-93f1-4f25524800ca" class="toggle"><li><details open=""><summary>Open University - Chapter 9 (Efficiency)</summary><ul id="9deda7ea-ae0f-4d57-801a-fca2d7e7454c" class="toggle"><li><details open=""><summary>Basic</summary><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="938ba400-f46c-4bab-a2e6-7c34594fa185"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">there are many ways to solve the same problem, but some of the ways will be for efficient by <strong>SPACE</strong> and <strong>TIME</strong></div></figure><ul id="83f9c8fb-7fe8-4d3c-9990-27e3568d2a39" class="bulleted-list"><li style="list-style-type:disc">Space Complexity - גודל זכרון המחשב שצריך להקצות לצורך ביצוע התוכנית</li></ul><ul id="7e04443f-2831-46e0-a803-6981c4a917c9" class="bulleted-list"><li style="list-style-type:disc">Time Complexity - משך הזמן בו מתבצע התוכנית</li></ul><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="2439d698-13b2-4b46-9bc6-f3a5622ec2bc"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">We will measure the time complexity by the input <strong>and</strong> the number of operations that the program does and <strong>not </strong>by the hardware or the length of the input</div></figure><figure id="973d63ce-6b86-48aa-a3b1-29c84d9ad223" class="image"><a href="Introduction%20to%20CS%20+%20OOP%20(Java)%20102607db27274e6994a3c6d9cf1f4cf5/Screenshot_from_2023-01-22_15-34-21.png"><img style="width:1426px" src="Introduction%20to%20CS%20+%20OOP%20(Java)%20102607db27274e6994a3c6d9cf1f4cf5/Screenshot_from_2023-01-22_15-34-21.png"/></a></figure><ul id="c6642084-69ba-4dff-a735-22e8abe2f8cc" class="bulleted-list"><li style="list-style-type:disc">It’s important to remember that we calculated mostly the <strong>worst</strong> case</li></ul></details></li></ul><ul id="15edac0a-3cb0-48e9-8a7a-8cb27183e6e1" class="toggle"><li><details open=""><summary>Big O Notion (order of magnitude) - סדר גודל</summary><figure id="78347eb3-acf2-4331-952e-055e7a393572" class="image"><a href="Introduction%20to%20CS%20+%20OOP%20(Java)%20102607db27274e6994a3c6d9cf1f4cf5/Screenshot_from_2023-01-24_09-32-00.png"><img style="width:1367px" src="Introduction%20to%20CS%20+%20OOP%20(Java)%20102607db27274e6994a3c6d9cf1f4cf5/Screenshot_from_2023-01-24_09-32-00.png"/></a></figure><figure id="6fc4324b-10fb-49e1-b700-563fbe45ee6e" class="image"><a href="Introduction%20to%20CS%20+%20OOP%20(Java)%20102607db27274e6994a3c6d9cf1f4cf5/Screenshot_from_2023-01-24_09-44-27.png"><img style="width:1367px" src="Introduction%20to%20CS%20+%20OOP%20(Java)%20102607db27274e6994a3c6d9cf1f4cf5/Screenshot_from_2023-01-24_09-44-27.png"/></a></figure></details></li></ul><ul id="279f0cc2-7132-4798-8a98-b99dad900562" class="toggle"><li><details open=""><summary>Sorting</summary><ul id="57162d59-744e-412e-8429-8a2c304b627e" class="toggle"><li><details open=""><summary>Bubble Sort (O^2)</summary><figure id="e2f9d1f8-2938-47c4-9a0e-7fddc6e31d45" class="image"><a href="Introduction%20to%20CS%20+%20OOP%20(Java)%20102607db27274e6994a3c6d9cf1f4cf5/Screenshot_from_2023-01-24_09-47-21.png"><img style="width:1384px" src="Introduction%20to%20CS%20+%20OOP%20(Java)%20102607db27274e6994a3c6d9cf1f4cf5/Screenshot_from_2023-01-24_09-47-21.png"/></a></figure><figure id="5401b3a0-d48a-48bd-a21b-c707759ac43e" class="image"><a href="Introduction%20to%20CS%20+%20OOP%20(Java)%20102607db27274e6994a3c6d9cf1f4cf5/Screenshot_from_2023-01-24_09-48-22.png"><img style="width:1408px" src="Introduction%20to%20CS%20+%20OOP%20(Java)%20102607db27274e6994a3c6d9cf1f4cf5/Screenshot_from_2023-01-24_09-48-22.png"/></a></figure><figure id="ed7488e4-7118-4ae5-963c-63c2520a82bc" class="image"><a href="Introduction%20to%20CS%20+%20OOP%20(Java)%20102607db27274e6994a3c6d9cf1f4cf5/Screenshot_from_2023-01-24_09-49-15.png"><img style="width:1498px" src="Introduction%20to%20CS%20+%20OOP%20(Java)%20102607db27274e6994a3c6d9cf1f4cf5/Screenshot_from_2023-01-24_09-49-15.png"/></a></figure><figure id="2bfc6bc3-6bfb-43d0-86b7-70d96062c63f" class="image"><a href="Introduction%20to%20CS%20+%20OOP%20(Java)%20102607db27274e6994a3c6d9cf1f4cf5/Screenshot_from_2023-01-24_09-51-03.png"><img style="width:1420px" src="Introduction%20to%20CS%20+%20OOP%20(Java)%20102607db27274e6994a3c6d9cf1f4cf5/Screenshot_from_2023-01-24_09-51-03.png"/></a></figure><p id="9966a12b-8998-4770-a747-cf111d714fb0" class="">
+</p></details></li></ul><ul id="bce3d743-58e3-43cb-ac52-f4d75ed6ffce" class="toggle"><li><details open=""><summary>Selection Sort (O^2)</summary><figure id="8673f7a6-488f-462b-a39e-94704c4089b6" class="image"><a href="Introduction%20to%20CS%20+%20OOP%20(Java)%20102607db27274e6994a3c6d9cf1f4cf5/Screenshot_from_2023-01-24_10-01-04.png"><img style="width:1420px" src="Introduction%20to%20CS%20+%20OOP%20(Java)%20102607db27274e6994a3c6d9cf1f4cf5/Screenshot_from_2023-01-24_10-01-04.png"/></a></figure><figure id="d1700b11-bcba-459a-ac6c-5b0b82cba13c" class="image"><a href="Introduction%20to%20CS%20+%20OOP%20(Java)%20102607db27274e6994a3c6d9cf1f4cf5/Screenshot_from_2023-01-24_10-01-43.png"><img style="width:1394px" src="Introduction%20to%20CS%20+%20OOP%20(Java)%20102607db27274e6994a3c6d9cf1f4cf5/Screenshot_from_2023-01-24_10-01-43.png"/></a></figure><figure id="7aca8dbf-6d69-4e8a-9d06-af95f943028f" class="image"><a href="Introduction%20to%20CS%20+%20OOP%20(Java)%20102607db27274e6994a3c6d9cf1f4cf5/Screenshot_from_2023-01-24_10-02-48.png"><img style="width:1395px" src="Introduction%20to%20CS%20+%20OOP%20(Java)%20102607db27274e6994a3c6d9cf1f4cf5/Screenshot_from_2023-01-24_10-02-48.png"/></a></figure></details></li></ul><ul id="8871e3dc-ab92-4892-968f-f78eacb158aa" class="toggle"><li><details open=""><summary>Insertion Sort (O^2)</summary><figure id="72416f9e-2bf7-4082-b8a5-888888d87ee5" class="image"><a href="Introduction%20to%20CS%20+%20OOP%20(Java)%20102607db27274e6994a3c6d9cf1f4cf5/Screenshot_from_2023-01-24_10-05-19.png"><img style="width:1395px" src="Introduction%20to%20CS%20+%20OOP%20(Java)%20102607db27274e6994a3c6d9cf1f4cf5/Screenshot_from_2023-01-24_10-05-19.png"/></a></figure><figure id="6dafd549-bcb4-4672-910f-f092d35408fe" class="image"><a href="Introduction%20to%20CS%20+%20OOP%20(Java)%20102607db27274e6994a3c6d9cf1f4cf5/Screenshot_from_2023-01-24_10-05-40.png"><img style="width:1377px" src="Introduction%20to%20CS%20+%20OOP%20(Java)%20102607db27274e6994a3c6d9cf1f4cf5/Screenshot_from_2023-01-24_10-05-40.png"/></a></figure></details></li></ul></details></li></ul><ul id="82315ee4-a118-4afd-89d7-c7c61159bce9" class="toggle"><li><details open=""><summary>Space complexity</summary><figure id="4bdbad05-adf3-4108-8c5e-73a553f99ea0" class="image"><a href="Introduction%20to%20CS%20+%20OOP%20(Java)%20102607db27274e6994a3c6d9cf1f4cf5/Screenshot_from_2023-01-25_14-48-50.png"><img style="width:1646px" src="Introduction%20to%20CS%20+%20OOP%20(Java)%20102607db27274e6994a3c6d9cf1f4cf5/Screenshot_from_2023-01-25_14-48-50.png"/></a></figure><figure id="49323b2d-fce2-4be8-8a53-60eee2beeedf" class="image"><a href="Introduction%20to%20CS%20+%20OOP%20(Java)%20102607db27274e6994a3c6d9cf1f4cf5/Screenshot_from_2023-01-25_14-53-02.png"><img style="width:1574px" src="Introduction%20to%20CS%20+%20OOP%20(Java)%20102607db27274e6994a3c6d9cf1f4cf5/Screenshot_from_2023-01-25_14-53-02.png"/></a></figure></details></li></ul></details></li></ul><ul id="29d8efdf-4040-45f7-bc75-c741c72820bc" class="toggle"><li><details open=""><summary>Open University - Chapter 10 (Recursion)</summary><figure id="9741861b-94c4-4f6c-827c-78fd1dc5451f" class="image"><a href="Introduction%20to%20CS%20+%20OOP%20(Java)%20102607db27274e6994a3c6d9cf1f4cf5/Screenshot_from_2023-01-25_15-44-12.png"><img style="width:1388px" src="Introduction%20to%20CS%20+%20OOP%20(Java)%20102607db27274e6994a3c6d9cf1f4cf5/Screenshot_from_2023-01-25_15-44-12.png"/></a></figure><ul id="177b1b0c-cb32-43fa-b806-c3078c03e565" class="toggle"><li><details open=""><summary>Backtracking (עקיבה לאחור)</summary><p id="c9a121d2-557d-445b-b766-a0f03d0b8460" class="">הדוגמא הפשוטה ביותר להמחיש את האלגוריתם הוא מבוך שנכנסים אליו מצד אחד ויוצאים ממנו בצד השני. כדי למצוא את הדרך שמובילה מתחילת המבוך אל היציאה, האלגוריתם ינסה ללכת בכל השבילים וכאשר הוא ייתקל במבוי סתום - הוא פשוט יחזור אחורה (מכאן השם Backtrack) ואז ינסה שוב במסלול אחר.</p><figure id="cd252b3e-4ae1-4a7d-93ad-c7cb94ec7b3f" class="image"><a href="Introduction%20to%20CS%20+%20OOP%20(Java)%20102607db27274e6994a3c6d9cf1f4cf5/Screenshot_from_2023-01-29_10-11-28.png"><img style="width:1295px" src="Introduction%20to%20CS%20+%20OOP%20(Java)%20102607db27274e6994a3c6d9cf1f4cf5/Screenshot_from_2023-01-29_10-11-28.png"/></a></figure><p id="1f009f82-8f53-4f14-8f85-8b9a467c87f5" class="">
+</p></details></li></ul></details></li></ul><ul id="329df3bb-e939-4a81-91d0-ba086afe5bf3" class="toggle"><li><details open=""><summary>Open University - Chapter 11 (Lists)</summary><ul id="45337f3e-0a5c-4133-a5cc-aa3f2c0afc7b" class="toggle"><li><details open=""><summary>Lists</summary><figure id="d6652b93-02cd-4513-84a4-cb0f408a90dd" class="image"><a href="Introduction%20to%20CS%20+%20OOP%20(Java)%20102607db27274e6994a3c6d9cf1f4cf5/Screenshot_from_2023-01-29_12-17-04.png"><img style="width:1630px" src="Introduction%20to%20CS%20+%20OOP%20(Java)%20102607db27274e6994a3c6d9cf1f4cf5/Screenshot_from_2023-01-29_12-17-04.png"/></a></figure><figure id="bf46fb72-56c9-4907-b6b0-0d8b504d121c" class="image"><a href="Introduction%20to%20CS%20+%20OOP%20(Java)%20102607db27274e6994a3c6d9cf1f4cf5/Screenshot_from_2023-01-29_12-18-04.png"><img style="width:1633px" src="Introduction%20to%20CS%20+%20OOP%20(Java)%20102607db27274e6994a3c6d9cf1f4cf5/Screenshot_from_2023-01-29_12-18-04.png"/></a></figure></details></li></ul><ul id="e111acb0-9ace-44ab-bc1d-acb02c30658e" class="toggle"><li><details open=""><summary>Linked Lists</summary><figure id="d48e101f-c1e7-413a-9123-5644d1a76ad3"><div class="source"><a href="https://www.geeksforgeeks.org/applications-of-linked-list-data-structure/">https://www.geeksforgeeks.org/applications-of-linked-list-data-structure/</a></div></figure><figure id="4b7bf147-72e9-46ff-8d40-b411442a8828" class="image"><a href="Introduction%20to%20CS%20+%20OOP%20(Java)%20102607db27274e6994a3c6d9cf1f4cf5/Screenshot_from_2023-01-30_09-25-37.png"><img style="width:1858px" src="Introduction%20to%20CS%20+%20OOP%20(Java)%20102607db27274e6994a3c6d9cf1f4cf5/Screenshot_from_2023-01-30_09-25-37.png"/></a></figure><p id="640b55e9-09f2-47d2-b728-049080efa6b7" class="">
+</p></details></li></ul><ul id="b2f3a4eb-d7a0-41ad-90d5-bb5cf89e0e5a" class="toggle"><li><details open=""><summary>Double Linked Lists</summary><figure id="dec18a21-0f13-497c-91cc-19d9659ace9f"><div class="source"><a href="https://www.geeksforgeeks.org/introduction-and-insertion-in-a-doubly-linked-list/">https://www.geeksforgeeks.org/introduction-and-insertion-in-a-doubly-linked-list/</a></div></figure></details></li></ul><ul id="51ae399a-6a90-4c80-ab2f-733e99c07fde" class="toggle"><li><details open=""><summary>Merge Sort</summary><figure id="d195b05c-232a-4e60-9112-433a3d8aa658"><div class="source"><a href="https://www.baeldung.com/java-merge-sort">java-merge-sort</a></div></figure><figure id="c8a5b371-2ddf-4ec8-93e9-d5f2aeacf17c" class="image"><a href="Introduction%20to%20CS%20+%20OOP%20(Java)%20102607db27274e6994a3c6d9cf1f4cf5/Screenshot_from_2023-01-31_15-50-09.png"><img style="width:1537px" src="Introduction%20to%20CS%20+%20OOP%20(Java)%20102607db27274e6994a3c6d9cf1f4cf5/Screenshot_from_2023-01-31_15-50-09.png"/></a></figure></details></li></ul></details></li></ul><ul id="5b3f4fe6-a74b-491b-a50f-eda4c5fc6ece" class="toggle"><li><details open=""><summary>Open University - Chapter 11 (Stack, Quere, Binary-Trees)</summary><ul id="c7babf0d-f34f-49cd-b089-d8aa90c79324" class="toggle"><li><details open=""><summary>Stack (מחסנית) <strong><em>Linear</em></strong></summary><figure id="75e01fc6-6523-42d7-b6ed-2c72616fe535" class="image"><a href="Introduction%20to%20CS%20+%20OOP%20(Java)%20102607db27274e6994a3c6d9cf1f4cf5/Screenshot_from_2023-02-05_14-05-50.png"><img style="width:1445px" src="Introduction%20to%20CS%20+%20OOP%20(Java)%20102607db27274e6994a3c6d9cf1f4cf5/Screenshot_from_2023-02-05_14-05-50.png"/></a></figure><figure id="e8a801ad-83b6-4d5b-bda8-42b713842eea" class="image"><a href="Introduction%20to%20CS%20+%20OOP%20(Java)%20102607db27274e6994a3c6d9cf1f4cf5/Screenshot_from_2023-02-05_14-07-57.png"><img style="width:1610px" src="Introduction%20to%20CS%20+%20OOP%20(Java)%20102607db27274e6994a3c6d9cf1f4cf5/Screenshot_from_2023-02-05_14-07-57.png"/></a></figure><figure id="cab0630b-344d-4df3-86fb-4edc80f971fd" class="image"><a href="Introduction%20to%20CS%20+%20OOP%20(Java)%20102607db27274e6994a3c6d9cf1f4cf5/Screenshot_from_2023-02-05_14-10-05.png"><img style="width:1694px" src="Introduction%20to%20CS%20+%20OOP%20(Java)%20102607db27274e6994a3c6d9cf1f4cf5/Screenshot_from_2023-02-05_14-10-05.png"/></a></figure></details></li></ul><ul id="c812bafa-8103-4ec2-8cbe-75b1607789c2" class="toggle"><li><details open=""><summary>Queue (תור) <strong><em>Linear</em></strong></summary><figure id="95d46b91-d2a3-4f3f-b777-3849649fa994" class="image"><a href="Introduction%20to%20CS%20+%20OOP%20(Java)%20102607db27274e6994a3c6d9cf1f4cf5/Screenshot_from_2023-02-06_09-36-13.png"><img style="width:1872px" src="Introduction%20to%20CS%20+%20OOP%20(Java)%20102607db27274e6994a3c6d9cf1f4cf5/Screenshot_from_2023-02-06_09-36-13.png"/></a></figure><figure id="73f12f67-32a6-4596-b91f-bfcb74b55646" class="image"><a href="Introduction%20to%20CS%20+%20OOP%20(Java)%20102607db27274e6994a3c6d9cf1f4cf5/Screenshot_from_2023-02-06_09-37-11.png"><img style="width:1647px" src="Introduction%20to%20CS%20+%20OOP%20(Java)%20102607db27274e6994a3c6d9cf1f4cf5/Screenshot_from_2023-02-06_09-37-11.png"/></a></figure></details></li></ul><ul id="d7938cce-86ad-4d8d-b69e-f11a94538a38" class="toggle"><li><details open=""><summary>Trees (עצים) <strong>Hierarchy</strong></summary><figure id="a100d8d4-9391-433b-a1b9-57522ecc6782"><div class="source"><a href="https://www.geeksforgeeks.org/introduction-to-binary-tree-data-structure-and-algorithm-tutorials/">https://www.geeksforgeeks.org/introduction-to-binary-tree-data-structure-and-algorithm-tutorials/</a></div></figure><ul id="e22d47b7-4ada-4f33-8f97-212b808252aa" class="toggle"><li><details open=""><summary>Trees</summary><figure id="5ac7d5e5-34b6-49a1-ad18-7db92c0288ba" class="image"><a href="Introduction%20to%20CS%20+%20OOP%20(Java)%20102607db27274e6994a3c6d9cf1f4cf5/Screenshot_from_2023-02-06_14-02-56.png"><img style="width:1878px" src="Introduction%20to%20CS%20+%20OOP%20(Java)%20102607db27274e6994a3c6d9cf1f4cf5/Screenshot_from_2023-02-06_14-02-56.png"/></a></figure><figure id="f325167c-f7d6-4906-8eef-b7eda37eb8f6" class="image"><a href="Introduction%20to%20CS%20+%20OOP%20(Java)%20102607db27274e6994a3c6d9cf1f4cf5/Screenshot_from_2023-02-06_14-04-48.png"><img style="width:1709px" src="Introduction%20to%20CS%20+%20OOP%20(Java)%20102607db27274e6994a3c6d9cf1f4cf5/Screenshot_from_2023-02-06_14-04-48.png"/></a></figure><figure id="2004d937-2d6c-4d27-a727-8b3817d261a8" class="image"><a href="Introduction%20to%20CS%20+%20OOP%20(Java)%20102607db27274e6994a3c6d9cf1f4cf5/Screenshot_from_2023-02-06_14-07-42.png"><img style="width:1877px" src="Introduction%20to%20CS%20+%20OOP%20(Java)%20102607db27274e6994a3c6d9cf1f4cf5/Screenshot_from_2023-02-06_14-07-42.png"/></a></figure><figure id="0f87be13-316b-47ee-80fa-c6e0680c28b7" class="image"><a href="Introduction%20to%20CS%20+%20OOP%20(Java)%20102607db27274e6994a3c6d9cf1f4cf5/Screenshot_from_2023-02-06_14-09-51.png"><img style="width:1851px" src="Introduction%20to%20CS%20+%20OOP%20(Java)%20102607db27274e6994a3c6d9cf1f4cf5/Screenshot_from_2023-02-06_14-09-51.png"/></a></figure><figure id="b9c9597e-6a2c-431a-abbb-919efaf9b3ae" class="image"><a href="Introduction%20to%20CS%20+%20OOP%20(Java)%20102607db27274e6994a3c6d9cf1f4cf5/Screenshot_from_2023-02-06_14-10-40.png"><img style="width:1252px" src="Introduction%20to%20CS%20+%20OOP%20(Java)%20102607db27274e6994a3c6d9cf1f4cf5/Screenshot_from_2023-02-06_14-10-40.png"/></a></figure></details></li></ul><ul id="a279d815-6b80-424e-8daf-7368ed9ed646" class="toggle"><li><details open=""><summary>Binary Trees</summary><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="1e9ce6fb-e1b9-41e5-9d06-2d601b3cc442"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">We can search a number if exists in a binary tree with <strong>PreOrder, InOrder, PostOrder.
+</strong><figure id="f36dfea1-688d-4f0b-9de5-16b7c5980c84" class="image"><a href="Introduction%20to%20CS%20+%20OOP%20(Java)%20102607db27274e6994a3c6d9cf1f4cf5/Screenshot_from_2023-02-06_14-53-55.png"><img style="width:1659px" src="Introduction%20to%20CS%20+%20OOP%20(Java)%20102607db27274e6994a3c6d9cf1f4cf5/Screenshot_from_2023-02-06_14-53-55.png"/></a></figure></div></figure><figure id="84fe08ef-09a8-4708-b60a-e129ac873aad" class="image"><a href="Introduction%20to%20CS%20+%20OOP%20(Java)%20102607db27274e6994a3c6d9cf1f4cf5/Screenshot_from_2023-02-06_14-16-32.png"><img style="width:1791px" src="Introduction%20to%20CS%20+%20OOP%20(Java)%20102607db27274e6994a3c6d9cf1f4cf5/Screenshot_from_2023-02-06_14-16-32.png"/></a></figure><figure id="5d237e5d-0107-4ebd-89bc-7568705a7113" class="image"><a href="Introduction%20to%20CS%20+%20OOP%20(Java)%20102607db27274e6994a3c6d9cf1f4cf5/Screenshot_from_2023-02-06_14-20-18.png"><img style="width:1295px" src="Introduction%20to%20CS%20+%20OOP%20(Java)%20102607db27274e6994a3c6d9cf1f4cf5/Screenshot_from_2023-02-06_14-20-18.png"/></a></figure></details></li></ul><ul id="1dafc50e-218e-4560-881e-58e44d949078" class="toggle"><li><details open=""><summary>Binary Search Tree</summary><figure id="a4a8f62a-9070-4fe9-94bf-670dabd1dc92" class="image"><a href="Introduction%20to%20CS%20+%20OOP%20(Java)%20102607db27274e6994a3c6d9cf1f4cf5/Screenshot_from_2023-02-07_10-01-46.png"><img style="width:1659px" src="Introduction%20to%20CS%20+%20OOP%20(Java)%20102607db27274e6994a3c6d9cf1f4cf5/Screenshot_from_2023-02-07_10-01-46.png"/></a></figure></details></li></ul></details></li></ul></details></li></ul><ul id="2917e67e-f72c-4c67-b81e-9c2cc392ee08" class="toggle"><li><details open=""><summary>Open University - Chapter 12 (יחידה העשרה - חישוביות על קצה המזלג)</summary><figure id="ab9bdc67-771c-47b3-9f18-b2fe202e8480" class="image"><a href="Introduction%20to%20CS%20+%20OOP%20(Java)%20102607db27274e6994a3c6d9cf1f4cf5/Screenshot_from_2023-02-07_10-44-04.png"><img style="width:861px" src="Introduction%20to%20CS%20+%20OOP%20(Java)%20102607db27274e6994a3c6d9cf1f4cf5/Screenshot_from_2023-02-07_10-44-04.png"/></a></figure><figure id="c6dbcfbc-3ce0-4a9f-934c-37597bb898d9" class="image"><a href="Introduction%20to%20CS%20+%20OOP%20(Java)%20102607db27274e6994a3c6d9cf1f4cf5/Screenshot_from_2023-02-07_10-44-10.png"><img style="width:861px" src="Introduction%20to%20CS%20+%20OOP%20(Java)%20102607db27274e6994a3c6d9cf1f4cf5/Screenshot_from_2023-02-07_10-44-10.png"/></a></figure><ul id="29159268-8a32-47f0-9855-ed204abcd585" class="toggle"><li><details open=""><summary>Turing Machine</summary><figure id="ce86e9d9-8b9e-4b63-a5a5-465220ec681c"><a href="https://www.geeksforgeeks.org/turing-machine-in-toc/" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Turing Machine in TOC - GeeksforGeeks</div><div class="bookmark-description">Turing Machine was invented by Alan Turing in 1936 and it is used to accept Recursive Enumerable Languages (generated by Type-0 Grammar). A turing machine consists of a tape of infinite length on which read and writes operation can be performed.</div></div><div class="bookmark-href"><img src="https://media.geeksforgeeks.org/wp-content/cdn-uploads/gfg_favicon.png" class="icon bookmark-icon"/>https://www.geeksforgeeks.org/turing-machine-in-toc/</div></div><img src="https://media.geeksforgeeks.org/wp-content/cdn-uploads/gfg_200x200-min.png" class="bookmark-image"/></a></figure><figure id="7f83ff76-5806-4181-8bf6-d05a0d571a0c" class="image"><a href="Introduction%20to%20CS%20+%20OOP%20(Java)%20102607db27274e6994a3c6d9cf1f4cf5/Screenshot_from_2023-02-07_11-01-25.png"><img style="width:861px" src="Introduction%20to%20CS%20+%20OOP%20(Java)%20102607db27274e6994a3c6d9cf1f4cf5/Screenshot_from_2023-02-07_11-01-25.png"/></a></figure></details></li></ul><ul id="b10bf44a-ebfd-4ed1-8daa-6f5dbea6acdb" class="toggle"><li><details open=""><summary>Scruffy vs. Neat</summary><figure id="242db709-2732-4bb9-9a29-0e72bb9cd4df" class="image"><a href="Introduction%20to%20CS%20+%20OOP%20(Java)%20102607db27274e6994a3c6d9cf1f4cf5/Screenshot_from_2023-02-13_10-26-46.png"><img style="width:861px" src="Introduction%20to%20CS%20+%20OOP%20(Java)%20102607db27274e6994a3c6d9cf1f4cf5/Screenshot_from_2023-02-13_10-26-46.png"/></a></figure></details></li></ul></details></li></ul></details></li></ul></div></article></body></html>
