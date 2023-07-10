@@ -1,3 +1,0 @@
-## Bus Factor
-
-💡 The bus factor refers to the number of people in a team who can get hit by a bus (or leave the project for any other reason) before the project becomes in danger or stuck. The lower the number, the higher the risk. Essentially, it measures how dependent a project is on a small number of individuals. It's important to ensure that there are multiple team members who are familiar with the project and can step in if necessary to mitigate risks.
