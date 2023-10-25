@@ -12,3 +12,6 @@ enjoy!
     <br>
     <a href="https://peryshahar.notion.site/Computers-b7d4581a38e444229b72e92ba25f85d1?pvs=4"><strong>👀 Watch it in Live → </strong></a>
 </p>
+
+![Screenshot from 2023-10-25 15-33-52](https://github.com/PeryShahar/my-knowledge/assets/89962400/8526b44f-2cdc-4071-8261-22cdf4139cd2)
+![Screenshot from 2023-10-25 15-34-24](https://github.com/PeryShahar/my-knowledge/assets/89962400/1e4928a3-dee9-470f-891d-1ef49b975a0d)
