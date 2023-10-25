@@ -1,0 +1,749 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>System Design</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-interactiveBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="07e00cee-1d83-4434-a28a-433f2b654c40" class="page sans"><header><img class="page-cover-image" src="https://www.notion.so/images/page-cover/rijksmuseum_jansz_1636.jpg" style="object-position:center 50%"/><div class="page-header-icon page-header-icon-with-cover"><span class="icon">🧑🏻‍💼</span></div><h1 class="page-title">System Design</h1><p class="page-description"></p></header><div class="page-body"><ul id="52f8db1e-5d87-494f-87ad-aa5e90bf0de8" class="toggle"><li><details open=""><summary>Basic</summary><figure id="f9a57984-369e-4178-b7fd-9c4408768445"><div class="source"><a href="https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7119895525402836992">https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7119895525402836992</a></div></figure><figure id="93b0126f-4695-499c-bef3-420ba1076286"><div class="source"><a href="https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7118331161008910336">https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7118331161008910336</a></div></figure><figure id="a596498f-5b95-4b96-bebe-23abe9ab94d4" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/FoiePgAagAUEK4m.jpeg"><img style="width:4096px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/FoiePgAagAUEK4m.jpeg"/></a></figure><figure id="ac3725d6-6af2-442d-871b-99a8507d5174" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/1693395915257.gif"><img style="width:800px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/1693395915257.gif"/></a></figure><figure id="21c543d4-f106-43b1-b81c-8ae4b41581b2" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/1682004881184.jpeg"><img style="width:1458px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/1682004881184.jpeg"/></a></figure><figure id="d407bd8d-012b-4cc0-b2bb-bd13e0968e5d" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/1688991068786.jpeg"><img style="width:800px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/1688991068786.jpeg"/></a></figure><figure id="8d3aa851-ec12-4f9d-a04e-f7998b175d08" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_20230831-191549__01.jpg"><img style="width:1080px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_20230831-191549__01.jpg"/></a></figure><figure id="ab2aaecd-412a-43b9-be71-cdb836d52de4" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_20230723-103531__01.jpg"><img style="width:1080px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_20230723-103531__01.jpg"/></a></figure><figure id="e3a6a9b7-3c51-4238-a26c-52a81f28f559" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/1694130856855.gif"><img style="width:1080px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/1694130856855.gif"/></a></figure><figure id="284eac58-6d22-4e99-9fa8-bb8defc2b1e2" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/1695138310516.jpeg"><img style="width:800px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/1695138310516.jpeg"/></a></figure></details></li></ul><ul id="8df64907-c8b4-4746-9a92-128cd507733d" class="toggle"><li><details open=""><summary>Concepts</summary><ul id="71ad3bb1-0678-484d-b274-79292dc6d9ec" class="toggle"><li><details open=""><summary>Distributed computing/systems</summary></details></li></ul><ul id="f32b13fa-7ac0-4390-956b-e2ecceaae5c8" class="toggle"><li><details open=""><summary>Core Concepts</summary><ul id="8e7c27fe-24b9-4ddc-a1cd-a4ed71486bec" class="toggle"><li><details open=""><summary>Scalability</summary><ul id="44ddc86e-6907-408b-bd00-49f8cb44372d" class="toggle"><li><details open=""><summary>Vertical scaling</summary></details></li></ul><ul id="9b8a4b97-474a-40e3-b7da-9a290dc7d5d3" class="toggle"><li><details open=""><summary>Horizontal scaling</summary></details></li></ul></details></li></ul><ul id="b21f4a67-4806-4890-887c-35818d4c3fca" class="toggle"><li><details open=""><summary>Microservices Vs. Monolith </summary><figure id="1173d54b-54a8-40d0-a3e2-50b21b9afdc5" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/1688883939883.jpeg"><img style="width:1280px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/1688883939883.jpeg"/></a></figure><figure id="07dbecc5-6c15-491d-8e74-5eb0f69f5c57" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/1688485514737.jpeg"><img style="width:1370px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/1688485514737.jpeg"/></a></figure><figure id="de41a512-976f-48ed-876f-9244314683a6" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/1695555126656.jpeg"><img style="width:800px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/1695555126656.jpeg"/></a></figure></details></li></ul><ul id="3891b235-51cc-4d9b-ae77-adfb67a61b2c" class="toggle"><li><details open=""><summary>Reliability</summary></details></li></ul><ul id="090e0c13-3070-4b48-bf59-a078a9274fbe" class="toggle"><li><details open=""><summary>Availability </summary></details></li></ul><ul id="d56dd010-5a31-4f29-ac45-0352a3d91d4a" class="toggle"><li><details open=""><summary>Consistency</summary></details></li></ul><ul id="ec096a0d-8bf6-405b-bd52-23a9400700c7" class="toggle"><li><details open=""><summary>CAP Theorem</summary><figure id="62480e44-a38b-4d99-9d96-da2db9cb8cdd" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/1_Br1FrvKnK3hU6Xl_LbDkwg.png"><img style="width:850px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/1_Br1FrvKnK3hU6Xl_LbDkwg.png"/></a></figure></details></li></ul></details></li></ul><ul id="f5417a7d-d680-4a7b-9ff0-8cefb463e662" class="toggle"><li><details open=""><summary>Other Concepts</summary><ul id="b396654d-dbed-43ed-a231-06cededa760a" class="toggle"><li><details open=""><summary>Fault Tolerance</summary></details></li></ul><ul id="026b031f-0148-4f49-97fd-ea9abbc3cca4" class="toggle"><li><details open=""><summary>Redundancy</summary></details></li></ul><ul id="05b2dc8b-6ead-4aed-94f8-d3eb9140b09b" class="toggle"><li><details open=""><summary>Decoupling System</summary></details></li></ul><ul id="e8f40f4f-617a-4f5c-a0ae-339db6f4460c" class="toggle"><li><details open=""><summary>Extensibility </summary></details></li></ul><ul id="b4f09636-5590-4cb5-9d2f-5a07be2e422e" class="toggle"><li><details open=""><summary>Low Level Design Vs High Level Design</summary></details></li></ul><ul id="aa23e24b-23bb-43d8-ba14-0c10fc02933d" class="toggle"><li><details open=""><summary>Capacity Planning and Estimation</summary><figure id="2c34d650-131d-47b5-9c9e-b368706bb12f" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-07-30_11-41-12.png"><img style="width:1279px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-07-30_11-41-12.png"/></a></figure></details></li></ul><ul id="ac22313f-360f-49d2-8155-cc9caa50b192" class="toggle"><li><details open=""><summary>Single Point of Failure</summary></details></li></ul><ul id="a6b93d15-88de-43c5-aa19-ca8f6a8e0d8f" class="toggle"><li><details open=""><summary>Tier Architecture</summary></details></li></ul><ul id="32666052-d619-4709-85ff-38f74f30a96d" class="toggle"><li><details open=""><summary>Event-Driven Architecture</summary></details></li></ul><ul id="47123218-270c-42c7-b09b-234153d239f4" class="toggle"><li><details open=""><summary>Consistent Hashing</summary><p id="84eaba42-0800-4509-822c-d69b08a359dc" class="">
+</p></details></li></ul></details></li></ul></details></li></ul><hr id="a6d8229a-cf9e-4f3f-a534-b76ac4f8c7b7"/><ul id="51bc260f-1601-4f47-990e-31832a56d10f" class="toggle"><li><details open=""><summary>Load Balancer / Proxy (Reverse / Foward)</summary><ul id="38238af3-8a17-4f76-bd76-00f439b7aee6" class="toggle"><li><details open=""><summary>Load Balancer</summary><figure id="eef20c92-df2b-497f-abcb-64e8fa4dd3eb" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_20230801-093411__01.jpg"><img style="width:1080px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_20230801-093411__01.jpg"/></a></figure><figure id="1238bfcd-bb5d-421e-b1ba-452766781c4e" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/1693112130598.gif"><img style="width:800px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/1693112130598.gif"/></a></figure></details></li></ul><ul id="e4d1e2e6-ba36-4a9f-af6e-a0827a166f1d" class="toggle"><li><details open=""><summary>Proxy</summary><pre id="af385611-4318-425d-92d1-f4fbc437bd4b" class="code"><code>// proxy.middleware.ts
+
+import { Injectable, NestMiddleware } from &#x27;@nestjs/common&#x27;;
+import { Request, Response } from &#x27;express&#x27;;
+import * as proxy from &#x27;http-proxy-middleware&#x27;;
+
+@Injectable()
+export class ProxyMiddleware implements NestMiddleware {
+  private proxyInstance: any;
+
+  constructor() {
+    // Configure the target server for the proxy
+    this.proxyInstance = proxy({
+      target: &#x27;http://example.com&#x27;, // Replace with the target server&#x27;s URL
+      changeOrigin: true, // Changes the &quot;Host&quot; header to the target URL
+    });
+  }
+
+  use(req: Request, res: Response, next: () =&gt; void) {
+    // Call the proxy instance to handle the incoming request
+    this.proxyInstance(req, res, next);
+  }
+}</code></pre><pre id="40ec9c77-fa48-40c6-b94f-35ad3c01598a" class="code"><code>// app.module.ts
+
+import { Module, NestModule, MiddlewareConsumer } from &#x27;@nestjs/common&#x27;;
+import { ProxyMiddleware } from &#x27;./proxy.middleware&#x27;;
+
+@Module({})
+export class AppModule implements NestModule {
+  configure(consumer: MiddlewareConsumer) {
+    // Apply the ProxyMiddleware to all incoming requests
+    consumer.apply(ProxyMiddleware).forRoutes(&#x27;*&#x27;);
+  }
+}</code></pre></details></li></ul><ul id="22203a7a-c944-4e9b-9c44-c6b75ce8f9a7" class="toggle"><li><details open=""><summary>Reverse Proxy / Foward Proxy</summary><figure id="5c83f77c-8025-48b5-88c7-89e43b082150" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/1694055162782.gif"><img style="width:1080px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/1694055162782.gif"/></a></figure></details></li></ul><figure id="ac0998d9-3d71-4029-838d-c74bf6232076" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_20230820-122444__01.jpg"><img style="width:1080px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_20230820-122444__01.jpg"/></a></figure></details></li></ul><ul id="e3511964-f13a-4282-a5d5-6ef7df4b886d" class="toggle"><li><details open=""><summary>Content Delivery Network (CDN)</summary><figure id="90786f3f-e74e-4c79-b61e-462dc3cf125b" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-10-09_18-00-07.png"><img style="width:946px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-10-09_18-00-07.png"/></a></figure></details></li></ul><ul id="d763ec70-a1b1-4e53-abc4-d948db8474fe" class="toggle"><li><details open=""><summary>Caching</summary><figure id="fc57c588-7aca-4397-9f70-affa2e90c272"><div class="source"><a href="https://www.youtube.com/watch?v=n__c7xY1ZcI&amp;ab_channel=Udacity">https://www.youtube.com/watch?v=n__c7xY1ZcI&amp;ab_channel=Udacity</a></div></figure><figure id="2576251b-47b9-4190-9a2f-4fb8ba4e284e"><div class="source"><a href="https://www.youtube.com/watch?v=U3RkDLtS7uY&amp;list=PLMCXHnjXnTnvo6alSjVkgxV-VH6EPyvoX&amp;index=12&amp;ab_channel=GauravSen">https://www.youtube.com/watch?v=U3RkDLtS7uY&amp;list=PLMCXHnjXnTnvo6alSjVkgxV-VH6EPyvoX&amp;index=12&amp;ab_channel=GauravSen</a></div></figure><figure id="b2e4d18f-e6af-4c0f-9741-126f33eb3492" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/unnamed.jpg"><img style="width:1336px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/unnamed.jpg"/></a></figure><p id="65b1aca3-440c-4d71-802b-751de7837ef1" class="">
+</p><figure id="04136074-213f-4f5a-bef1-b1586aaa7b2d" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/1688969826369.jpeg"><img style="width:1280px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/1688969826369.jpeg"/></a></figure><figure id="adbd678c-b47c-4a41-93c0-f739307be69e" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/1685772214564.jpeg"><img style="width:2048px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/1685772214564.jpeg"/></a></figure></details></li></ul><hr id="fc41b36a-be7b-4d61-ade5-3ba5414944a3"/><ul id="65cbd7ed-c4ad-40ee-860a-d309bfbf9d5b" class="toggle"><li><details open=""><summary>Domain Name System (DNS)</summary><figure id="0fe04c24-2579-4c95-bf34-ca7426277ed5"><a href="https://blog.bytebytego.com/p/a-crash-course-in-dns-domain-name" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">A Crash Course in DNS</div><div class="bookmark-description">What if you woke up tomorrow and could no longer access websites by typing names like google.com or espn.com? Instead, you had to memorize and type a series of numbers just to get online - 172.217.16.206 to check Gmail or 199.181.132.250 to read sports news. Internet browsing would become extremely tedious overnight!</div></div><div class="bookmark-href"><img src="https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com%2Fpublic%2Fimages%2F5507d97a-c736-4de2-852b-fab5b91d0796%2Fapple-touch-icon-1024x1024.png" class="icon bookmark-icon"/>https://blog.bytebytego.com/p/a-crash-course-in-dns-domain-name</div></div><img src="https://substackcdn.com/image/fetch/w_1200,h_600,c_fill,f_jpg,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F96fbf5fc-bf5d-4047-b058-f48f6f3b3a30_1600x1432.png" class="bookmark-image"/></a></figure><figure id="f815411d-fa80-4a9d-8a89-19ed84ec3615" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/unnamed.png"><img style="width:1600px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/unnamed.png"/></a></figure><figure id="b8b93aff-570a-44eb-bab7-679dd49bc2ef" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/unnamed_(1).png"><img style="width:1600px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/unnamed_(1).png"/></a></figure><figure id="ade2b868-4d5c-47c7-a9ab-ef9738650839" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/1690166855129.gif"><img style="width:763px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/1690166855129.gif"/></a></figure></details></li></ul><ul id="7a7ce954-0dbf-48a4-aac0-6c22db2755b8" class="toggle"><li><details open=""><summary>Protocols (HTTP, IP, TCP)</summary><ul id="ed68833d-c3e2-4d67-8026-025b5a911c23" class="toggle"><li><details open=""><summary>Internet Protocol (IP) Address</summary></details></li></ul><ul id="29922279-6bbb-424e-8c00-cd853e929024" class="toggle"><li><details open=""><summary>Transmission Control Protocol (TCP)</summary></details></li></ul><ul id="7418df8e-8257-4580-a4a3-b3d253ef0d4b" class="toggle"><li><details open=""><summary>Hypertext Transfer Protocol (HTTP)</summary><figure id="130e3c09-c8b8-44d1-b55c-c4fe1a9eabfc" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/1697206511204.gif"><img style="width:800px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/1697206511204.gif"/></a></figure><figure id="b95c44af-33c2-4577-8fd6-5435f37eb495" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_20230716-114103__01.jpg"><img style="width:1080px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_20230716-114103__01.jpg"/></a></figure></details></li></ul><ul id="d211ba91-4650-4384-83f2-ddaf42b70d57" class="toggle"><li><details open=""><summary>Extensible Messaging and Presence Protocol (XMPP)</summary></details></li></ul><figure id="c4a98679-e6a5-4f9b-a2ae-fba172ba458b" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/1696068398454.gif"><img style="width:800px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/1696068398454.gif"/></a></figure><figure id="6446a387-bd70-4e8b-bac8-9ecf79c451b0" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/1696261520481.gif"><img style="width:800px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/1696261520481.gif"/></a></figure></details></li></ul><ul id="a25dd76c-350e-4efa-a7d9-06f6b0a9fa7a" class="toggle"><li><details open=""><summary>API (Gateway, Design, Patterns)</summary><ul id="9b5d8fc5-eb4b-419d-9467-8312b6173b23" class="toggle"><li><details open=""><summary>Basic</summary><figure id="a01869d2-4768-46f0-8146-525938165c27"><div class="source"><a href="https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7104499766813679617">https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7104499766813679617</a></div></figure><figure id="8d75932f-a94b-46f3-805e-c8242f46a2ed" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_20230728-161447__01.jpg"><img style="width:1080px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_20230728-161447__01.jpg"/></a></figure><figure id="7fbf02da-be1d-4da2-b1e9-0523811f2270" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/1691346319428.jpg"><img style="width:1280px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/1691346319428.jpg"/></a></figure></details></li></ul><ul id="4230f1c6-2df3-44c8-8cff-12da04510f55" class="toggle"><li><details open=""><summary>API Gateway</summary><figure id="fa1b5f24-573f-445e-9fe7-b5c334622e08" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/1697088114052.jpeg"><img style="width:800px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/1697088114052.jpeg"/></a></figure></details></li></ul><ul id="bbe5b259-d485-4fcd-ad80-1dd0871d6ad9" class="toggle"><li><details open=""><summary>API Design</summary><figure id="97a9e58d-9e9a-4a3d-a0a4-348b7cd586be" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_20230831-115306__01.jpg"><img style="width:1080px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_20230831-115306__01.jpg"/></a></figure></details></li></ul><ul id="13f400da-fe11-4f63-bf2c-525327f08e75" class="toggle"><li><details open=""><summary>API Patterns (Rest, GraphQL. gRPC, WebSocket)</summary><ul id="e8ff3cdf-6077-4e30-aa65-fba5f6dc78e5" class="toggle"><li><details open=""><summary>Representational State Transfer (REST) API</summary></details></li></ul><ul id="761923da-4763-4c32-8043-aeb0f2f21f9d" class="toggle"><li><details open=""><summary>GraphQL</summary></details></li></ul><ul id="a0f91771-1e9f-4d94-a164-9c92cf0c518d" class="toggle"><li><details open=""><summary>WebSocket</summary></details></li></ul><ul id="50a938e5-6a15-4e81-9c72-3cc5c683ad6b" class="toggle"><li><details open=""><summary>gRPC</summary></details></li></ul><figure id="d3dd8ccb-621f-4e59-93ad-b541544f0c0e" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/1691818183149.gif"><img style="width:794px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/1691818183149.gif"/></a></figure><figure id="c05eddd0-b652-4572-9fd6-5652b2b09787" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_20230821-104634__01.jpg"><img style="width:1080px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_20230821-104634__01.jpg"/></a></figure><figure id="c531a200-51d8-4c16-8089-41c6d685ca7e" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/1685460729269.jpeg"><img style="width:1188px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/1685460729269.jpeg"/></a></figure><figure id="c2fd7a18-163a-4f74-ac22-4bab3e779e36" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_20230724-114334__01.jpg"><img style="width:1080px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_20230724-114334__01.jpg"/></a></figure></details></li></ul></details></li></ul><ul id="0851aefe-a69c-4f59-b2f7-73cb0c6b498e" class="toggle"><li><details open=""><summary>Rate Limiter (Throttling)</summary><figure id="9448315c-3090-4cb7-ad30-f27f5ff7405f"><div class="source"><a href="https://www.youtube.com/watch?v=FU4WlwfS3G0&amp;ab_channel=SystemDesignInterview">https://www.youtube.com/watch?v=FU4WlwfS3G0&amp;ab_channel=SystemDesignInterview</a></div></figure><figure id="50f27934-c43f-4455-980f-e3398f3c0a08" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-10_11-55-54.png"><img style="width:1788px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-10_11-55-54.png"/></a></figure><figure id="c0a6a55b-577c-4169-9456-8c77bab11009" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/1643605303226.jpeg"><img style="width:878px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/1643605303226.jpeg"/></a></figure></details></li></ul><hr id="6907562a-1caf-44e7-99b7-fc5b03b3ed3b"/><ul id="acfb7da8-4398-4ee3-9d09-d17edf7f4cff" class="toggle"><li><details open=""><summary>Message Queue (Async Communication)</summary><figure id="7d7d87b0-f237-4c91-98e9-4995112ecbc6" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-06_12-44-33.png"><img style="width:1328px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-06_12-44-33.png"/></a></figure><figure id="610762d1-673e-4161-8154-d126bdbed92b" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/1696347927788.gif"><img style="width:800px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/1696347927788.gif"/></a></figure><ul id="06b68330-b3d1-4179-85aa-9d9a27534bf0" class="toggle"><li><details open=""><summary>Kafka</summary></details></li></ul><figure id="077238c0-26e0-4754-a586-df9b9dcb89cd" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/1693706195802.gif"><img style="width:1080px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/1693706195802.gif"/></a></figure><figure id="b63a7f78-9966-4521-af9d-a0faba5109f2" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/1697097779967.gif"><img style="width:800px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/1697097779967.gif"/></a></figure></details></li></ul><ul id="ee0c0feb-88c6-4c93-8f7a-34b2dc887df5" class="toggle"><li><details open=""><summary>Databases</summary><ul id="04877033-90aa-43af-9766-906a8cbd0b95" class="toggle"><li><details open=""><summary>Data Sharding</summary><figure id="3b43edab-8de0-49dd-9535-be64bf326278" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/1695051917383.jpeg"><img style="width:800px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/1695051917383.jpeg"/></a></figure></details></li></ul><ul id="4971489b-2932-4b25-b9a6-ae2ce5c392b9" class="toggle"><li><details open=""><summary>Data Partition</summary></details></li></ul><ul id="afe762d9-de73-4d7f-b465-ced7356fa3bb" class="toggle"><li><details open=""><summary>Data Replication</summary></details></li></ul><ul id="7897f79b-0bbc-499c-8e23-ae5b42743e5d" class="toggle"><li><details open=""><summary>Sql Vs. NoSql</summary></details></li></ul><figure id="bfeed49b-5aff-4acc-aff0-50a9990be835" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_20230821-154952__01.jpg"><img style="width:1080px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_20230821-154952__01.jpg"/></a></figure><figure id="e75ae28e-3ca9-4d4b-b591-efa9fd4e8a12" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/1685431754474.jpeg"><img style="width:1534px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/1685431754474.jpeg"/></a></figure><figure id="fd2a268d-3435-4e59-804d-e1c74fbc8c94" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/1696155264098_(1)_(1).gif"><img style="width:1068px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/1696155264098_(1)_(1).gif"/></a></figure></details></li></ul><hr id="a08cecd3-1dcc-4ecf-8235-da8b91ed88d6"/><ul id="28fe4d7c-5704-4aeb-947c-7cab746bc569" class="toggle"><li><details open=""><summary>System Designs Examples</summary><ul id="f53ee81d-ffbb-4240-9f67-28cd7efc5236" class="toggle"><li><details open=""><summary>YouTube</summary><figure id="9f8c27e4-3765-4420-b446-2b3cbbc70616" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/1693828048333.gif"><img style="width:800px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/1693828048333.gif"/></a></figure></details></li></ul><ul id="d3713b41-539e-48ae-b678-2d90300d0ade" class="toggle"><li><details open=""><summary>Twitter</summary><figure id="ae3b4733-a4ee-417a-8a80-7b35d360dd15" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/1687878014955.jpeg"><img style="width:1280px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/1687878014955.jpeg"/></a></figure></details></li></ul><ul id="09179c48-d04b-4b11-a546-ae8c5d64a98f" class="toggle"><li><details open=""><summary>Netflix</summary><figure id="67c757ae-7bc3-425e-bdcc-9cd648a73508" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_20230906-083831__01.jpg"><img style="width:1080px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_20230906-083831__01.jpg"/></a></figure><figure id="294d7ff9-07c8-4b1a-840b-f52d40f6c629" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/1686584714216.jpeg"><img style="width:1280px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/1686584714216.jpeg"/></a></figure><figure id="c40d87af-a280-4507-b1d6-a25df62da957" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/1684165512226.jpeg"><img style="width:1945px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/1684165512226.jpeg"/></a></figure></details></li></ul><ul id="f320764c-60ed-4537-9e1b-7a07c64cdd3b" class="toggle"><li><details open=""><summary>Google</summary><ul id="76042eac-46f8-43ea-bc26-6dfa90570bce" class="toggle"><li><details open=""><summary>Google Docs</summary><figure id="70c1cc35-256f-42e7-9c5b-c5c3e03fdd62" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/1695641864474.gif"><img style="width:800px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/1695641864474.gif"/></a></figure></details></li></ul><ul id="ceb75fb6-46df-4ecf-a24f-62eb487672a2" class="toggle"><li><details open=""><summary>Google Map</summary><figure id="b395ed17-727a-4b3f-8ac4-0ab36b1371c5" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/1695815479546.gif"><img style="width:1080px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/1695815479546.gif"/></a></figure></details></li></ul></details></li></ul><ul id="b8b002cd-7ac8-48d3-bf64-0aae1658c01e" class="toggle"><li><details open=""><summary>Uber</summary><figure id="f289fd02-f567-495f-b819-ee9824e69d11" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/unnamed_(1).jpg"><img style="width:1204px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/unnamed_(1).jpg"/></a></figure><figure id="2d53a542-b9ff-4cc8-bdb5-89536f4017b1" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/1694664667482.gif"><img style="width:800px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/1694664667482.gif"/></a></figure></details></li></ul><ul id="8bf08751-5e5f-40e7-946f-265112a879eb" class="toggle"><li><details open=""><summary>WhatsApp</summary><figure id="859c5bf9-43cf-40d0-9083-07671629b0e7" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/1693586669456.gif"><img style="width:800px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/1693586669456.gif"/></a></figure></details></li></ul><ul id="9814b9d5-2e5d-4b08-9597-0b1fae7f26aa" class="toggle"><li><details open=""><summary>Instagram</summary><figure id="5b924a5f-ece9-4d73-a62e-3848944aff53" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/1694863842282.gif"><img style="width:800px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/1694863842282.gif"/></a></figure></details></li></ul><ul id="2dd52ada-5da8-4fdf-981d-1caba0eb1f49" class="toggle"><li><details open=""><summary>Quora</summary><figure id="c3a9076d-7815-4cfb-bac1-10d92e452b01" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/1695902214710.gif"><img style="width:800px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/1695902214710.gif"/></a></figure></details></li></ul><ul id="45ba5b0e-13e4-473c-b68a-79613daa8592" class="toggle"><li><details open=""><summary>Facebook</summary><figure id="7eeb5e1b-16e5-4d50-b1c3-8654b4e6a05f" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/1696160126023.gif"><img style="width:1025px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/1696160126023.gif"/></a></figure></details></li></ul><ul id="ad89e38c-1cc1-4fee-9444-e2bbc493d93a" class="toggle"><li><details open=""><summary>Pinterest</summary><figure id="ed68f7a4-984a-4126-bac9-6248faabf253" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/1696858232339.gif"><img style="width:1465px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/1696858232339.gif"/></a></figure></details></li></ul></details></li></ul><ul id="3da24e4e-7b21-4eb2-a0d3-702415804576" class="toggle"><li><details open=""><summary>System Designs Step By Step (System Design Interview Vol.1 - Alex Xu)</summary><ul id="4da9f2ce-fd68-4810-a7fc-85c5f7173219" class="toggle"><li><details open=""><summary>CHAPTER 1: SCALE FROM ZERO TO MILLIONS OF USERS</summary><ul id="b7c7becd-dae5-4461-996d-0ee4cd2fb7f2" class="toggle"><li><details open=""><summary>Single Server Setup</summary><figure id="50314b6a-1e94-4e56-b303-b02d2fcaceb5" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-07-31_10-38-04.png"><img style="width:970px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-07-31_10-38-04.png"/></a></figure><pre id="efd37a59-49a9-44f9-b3b9-349432ff45fc" class="code"><code>GET/users/12 - Retrieve user object for id = 12
+
+{
+&quot;id&quot;: 12,
+&quot;firstName&quot;: &quot;John&quot;,
+&quot;lastName&quot;: &quot;Smith&quot;,
+&quot;address&quot;: {
+&quot;streetAddress&quot;: &quot;21 2nd Street&quot;,
+&quot;city&quot;: &quot;New York&quot;,
+&quot;state&quot;: &quot;NY&quot;,
+&quot;postalCode&quot;: 10021
+},
+&quot;phoneNumbers&quot;: [
+&quot;646 555-4567&quot;,
+&quot;212 555-1234&quot;,
+]
+}
+</code></pre></details></li></ul><ul id="084e50d8-636f-40df-baca-80188d150190" class="toggle"><li><details open=""><summary>Databases</summary><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="85258f64-15b4-4702-995d-8ebbeaf321bd"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">With the growth of the user base, one server is not enough, and we need multiple servers: one for web/mobile traffic, the other for the database (Figure 1-3). Separating web/mobile traffic (web tier) and database (data tier) servers allows them to be scaled independently.</div></figure><figure id="dfb0fcec-f9f5-4743-b7f9-2e72edcfc11e" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-07-31_10-45-10.png"><img style="width:841px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-07-31_10-45-10.png"/></a></figure></details></li></ul><ul id="dead6b9f-829f-43a9-907d-4164ec756ff1" class="toggle"><li><details open=""><summary>Vertical Scaling vs Horizontal Scaling</summary></details></li></ul><ul id="5b134791-0330-4487-8060-f49d770664d4" class="toggle"><li><details open=""><summary>Load Balancer</summary><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="94d56cdd-06a9-42e4-93cd-e3c53bd89619"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">A load balancer evenly distributes incoming traffic among web servers that are defined in a load-balancer set.</div></figure><figure id="10ccdef4-1eb2-4d5f-b15d-a9043aa25534" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-07-31_10-49-25.png"><img style="width:831px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-07-31_10-49-25.png"/></a></figure></details></li></ul><ul id="8aa5b6ad-294b-4bbe-8c11-f533e94d5f1a" class="toggle"><li><details open=""><summary>Database Replication</summary><figure id="ae913ac8-acff-4310-84e2-13c80c1c2d4c" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-01_09-55-29.png"><img style="width:639px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-01_09-55-29.png"/></a></figure><figure id="f7bcd034-aecb-40cc-a85f-38005500c699" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-01_09-57-42.png"><img style="width:758px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-01_09-57-42.png"/></a></figure></details></li></ul><ul id="7dfad649-57eb-4fb7-adc0-f22182848586" class="toggle"><li><details open=""><summary>Cache</summary><figure id="db204555-070e-47a6-9e18-9cc6ecc383bf" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-01_10-02-38.png"><img style="width:760px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-01_10-02-38.png"/></a></figure><figure id="fca2e873-7299-440a-8a26-1fda719ea5fd" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-01_10-03-41.png"><img style="width:469px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-01_10-03-41.png"/></a></figure><figure id="e01af76f-776e-4eaa-94b1-ba994e824d8d" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-01_10-04-38.png"><img style="width:483px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-01_10-04-38.png"/></a></figure></details></li></ul><ul id="a7d292ab-083a-45cb-91f8-09152c5cadaa" class="toggle"><li><details open=""><summary>Content Delivery Network (CDN)</summary><figure id="dc6082e4-a545-4465-bd78-700626467225" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-02_09-32-26.png"><img style="width:917px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-02_09-32-26.png"/></a></figure><figure id="76702ce2-54f2-48c1-b09b-7dd3740ef8f1" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-02_09-47-47.png"><img style="width:771px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-02_09-47-47.png"/></a></figure></details></li></ul><ul id="2c18f057-b555-4057-8063-72e17e05a4ad" class="toggle"><li><details open=""><summary>Stateless web tier, Stateful architecture, Stateless architecture</summary><figure id="c554fde8-3825-4d5d-93f2-71020e0d4bec" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-02_09-52-17.png"><img style="width:814px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-02_09-52-17.png"/></a></figure><figure id="ff706fee-20bd-459b-a3c0-45afe7201bd1" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-02_09-54-21.png"><img style="width:769px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-02_09-54-21.png"/></a></figure><figure id="f888b981-4d8d-4133-a393-d47cf6ca0829" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-02_09-54-59.png"><img style="width:760px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-02_09-54-59.png"/></a></figure></details></li></ul><ul id="835c150c-10c1-4b26-ae71-5cba66026a99" class="toggle"><li><details open=""><summary>Data Centers</summary><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="21713542-9796-4a42-a725-2bb83cce59b2"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Figure 1-15 shows an example setup with two data centers. In normal operation, users are geoDNS-routed, also known as geo-routed, to the closest data center, with a split traffic of x% in US-East and (100 - x)% in US-West. geoDNS is a DNS service that allows domain names to be resolved to IP addresses based on the location of a user.</div></figure><figure id="bf5d87db-b4a4-49fe-ab23-f68aee2ca59f" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-02_09-56-44.png"><img style="width:776px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-02_09-56-44.png"/></a></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="92beb995-f8cd-4b96-9763-cd1adfb80705"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">In the event of any significant data center outage, we direct all traffic to a healthy data center. In Figure 1-16, data center 2 (US-West) is offline, and 100% of the traffic is routed to data center 1 (US-East).</div></figure><figure id="0a0483e3-8e78-46de-8f87-99c7ebf47357" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-02_14-40-14.png"><img style="width:815px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-02_14-40-14.png"/></a></figure></details></li></ul><ul id="f06b284a-b9ae-46e7-adbf-4a7eb4afd756" class="toggle"><li><details open=""><summary>Message Queue</summary><figure id="c9cb309d-2297-4fa1-a7a6-274f006edc6e" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-06_12-34-57.png"><img style="width:968px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-06_12-34-57.png"/></a></figure><figure id="911eb5ec-6d43-4212-8ee7-5c3debceb702" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-06_12-35-08.png"><img style="width:925px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-06_12-35-08.png"/></a></figure><p id="3343b88d-4c4b-465d-90ef-2587979593cb" class="">
+</p></details></li></ul><ul id="0f88b91c-35eb-41d5-bc34-2a5ba58be9a0" class="toggle"><li><details open=""><summary>Logging, metrics, automation</summary><figure id="893ed8e0-c35d-4a8b-b098-f363e4263847" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-06_13-05-57.png"><img style="width:617px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-06_13-05-57.png"/></a></figure><p id="4daf809f-9ed1-47b4-bf6e-c56e290a7504" class="">
+</p></details></li></ul><ul id="c7c5b1e3-af97-4304-98c0-09dc223b5533" class="toggle"><li><details open=""><summary>Database scaling</summary><figure id="a8831c33-fb02-420c-93f7-e108581b63b2" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-06_13-08-29.png"><img style="width:811px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-06_13-08-29.png"/></a></figure><figure id="189e11b5-98d1-48ab-a779-c5521672315e" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-06_13-09-36.png"><img style="width:711px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-06_13-09-36.png"/></a></figure><figure id="6a3824e0-283d-4ba8-99dc-6027bc919b7b" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-06_13-12-37.png"><img style="width:771px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-06_13-12-37.png"/></a></figure></details></li></ul></details></li></ul><ul id="360a21a2-6c4f-426b-9d41-b30186085dda" class="toggle"><li><details open=""><summary>CHAPTER 2: BACK-OF-THE-ENVELOPE ESTIMATION</summary><ul id="f9247e57-fd6b-474e-8b0d-5248141b319d" class="toggle"><li><details open=""><summary>Power Two</summary><figure id="232b324e-2a24-4b94-b2fc-60ef76044352" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-07_15-43-14.png"><img style="width:816px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-07_15-43-14.png"/></a></figure></details></li></ul><ul id="c2398ba8-21bb-495b-bb5e-f8701e53f1d6" class="toggle"><li><details open=""><summary>Latency numbers every programmer should know</summary><figure id="4dbc8348-cadd-4d3a-bab3-33b079e796da" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-07_15-44-18.png"><img style="width:788px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-07_15-44-18.png"/></a></figure><figure id="60b485ee-29a2-4c8b-9701-569be8f1c7c7" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-07_15-45-15.png"><img style="width:791px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-07_15-45-15.png"/></a></figure></details></li></ul><ul id="1593a7b2-c94e-442b-acf3-d6a8bcfd1122" class="toggle"><li><details open=""><summary>Availability numbers</summary><figure id="56952c89-7552-47c5-a25f-c246aaee9612" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-07_15-46-53.png"><img style="width:789px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-07_15-46-53.png"/></a></figure><p id="ac4e68b6-b9f0-4252-871c-3bbddade1883" class="">
+</p></details></li></ul><ul id="f3840296-f615-4ab8-b6f3-8655af1ae2f5" class="toggle"><li><details open=""><summary>Example: Estimate Twitter QPS and storage requirements</summary></details></li></ul><ul id="9f3e26c4-6a27-4660-a0a0-cb82eff476ff" class="toggle"><li><details open=""><summary>Tips</summary></details></li></ul></details></li></ul><ul id="ab769203-b3c7-4b71-b05c-183200b8fc35" class="toggle"><li><details open=""><summary>CHAPTER 3: A FRAMEWORK FOR SYSTEM DESIGN
+INTERVIEWS</summary><ul id="61040245-446d-4926-a99c-05c88a3d2d71" class="toggle"><li><details open=""><summary>4-step process for effective system design interview</summary><ul id="e29f8ba0-1881-408d-bce0-d834f11eb4ed" class="toggle"><li><details open=""><summary>Step 1 - Understand the problem and establish design scope</summary></details></li></ul><ul id="1475903c-7f64-4d91-ae11-4f4e9df568c1" class="toggle"><li><details open=""><summary>Step 2 - Propose high-level design and get buy-in</summary><figure id="7d803af5-9850-48e8-a6e6-c305ba21477a" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-08_12-46-51.png"><img style="width:586px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-08_12-46-51.png"/></a></figure><figure id="7045d5f4-d952-4429-9c6e-bcaf1e0b1591" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-08_12-47-07.png"><img style="width:480px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-08_12-47-07.png"/></a></figure></details></li></ul><ul id="c747ad2e-ce8c-43ab-847d-557e5f9c717d" class="toggle"><li><details open=""><summary>Step 3 - Design deep dive</summary><figure id="9fa0dd6c-c0d2-46fa-86bd-42993b5f2e69" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-08_12-48-57.png"><img style="width:808px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-08_12-48-57.png"/></a></figure><figure id="970c894c-8738-45c1-b224-b00283d59d9a" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-08_12-49-19.png"><img style="width:694px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-08_12-49-19.png"/></a></figure><p id="58101bf4-e505-4b3f-a200-b1dfba335c8e" class="">
+</p></details></li></ul><ul id="5a0f067e-d810-4a84-ba5b-7b0412bbf898" class="toggle"><li><details open=""><summary>Step 4 - Wrap up</summary></details></li></ul></details></li></ul></details></li></ul><ul id="76b0500b-b57a-4a58-a924-f322bc1fdd2e" class="toggle"><li><details open=""><summary>CHAPTER 4: DESIGN A RATE LIMITER</summary><ul id="d46b6f97-2f23-4d69-b2a8-286fd44195e7" class="toggle"><li><details open=""><summary>Step 1 - Understand the problem and establish design scope</summary></details></li></ul><ul id="47288218-195e-4fd4-93dc-4d529f4f3017" class="toggle"><li><details open=""><summary>Step 2 - Propose high-level design and get buy-in</summary><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="5b1620ba-2f9a-464f-bacf-02148992b274"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Let us keep things simple and use a basic client and server model for communication.</div></figure><ul id="4c0a155e-4352-42a0-9c37-c352a98a7f75" class="toggle"><li><details open=""><summary>Where to put the rate limiter?</summary><figure id="f7d74766-aaa4-4631-baa3-5e952513b2cc" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-09_10-33-58.png"><img style="width:917px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-09_10-33-58.png"/></a></figure><figure id="052c6051-7970-46d0-ae93-065590154a4f" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-09_10-34-26.png"><img style="width:909px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-09_10-34-26.png"/></a></figure><figure id="3a0969dc-e9f3-4886-acff-85a198605c5a" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-09_10-35-00.png"><img style="width:890px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-09_10-35-00.png"/></a></figure></details></li></ul><ul id="2d0cecee-8ac7-4006-bc47-1f0e2c07b3b2" class="toggle"><li><details open=""><summary>Algorithms for rate limiting</summary><ul id="d81d9487-8106-4bea-ad6a-0a6cba02988f" class="toggle"><li><details open=""><summary>Token bucket algorithm</summary><figure id="9ac8c291-19a7-4c91-ab41-badde48ec19d" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-09_10-43-55.png"><img style="width:685px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-09_10-43-55.png"/></a></figure><figure id="de2e86d8-a4b7-4611-8210-6fe9e98f8a15" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-09_10-44-19.png"><img style="width:876px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-09_10-44-19.png"/></a></figure><figure id="6e6d6b95-f8e6-43f8-ab2a-948e1e9ec849" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-09_10-44-46.png"><img style="width:869px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-09_10-44-46.png"/></a></figure></details></li></ul><ul id="cd2ce97f-68f1-4225-a1a2-314c7831977f" class="toggle"><li><details open=""><summary>Leaking bucket algorithm</summary><figure id="0f5a3fa3-cefe-48e4-b740-4b81eba316c6" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-09_10-46-58.png"><img style="width:1002px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-09_10-46-58.png"/></a></figure></details></li></ul><ul id="de5d6482-9e6d-46bd-909c-ffdd55edc4e5" class="toggle"><li><details open=""><summary>Fixed window counter algorithm</summary><figure id="06610af6-946e-4351-8569-b6091db581a7" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-10_11-43-53.png"><img style="width:949px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-10_11-43-53.png"/></a></figure><figure id="16affca1-0115-45bb-95da-5742c14212f0" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-10_11-44-21.png"><img style="width:940px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-10_11-44-21.png"/></a></figure></details></li></ul><ul id="12a547bf-7c23-4195-80cc-a6c0c3af57d2" class="toggle"><li><details open=""><summary>Sliding window log algorithm</summary><figure id="1bce092e-6064-4ed7-b096-ec33de12d4ca" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-10_11-46-15.png"><img style="width:847px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-10_11-46-15.png"/></a></figure></details></li></ul><ul id="c84eb142-84d7-4909-816d-28c6d681a07f" class="toggle"><li><details open=""><summary>Sliding window counter algorithm</summary><figure id="f4185812-a7e6-475a-8aca-963dc1fd9446" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-10_11-48-02.png"><img style="width:931px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-10_11-48-02.png"/></a></figure></details></li></ul></details></li></ul><ul id="9c680de6-ba92-45c8-842d-6c795450d493" class="toggle"><li><details open=""><summary>High-level architecture</summary><figure id="719b3093-b297-43ab-8914-7d5fe422c85f" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-10_12-05-45.png"><img style="width:954px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-10_12-05-45.png"/></a></figure></details></li></ul></details></li></ul><ul id="4b469ff1-052a-478c-ab73-44a410a20ea8" class="toggle"><li><details open=""><summary>Step 3 - Design deep dive</summary><ul id="dcd4870b-ec46-4619-ba84-281d584b3bb1" class="toggle"><li><details open=""><summary>Rate limiting rules</summary></details></li></ul><ul id="c53d9d6e-16af-4285-9bc6-85a8c11ca0ac" class="toggle"><li><details open=""><summary>Exceeding the rate limit</summary></details></li></ul><ul id="3ab3c04f-dd76-4b20-8431-8ed5726ce363" class="toggle"><li><details open=""><summary>Detailed design</summary><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="89cdc2a5-2766-4afd-90b1-6daeb2801553"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Figure 4-13 presents a detailed design of the system.</div></figure><figure id="c649d726-0b15-4046-94d8-86203717c1eb" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-10_12-14-29.png"><img style="width:966px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-10_12-14-29.png"/></a></figure></details></li></ul><ul id="47c63a82-1a62-47aa-9f80-c8b0c966d9d7" class="toggle"><li><details open=""><summary>Rate limiter in a distributed environment</summary><figure id="7b0b1247-725d-4fc3-a9c5-81737946ef2b" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-10_12-16-33.png"><img style="width:924px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-10_12-16-33.png"/></a></figure><figure id="1145cdb7-7733-4c38-8113-2a071b398ea8" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-10_12-17-54.png"><img style="width:936px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-10_12-17-54.png"/></a></figure><figure id="81687af5-6f69-4de5-84f2-aa7d060b4bd9" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-10_12-18-24.png"><img style="width:949px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-10_12-18-24.png"/></a></figure></details></li></ul><ul id="d8725a68-26f5-4197-83a6-ae0e03cf87d3" class="toggle"><li><details open=""><summary>Performance optimization</summary><figure id="45908997-b801-485d-a961-b642ec596968" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-10_12-19-30.png"><img style="width:801px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-10_12-19-30.png"/></a></figure></details></li></ul><ul id="e567e846-0a5a-437c-b74b-fb56c1c4098b" class="toggle"><li><details open=""><summary>Monitoring</summary></details></li></ul></details></li></ul><ul id="5dbd44c4-d611-45cb-b353-d17f28ab0c27" class="toggle"><li><details open=""><summary>Step 4 - Wrap up</summary></details></li></ul></details></li></ul><ul id="86c6536b-de43-44a7-92ab-5ed38789c0d0" class="toggle"><li><details open=""><summary>CHAPTER 5: DESIGN CONSISTENT HASHING</summary><ul id="883a3cc2-02cd-44a5-93c3-a14bf96b8843" class="toggle"><li><details open=""><summary>The rehashing problem</summary><figure id="e430318f-2c2e-4610-8a07-4b6b5dcf3671" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-13_12-28-37.png"><img style="width:957px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-13_12-28-37.png"/></a></figure><figure id="f23a5f99-6ca6-468a-a5f2-a3f8881d715d" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-13_12-29-09.png"><img style="width:833px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-13_12-29-09.png"/></a></figure><figure id="db28ba0b-a7c1-407e-aa87-8eee4a3874f6" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-13_12-30-26.png"><img style="width:928px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-13_12-30-26.png"/></a></figure><figure id="4baf3574-1139-4953-a934-4b9a607a0004" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-13_12-30-42.png"><img style="width:847px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-13_12-30-42.png"/></a></figure></details></li></ul><ul id="a9eece96-fa48-4049-9877-018c7407c6f1" class="toggle"><li><details open=""><summary>Consistent hashing</summary><ul id="f94786ee-5afe-478b-9504-711020b305f4" class="toggle"><li><details open=""><summary>Hash space and hash ring</summary><figure id="d2763e90-8fa7-40e3-b8bf-fbbcff8d9581" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-13_12-33-05.png"><img style="width:943px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-13_12-33-05.png"/></a></figure></details></li></ul><ul id="2e8a6d63-ec9e-43c4-8538-c6458a9765c0" class="toggle"><li><details open=""><summary>Hash servers</summary><figure id="2b3f9cbe-9c2e-4c5a-9a70-294e3d929d13" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-13_12-36-46.png"><img style="width:943px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-13_12-36-46.png"/></a></figure></details></li></ul><ul id="d8b1c193-bbcc-4894-ad17-ec2e5123f26f" class="toggle"><li><details open=""><summary>Hash keys</summary><figure id="3be84a1e-63ef-4e2a-9677-e37589a216c5" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-13_12-38-48.png"><img style="width:943px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-13_12-38-48.png"/></a></figure><figure id="266f5a22-5676-41e4-b7cf-6708eb98c93f" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-13_12-39-09.png"><img style="width:903px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-13_12-39-09.png"/></a></figure></details></li></ul><ul id="c850e5ee-c28e-4cc3-87cf-676415bd7e91" class="toggle"><li><details open=""><summary>Add a server</summary><figure id="20822b55-9779-408e-b942-f7390ab15b5a" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-13_12-40-32.png"><img style="width:948px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-13_12-40-32.png"/></a></figure></details></li></ul><ul id="8e41ec8d-abf0-4e33-9f44-d80bda686581" class="toggle"><li><details open=""><summary>Remove a server</summary><figure id="c6d87c75-b9a5-45f5-8627-26259057f8dd" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-13_12-41-26.png"><img style="width:1043px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-13_12-41-26.png"/></a></figure></details></li></ul><ul id="893d64c6-9c6b-41fc-857e-80857aed720b" class="toggle"><li><details open=""><summary>Two issues in the basic approach</summary><figure id="b2c464b4-1c0f-45a7-b6ff-effbb88fc710" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-13_12-42-41.png"><img style="width:934px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-13_12-42-41.png"/></a></figure><figure id="22cbf4c3-c0a3-471b-98cc-24a4b1c23092" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-13_12-43-21.png"><img style="width:952px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-13_12-43-21.png"/></a></figure></details></li></ul><ul id="24983756-c0c2-4494-9db9-7ff72127a2d7" class="toggle"><li><details open=""><summary>Virtual nodes</summary><figure id="db7ebd67-65af-4005-8bc1-316697e94521" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-13_12-44-15.png"><img style="width:940px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-13_12-44-15.png"/></a></figure><figure id="8b2ffbbf-727f-4173-a13a-d02775c0663a" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-13_12-44-55.png"><img style="width:955px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-13_12-44-55.png"/></a></figure></details></li></ul><ul id="d63da4fc-85e9-4737-9b91-6531b3e60363" class="toggle"><li><details open=""><summary>Find affected keys </summary><figure id="8c71276e-69ff-4c16-b366-2567eb1ab1b7" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-13_12-45-57.png"><img style="width:926px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-13_12-45-57.png"/></a></figure><figure id="275acdfc-801f-4b87-a1fa-7d1a9d643ca1" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-13_12-46-27.png"><img style="width:939px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-13_12-46-27.png"/></a></figure></details></li></ul><ul id="583f3b74-3810-4a8e-95ba-29dbd737d454" class="toggle"><li><details open=""><summary>Wrap up</summary></details></li></ul></details></li></ul></details></li></ul><ul id="eb1be60c-15e1-4b29-8230-da5af8ddcda4" class="toggle"><li><details open=""><summary>CHAPTER 6: DESIGN A KEY-VALUE STORE</summary><figure id="300e4a3a-67e0-4841-a7c2-836aa48430da" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-14_09-26-31.png"><img style="width:966px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-14_09-26-31.png"/></a></figure><ul id="31083e14-4132-45fb-84b6-11c9972c43e1" class="toggle"><li><details open=""><summary>Understand the problem and establish design scope</summary></details></li></ul><ul id="e33819c2-c664-4d28-9115-c6ae5542faf0" class="toggle"><li><details open=""><summary>Single server key-value store</summary></details></li></ul><ul id="ed536d7e-b8a2-47c4-bd6f-7c59d195a762" class="toggle"><li><details open=""><summary>Distributed key-value store</summary><figure id="ce8cf1d4-c354-4ed1-b7e0-54cbc5240149" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-14_09-31-08.png"><img style="width:680px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-14_09-31-08.png"/></a></figure><figure id="e20658f9-c1a7-458f-b3a1-86dc5ac89d8f" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-14_09-34-43.png"><img style="width:698px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-14_09-34-43.png"/></a></figure><figure id="b5eb5f42-c9fc-472d-b649-d6e7c83e0ac4" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-14_09-35-44.png"><img style="width:701px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-14_09-35-44.png"/></a></figure><p id="264a9a8f-337d-4ad1-aff2-70d148938de6" class="">
+</p></details></li></ul><ul id="7d8768c7-66a4-48cc-8830-13a82e725211" class="toggle"><li><details open=""><summary>System components</summary></details></li></ul><ul id="b47e6703-51cd-40e7-b692-b2571e47fc89" class="toggle"><li><details open=""><summary>Data partition</summary><figure id="3bf2d96c-82d3-483a-964f-6497358e7937" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-14_09-39-22.png"><img style="width:869px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-14_09-39-22.png"/></a></figure></details></li></ul><ul id="092e5735-969c-4169-9636-fbf905caf791" class="toggle"><li><details open=""><summary>Data replication</summary><figure id="927f887d-09f5-4f5f-be9c-078c4cf13965" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-15_11-58-37.png"><img style="width:681px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-15_11-58-37.png"/></a></figure></details></li></ul><ul id="245de7cc-b615-4ef3-ad2c-c0447b0e37b9" class="toggle"><li><details open=""><summary>Consistency</summary><figure id="f67c3df3-d158-4dae-babb-74b5700219ee" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-15_12-02-40.png"><img style="width:654px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-15_12-02-40.png"/></a></figure><p id="7a6088d0-6e49-450c-b4e1-8010a3c6f3b2" class="">
+</p></details></li></ul><ul id="0bbdec65-65ce-4433-be9b-8068c326cf96" class="toggle"><li><details open=""><summary>Inconsistency resolution: versioning</summary><figure id="3eb80cd9-a0e0-40c2-8e1a-745cab5d3a1d" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-15_12-08-38.png"><img style="width:804px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-15_12-08-38.png"/></a></figure><figure id="05006c42-438d-4f45-a205-852c6bfc3e44" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-15_12-09-29.png"><img style="width:819px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-15_12-09-29.png"/></a></figure><figure id="a31e5365-4d65-49d7-abeb-fbc1b8c89b97" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-15_12-11-01.png"><img style="width:779px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-15_12-11-01.png"/></a></figure></details></li></ul><ul id="4175cd5f-3085-4f0b-82d7-1f9b8d1bc022" class="toggle"><li><details open=""><summary>Handling failures</summary><ul id="9f467d02-6617-4738-acce-6717984d0605" class="toggle"><li><details open=""><summary>Failure detection</summary><figure id="ede9c967-044f-415b-9401-702f057dd6de" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-15_12-14-59.png"><img style="width:634px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-15_12-14-59.png"/></a></figure><figure id="bdbb871f-23ef-4cbb-a4bc-8f0109b76555" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-15_12-15-59.png"><img style="width:1000px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-15_12-15-59.png"/></a></figure></details></li></ul><ul id="fc2600f3-5d20-4e7b-82b7-fb65bad26ef7" class="toggle"><li><details open=""><summary>Handling temporary failures</summary><figure id="112091c4-4d58-4452-b993-ad6e89c31a6d" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-15_12-17-56.png"><img style="width:774px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-15_12-17-56.png"/></a></figure></details></li></ul><ul id="a78a2442-f32b-4c22-92fd-fbe2087d25ab" class="toggle"><li><details open=""><summary>Handling permanent failures</summary><figure id="788943b1-7ac6-4711-9162-263a5995655b" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-16_09-24-08.png"><img style="width:999px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-16_09-24-08.png"/></a></figure><figure id="6a7cd3be-c869-416c-8237-aec2e8534060" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-16_09-25-10.png"><img style="width:951px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-16_09-25-10.png"/></a></figure><figure id="0681bdab-3dc3-42a9-ba79-8c7dca30ca1c" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-16_09-25-20.png"><img style="width:940px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-16_09-25-20.png"/></a></figure></details></li></ul><ul id="17453f65-f6aa-43d7-afea-7be1b117f288" class="toggle"><li><details open=""><summary>Handling data center outage</summary></details></li></ul></details></li></ul><ul id="404debcc-6416-472c-87b2-fb9fda17db4b" class="toggle"><li><details open=""><summary>System architecture diagram</summary><figure id="7933db5f-0062-4c44-bcc3-1f5fa59093bb" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-16_09-27-42.png"><img style="width:976px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-16_09-27-42.png"/></a></figure><figure id="a789a76f-6eb8-4ea3-a010-84e0a28c2d01" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-16_09-28-40.png"><img style="width:687px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-16_09-28-40.png"/></a></figure></details></li></ul><ul id="56a3bbc1-7d84-472f-8607-348b8dc50af6" class="toggle"><li><details open=""><summary>Write path</summary><figure id="4a59f92d-8a7b-4225-bf69-068b14c0754d" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-16_09-29-37.png"><img style="width:945px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-16_09-29-37.png"/></a></figure></details></li></ul><ul id="cc1233d1-48a4-49e2-90a2-6ec20b1d34f6" class="toggle"><li><details open=""><summary>Read path</summary><figure id="3f26a0db-cbfa-401c-a7f7-c80cbf92f6f0" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-16_09-30-57.png"><img style="width:940px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-16_09-30-57.png"/></a></figure><figure id="75f1b8f1-3397-4107-99ef-5abfc7fe14a7" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-16_09-31-26.png"><img style="width:940px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-16_09-31-26.png"/></a></figure></details></li></ul><ul id="936b75db-a6b7-44ab-9662-96c37fd53b80" class="toggle"><li><details open=""><summary>Summary</summary><figure id="b2246881-ebf1-4264-8e96-76145f696f85" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-16_09-32-30.png"><img style="width:919px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-16_09-32-30.png"/></a></figure></details></li></ul></details></li></ul><ul id="de12a4e7-5d15-4102-89c8-94ae4a4f3f01" class="toggle"><li><details open=""><summary>CHAPTER 7: DESIGN A UNIQUE ID GENERATOR IN
+DISTRIBUTED SYSTEMS</summary><figure id="096d92fd-925c-432c-b25e-ac923e341443" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-17_10-17-39.png"><img style="width:461px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-17_10-17-39.png"/></a></figure><ul id="bf87bf5b-4c08-494a-b8cb-3a2d3496a8df" class="toggle"><li><details open=""><summary>Step 1 - Understand the problem and establish design scope</summary></details></li></ul><ul id="73dbe617-48db-42f9-a6b4-9ba87d550737" class="toggle"><li><details open=""><summary>Step 2 - Propose high-level design and get buy-in</summary><ul id="3f8836ba-eb14-4973-90c9-6ac38e7c6167" class="toggle"><li><details open=""><summary>Multi-master replication</summary><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="113ceff2-bad4-4ff5-ad42-673366921314"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">As shown in Figure 7-2, the first approach is multi-master replication.</div></figure><figure id="1cf3c7b9-ac69-4b1f-ae42-98048897283c" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-17_10-21-13.png"><img style="width:729px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-17_10-21-13.png"/></a></figure></details></li></ul><ul id="880b6641-143b-4d43-93aa-e2275b7398c8" class="toggle"><li><details open=""><summary>UUID</summary><figure id="00099d44-bda5-43e9-ad26-f6a37d059312" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-17_10-22-38.png"><img style="width:921px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-17_10-22-38.png"/></a></figure></details></li></ul><ul id="ec97bc41-405b-407c-b93f-c55abd7b909f" class="toggle"><li><details open=""><summary>Ticket Server</summary><figure id="be61d0d5-6c00-4549-9da2-b7a7a1f4ee09" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-17_10-24-03.png"><img style="width:932px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-17_10-24-03.png"/></a></figure></details></li></ul><ul id="5692aa3f-47d2-4ded-883c-47faedffeb83" class="toggle"><li><details open=""><summary>Twitter snowflake approach</summary><figure id="e1cf070a-9e85-4672-b5c0-32f5f6ba2a8c" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-17_10-25-56.png"><img style="width:926px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-17_10-25-56.png"/></a></figure></details></li></ul></details></li></ul><ul id="3a5930e3-1ef5-43aa-a799-7d01a1ecc8d6" class="toggle"><li><details open=""><summary>Step 3 - Design deep dive</summary><figure id="3b6471c7-8d26-4611-81a0-003200364ae8" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-17_10-28-05.png"><img style="width:911px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-17_10-28-05.png"/></a></figure></details></li></ul><ul id="77bdab2e-6b88-44fa-bc86-d7b7b4b89859" class="toggle"><li><details open=""><summary>Step 4 - Wrap up</summary></details></li></ul></details></li></ul><ul id="5d01247f-a1e0-4c09-9bf4-e6d5088d5aaf" class="toggle"><li><details open=""><summary>CHAPTER 8: DESIGN A URL SHORTENER</summary><ul id="8859e4df-8c67-4849-9ac1-a03bf04df003" class="toggle"><li><details open=""><summary>Step 1 - Understand the problem and establish design scope</summary><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="a1f538a8-df54-452c-95b6-1ff622f2f29c"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><strong>Back of the envelope estimation</strong><p id="9c44b53a-715f-4ea2-b90b-0deb744b2a06" class="">• Write operation: 100 million URLs are generated per day.
+• Write operation per second: 100 million / 24 /3600 = 1160
+• Read operation: Assuming ratio of read operation to write operation is 10:1, read operation per second: 1160 * 10 = 11,600
+• Assuming the URL shortener service will run for 10 years, this means we must support 100 million * 365 * 10 = 365 billion records.
+• Assume average URL length is 100.
+• Storage requirement over 10 years: 365 billion * 100 bytes * 10 years = 365 TB
+It is important for you to walk through the assumptions and calculations with your interviewer so that both of you are on the same page.</p></div></figure></details></li></ul><ul id="d4ec0a62-e983-4656-b436-def52ba4b867" class="toggle"><li><details open=""><summary>Step 2 - Propose high-level design and get buy-in</summary><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="74006986-29f9-4ee7-b926-d00077c309a6"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">In this section, we discuss the API endpoints, URL redirecting, and URL shortening flows.</div></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="b42459f6-d026-48bf-a42d-c42f6ce389f0"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><strong>URL redirecting</strong><p id="3a487d0f-3c89-46a9-83f6-ab8f44c0ac58" class="">Figure 8-1 shows what happens when you enter a tinyurl onto the browser. Once the server receives a tinyurl request, it changes the short URL to the long URL with 301 redirect.</p></div></figure><figure id="70d03fbb-7a56-4823-8126-ea20ba920e08" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-27_11-03-06.png"><img style="width:925px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-27_11-03-06.png"/></a></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="23e08122-2eaf-4fb6-8fd9-46eb0efe0f56"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">The detailed communication between clients and servers is shown in Figure 8-2.</div></figure><figure id="d6ad7594-be4c-4397-92d7-0a77b03e727c" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-27_11-03-42.png"><img style="width:706px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-27_11-03-42.png"/></a></figure><figure id="540e4d2f-3cbc-4996-9098-12f6fdbc24e1" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-27_11-05-53.png"><img style="width:480px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-27_11-05-53.png"/></a></figure></details></li></ul><ul id="92588877-4b8d-438f-afba-3c0655e905d9" class="toggle"><li><details open=""><summary>Step 3 - Design deep dive</summary><figure id="3f66d616-f752-49fd-a04a-05622657ee8f" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-27_11-08-04.png"><img style="width:369px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-27_11-08-04.png"/></a></figure><ul id="927ad4c2-1f29-4225-92c9-3363762beddb" class="toggle"><li><details open=""><summary>Hash Function</summary><figure id="c67a7c5e-f414-477e-8c4e-79fae344be05" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-27_11-08-54.png"><img style="width:951px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-27_11-08-54.png"/></a></figure><figure id="d4bafe64-595e-45d2-8f62-8966456c3e37" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-27_11-09-38.png"><img style="width:723px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-27_11-09-38.png"/></a></figure><figure id="1846d074-d86f-406b-a1e0-b073909917d4" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-27_11-10-48.png"><img style="width:940px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-27_11-10-48.png"/></a></figure><figure id="7988f03a-d657-4e76-bf8e-9f24790e4610" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-27_11-13-59.png"><img style="width:838px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-27_11-13-59.png"/></a></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="387ee09e-e77a-4b7a-8803-db03a5cbc594"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Thus, the short URL is <a href="https://tinyurl.com/">https://tinyurl.com</a> /2TX</div></figure><figure id="d08302bd-3ca3-4f5e-ba73-ac6a3565c10c" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-27_11-14-30.png"><img style="width:919px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-27_11-14-30.png"/></a></figure></details></li></ul><ul id="989c0bbd-0bae-455f-a116-46c1b82804a1" class="toggle"><li><details open=""><summary>URL shortening deep dive</summary><figure id="cf8d7eae-244c-49c4-a4dd-cced6ec1ed42" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-27_11-15-07.png"><img style="width:823px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-27_11-15-07.png"/></a></figure><figure id="26fc04db-c66e-41f3-8cc0-b2562fe82d47" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-27_11-16-19.png"><img style="width:921px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-27_11-16-19.png"/></a></figure></details></li></ul><ul id="85b55973-e084-49f3-9570-c65f6a6f4ba1" class="toggle"><li><details open=""><summary>URL redirecting deep dive</summary><figure id="0b518e29-15f5-4142-8b74-1fff67bac609" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-27_11-18-45.png"><img style="width:959px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-27_11-18-45.png"/></a></figure></details></li></ul></details></li></ul><ul id="1260a459-4899-4f37-8908-5e6e5b6641b2" class="toggle"><li><details open=""><summary>Step 4 - Wrap up</summary></details></li></ul></details></li></ul><ul id="6252ac79-7dd0-461e-98b0-ac4d9ccf3b8a" class="toggle"><li><details open=""><summary>CHAPTER 9: DESIGN A WEB CRAWLER</summary><figure id="7d4e1dcd-d147-45ab-bc0d-4ad1a481b5a6" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-28_09-29-15.png"><img style="width:777px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-28_09-29-15.png"/></a></figure><ul id="e9645dd5-a41f-4d7a-80cb-0df7192b9f8c" class="toggle"><li><details open=""><summary>Step 1 - Understand the problem and establish design scope</summary></details></li></ul><ul id="bc5f8528-042a-4410-92d6-312c4743cd2a" class="toggle"><li><details open=""><summary>Step 2 - Propose high-level design and get buy-in</summary><figure id="7bfa33e1-d4f3-4f02-94aa-0c3b2431ce2d" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-28_11-31-06.png"><img style="width:926px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-28_11-31-06.png"/></a></figure><figure id="06c469d6-0f4f-4976-8fe7-5ecfab9d2cad" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-28_11-35-58.png"><img style="width:951px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-28_11-35-58.png"/></a></figure><figure id="1484f874-5bfa-4acc-a878-a050240f38c2" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-28_11-37-52.png"><img style="width:933px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-28_11-37-52.png"/></a></figure></details></li></ul><ul id="72035275-fdbd-48ec-9c7a-f59e3a12bf58" class="toggle"><li><details open=""><summary>Step 3 - Design deep dive</summary><ul id="a75b3730-5e63-4716-a9a7-f052adf8b79b" class="toggle"><li><details open=""><summary>DFS vs BFS</summary><figure id="8fa14f5e-91cd-4251-8d3e-e9303790c354" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-28_11-41-14.png"><img style="width:889px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-28_11-41-14.png"/></a></figure></details></li></ul><ul id="f8e6e9bd-f3a3-4977-be4c-fffb6cec22f4" class="toggle"><li><details open=""><summary>URL frontier</summary><figure id="505ec3d7-80a0-4e06-839a-97e2c2780075" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-28_11-44-18.png"><img style="width:790px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-28_11-44-18.png"/></a></figure><figure id="8005bf26-039b-4ed6-acb7-e12b49dc3fec" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-28_11-44-47.png"><img style="width:878px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-28_11-44-47.png"/></a></figure><figure id="398bed88-07d6-4b09-b331-52d086617b91" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-29_14-45-15.png"><img style="width:729px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-29_14-45-15.png"/></a></figure><figure id="82510f33-fdfa-4e03-860c-b624737a6496" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-29_14-45-59.png"><img style="width:531px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-29_14-45-59.png"/></a></figure></details></li></ul><ul id="4cbc5c69-38f1-41eb-9b2a-6c29b5771049" class="toggle"><li><details open=""><summary>HTML Downloader</summary><figure id="008820fe-29e8-4996-90e8-e376611ce71b" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-29_14-51-21.png"><img style="width:691px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-29_14-51-21.png"/></a></figure></details></li></ul><ul id="47331325-f4fe-4be3-8eb3-3300a5c70fbb" class="toggle"><li><details open=""><summary>Robustness</summary></details></li></ul><ul id="8997f273-156c-4286-8a42-7a64882a0d13" class="toggle"><li><details open=""><summary>Extensibility</summary><figure id="acb11a09-8c07-4b03-abc2-59a608a744c3" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-29_14-54-46.png"><img style="width:933px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-29_14-54-46.png"/></a></figure></details></li></ul><ul id="3b09ed3a-11a6-41a6-b925-b251cf33b746" class="toggle"><li><details open=""><summary>Detect and avoid problematic content</summary></details></li></ul></details></li></ul><ul id="31bf010f-61f8-4b28-9855-1f46a462a2c9" class="toggle"><li><details open=""><summary>Step 4 - Wrap up</summary></details></li></ul></details></li></ul><ul id="90a05566-9a18-448c-b170-4c9d7f1b4f57" class="toggle"><li><details open=""><summary>CHAPTER 10: DESIGN A NOTIFICATION SYSTEM</summary><ul id="b11f8368-e62d-4f7f-9e91-96f73dc048bd" class="toggle"><li><details open=""><summary>Step 1 - Understand the problem and establish design scope</summary></details></li></ul><ul id="c6b0bbb4-6d34-4267-81a8-4e1f47f8bcd5" class="toggle"><li><details open=""><summary>Step 2 - Propose high-level design and get buy-in</summary><ul id="ab29cb62-faa6-41e8-8389-30e0bc0f3f52" class="toggle"><li><details open=""><summary>Different types of notifications</summary><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="053b94bc-ba02-4fc2-9e6e-43508c93b4d4"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">We start by looking at how each notification type works at a high level.</div></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="b3df0658-b7c6-448e-8031-1b3ef47c8dc5"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><strong>iOS push notification</strong></div></figure><figure id="81e677e1-f079-47c1-bcdb-753e1650c725" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-30_11-25-03.png"><img style="width:666px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-30_11-25-03.png"/></a></figure><figure id="573c4817-0991-48af-b55f-82869d79f34b" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-30_11-26-49.png"><img style="width:583px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-30_11-26-49.png"/></a></figure><hr id="82a22966-a394-4fb4-a468-a7a6f56bf354"/><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="c3fcab5b-d19a-4208-8e30-dbfe6c541bae"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><strong>Android push notification
+</strong><p id="a3536ac3-a2d8-4dd1-9466-7bff4746818d" class="">Android adopts a similar notification flow. Instead of using APNs, Firebase Cloud Messaging (FCM) is commonly used to send push notifications to android devices.</p></div></figure><figure id="acef4b75-b0e0-4dd9-930b-03f551982d77" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-30_11-28-18.png"><img style="width:740px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-30_11-28-18.png"/></a></figure><figure id="cb131b28-dbff-46a4-9991-864e269f43c2" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-30_11-28-46.png"><img style="width:763px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-30_11-28-46.png"/></a></figure><figure id="47bff2d8-893b-42e7-bf0f-720fe4bab9b6" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-30_11-31-19.png"><img style="width:707px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-30_11-31-19.png"/></a></figure><figure id="d461c46a-4393-4564-bb3b-6da1ba3d82d6" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-30_11-31-37.png"><img style="width:464px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-30_11-31-37.png"/></a></figure></details></li></ul><ul id="5952ab88-1b35-442e-9669-f9c3d448f956" class="toggle"><li><details open=""><summary>Contact info gathering flow</summary><figure id="a219650c-3ace-4e78-b999-93fdf1b1eff3" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-30_11-32-42.png"><img style="width:932px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-30_11-32-42.png"/></a></figure><figure id="48bf867c-4d7b-435d-8db9-87e22381330d" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-30_11-33-18.png"><img style="width:946px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-30_11-33-18.png"/></a></figure></details></li></ul><ul id="0a91ebc4-bde1-4887-805d-5c978cb5fe52" class="toggle"><li><details open=""><summary>Notification sending/receiving flow</summary><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="15f6fe6f-3403-4a63-b1b3-2ff7b7b65787"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">We will first present the initial design; then, propose some optimizations.</div></figure><figure id="7ffd7d5e-9e2d-46f5-82bb-526d77fa5a2a" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-30_11-34-15.png"><img style="width:945px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-30_11-34-15.png"/></a></figure><figure id="6c6428fa-f97b-40f3-9377-3dd7db1e5cfa" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-30_12-25-00.png"><img style="width:1085px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-30_12-25-00.png"/></a></figure><figure id="a463c614-136d-47f7-a423-93c13c2f5ee8" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-30_12-26-47.png"><img style="width:586px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-30_12-26-47.png"/></a></figure><p id="96722e11-53f7-44b2-b0dd-20f549c505ad" class="">
+</p></details></li></ul></details></li></ul><ul id="3e48adec-c922-4662-846e-d2bd0c4909a3" class="toggle"><li><details open=""><summary>Step 3 - Design deep dive</summary><ul id="fd05323c-a39d-498c-902f-4f7b090375f0" class="toggle"><li><details open=""><summary>Reliability</summary><figure id="323ae39e-eb12-4319-93cb-7fa2601377b8" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-31_10-16-45.png"><img style="width:603px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-31_10-16-45.png"/></a></figure></details></li></ul><ul id="b392b59a-390c-4498-9c05-1f3de76b0a4d" class="toggle"><li><details open=""><summary>Additional components and considerations</summary><figure id="92b33a7c-0914-4571-8231-d677c4063b7d" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-31_10-24-28.png"><img style="width:547px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-31_10-24-28.png"/></a></figure><figure id="442ddf58-23e1-4615-a44f-8fb54e7662ac" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-31_10-27-10.png"><img style="width:869px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-31_10-27-10.png"/></a></figure><p id="b7a23a91-ad5e-4a76-9d70-f6c77ae4ac7d" class="">
+</p></details></li></ul><ul id="30f57457-0e9f-4941-89f6-13316ef7c230" class="toggle"><li><details open=""><summary>Updated design</summary><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="3b8c96c5-42d4-4e6a-8b64-78910c7f6607"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Putting everything together, Figure 10-14 shows the updated notification system design.</div></figure><figure id="2dd16434-fccc-4978-96fe-867ca82dbfaf" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-31_10-28-03.png"><img style="width:927px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-08-31_10-28-03.png"/></a></figure></details></li></ul></details></li></ul><ul id="d575564a-7bbf-4a12-bf0d-847a42ec50b1" class="toggle"><li><details open=""><summary>Step 4 - Wrap up</summary></details></li></ul></details></li></ul><ul id="bd128552-58e8-452d-bc2a-83d4fa0608ef" class="toggle"><li><details open=""><summary>CHAPTER 11: DESIGN A NEWS FEED SYSTEM</summary><ul id="0a47ab48-86ab-424a-89ed-0437cca331cc" class="toggle"><li><details open=""><summary>Step 1 - Understand the problem and establish design scope</summary></details></li></ul><ul id="bd980522-52a8-4646-9950-ef94122dbc86" class="toggle"><li><details open=""><summary>Step 2 - Propose high-level design and get buy-in</summary><figure id="802c50f5-3a70-49b7-b1a2-334aa7502aed" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-09-03_15-09-06.png"><img style="width:592px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-09-03_15-09-06.png"/></a></figure><figure id="294360c9-e935-45de-89e6-21167ad4fa86" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-09-03_15-12-10.png"><img style="width:462px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-09-03_15-12-10.png"/></a></figure></details></li></ul><ul id="a2384129-1e14-4368-aec8-5714260a3a8d" class="toggle"><li><details open=""><summary>Step 3 - Design deep dive</summary><ul id="de1b3025-6de3-4cb7-b448-da95a68bd8e2" class="toggle"><li><details open=""><summary>Feed publishing deep dive</summary><figure id="0236ee17-6d50-4c6b-b7e3-7c8c14de3fe6" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-09-04_10-50-12.png"><img style="width:796px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-09-04_10-50-12.png"/></a></figure><figure id="349dd0cc-2500-45dd-9779-b517fe15c06b" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-09-04_10-53-46.png"><img style="width:730px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-09-04_10-53-46.png"/></a></figure><figure id="97a233b9-6617-4f97-b117-2b5560efd626" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-09-04_10-55-17.png"><img style="width:401px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-09-04_10-55-17.png"/></a></figure></details></li></ul><ul id="e9fd9509-ea09-44d0-8733-2ca6b4ba1852" class="toggle"><li><details open=""><summary>Newsfeed retrieval deep dive</summary><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="88b46973-109e-46fe-b496-c317b15b472b"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Figure 11-7 illustrates the detailed design for news feed retrieval.</div></figure><figure id="03b06c3a-04a8-4a40-bdf2-3af188fb2c9c" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-09-04_10-56-03.png"><img style="width:799px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-09-04_10-56-03.png"/></a></figure></details></li></ul><ul id="6a5cbbd7-61be-4a69-a165-965db0d7343a" class="toggle"><li><details open=""><summary>Cache architecture</summary><figure id="fff86b70-6913-4b6b-a4cd-d46ad0ff2cc2" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-09-04_10-58-08.png"><img style="width:945px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_from_2023-09-04_10-58-08.png"/></a></figure></details></li></ul></details></li></ul><ul id="f199695a-7a1d-4705-ba4a-e37de093ae68" class="toggle"><li><details open=""><summary>Step 4 - Wrap up</summary></details></li></ul></details></li></ul></details></li></ul><ul id="0df8bd76-1511-47f5-aa6c-99e727f8e545" class="toggle"><li><details open=""><summary>Algorithms for System Design</summary><figure id="9a648005-93a3-4a0d-ba09-6f2709fe45a7" class="image"><a href="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_20230825-092100__01.jpg"><img style="width:1080px" src="System%20Design%2007e00cee1d834434a28a433f2b654c40/Screenshot_20230825-092100__01.jpg"/></a></figure></details></li></ul><ul id="7958ceda-b5b7-45f2-bd39-0b38d4e208c6" class="toggle"><li><details open=""><summary>Resources</summary><table id="486fd7c4-0f07-4987-8742-a85e42982b39" class="simple-table"><tbody><tr id="7d0e9941-f983-4d59-a909-3ba990338ae7"><td id="?q@L" class="" style="width:264px">Software System Design for Beginners</td><td id="FLPg" class="" style="width:515px"><a href="https://www.freecodecamp.org/news/software-system-design-for-beginners/">https://www.freecodecamp.org/news/software-system-design-for-beginners/</a></td></tr><tr id="0c933f14-2c65-4911-bf06-c0c76ff0d118"><td id="?q@L" class="" style="width:264px">Complete System Design Series - 
+Naina Chaturvedi</td><td id="FLPg" class="" style="width:515px"><a href="https://medium.com/coders-mojo/complete-system-design-series-part-1-45bf9c8654bc">https://medium.com/coders-mojo/complete-system-design-series-part-1-45bf9c8654bc</a></td></tr><tr id="8cbfd70f-e421-4c38-b420-c64a7922b5ac"><td id="?q@L" class="" style="width:264px">ByteByteGo</td><td id="FLPg" class="" style="width:515px"><a href="https://www.youtube.com/@ByteByteGo/featured">https://www.youtube.com/@ByteByteGo/featured</a></td></tr><tr id="70c676c2-9473-461f-83c1-f356bd867bbc"><td id="?q@L" class="" style="width:264px">System Design - Gaurav Sen</td><td id="FLPg" class="" style="width:515px"><a href="https://www.youtube.com/watch?v=xpDnVSmNFX0&amp;list=PLMCXHnjXnTnvo6alSjVkgxV-VH6EPyvoX&amp;ab_channel=GauravSen">https://www.youtube.com/watch?v=xpDnVSmNFX0&amp;list=PLMCXHnjXnTnvo6alSjVkgxV-VH6EPyvoX&amp;ab_channel=GauravSen</a></td></tr><tr id="2f8dba44-e58b-4389-82b4-7c8e85778d8f"><td id="?q@L" class="" style="width:264px">System Design - the complete course</td><td id="FLPg" class="" style="width:515px"><a href="https://dev.to/karanpratapsingh/system-design-the-complete-course-10fo">https://dev.to/karanpratapsingh/system-design-the-complete-course-10fo</a></td></tr><tr id="ddd9a0c1-8e8d-4feb-a149-2fffcff4252c"><td id="?q@L" class="" style="width:264px">The complete guide to System Design in 2023</td><td id="FLPg" class="" style="width:515px"><a href="https://www.educative.io/blog/complete-guide-to-system-design">https://www.educative.io/blog/complete-guide-to-system-design</a></td></tr><tr id="1d0a75c6-8e68-4994-bf6c-5929ad4e857b"><td id="?q@L" class="" style="width:264px">System Design - geeksforgeeks</td><td id="FLPg" class="" style="width:515px"><a href="https://www.geeksforgeeks.org/system-design-tutorial/?fbclid=IwAR0Qyu2A43RZAi9WfSKq45zxdzqroUrGC8Z10vIJ8uM8Vk4BkzxQ5X_M5EA">https://www.geeksforgeeks.org/system-design-tutorial/?fbclid=IwAR0Qyu2A43RZAi9WfSKq45zxdzqroUrGC8Z10vIJ8uM8Vk4BkzxQ5X_M5EA</a></td></tr><tr id="75daf386-f64c-42a7-aa47-2d6964e17786"><td id="?q@L" class="" style="width:264px">top 30 system design interview questions</td><td id="FLPg" class="" style="width:515px"><a href="https://medium.com/javarevisited/top-30-system-design-interview-questions-and-problems-for-programmers-417e89eadd67">https://medium.com/javarevisited/top-30-system-design-interview-questions-and-problems-for-programmers-417e89eadd67</a></td></tr><tr id="44e65859-b383-4e18-9021-6246e51c018a"><td id="?q@L" class="" style="width:264px">Shiran Afergan - System Design</td><td id="FLPg" class="" style="width:515px"><a href="https://www.youtube.com/watch?v=-frNQkRz_IU">https://www.youtube.com/watch?v=-frNQkRz_IU</a></td></tr><tr id="37ce71e8-37a3-4343-ab20-91b5debcfd98"><td id="?q@L" class="" style="width:264px">20 System Design Concepts Explained in 10 Minutes</td><td id="FLPg" class="" style="width:515px"><a href="https://www.youtube.com/watch?v=i53Gi_K3o7I&amp;ab_channel=NeetCode">https://www.youtube.com/watch?v=i53Gi_K3o7I&amp;ab_channel=NeetCode</a></td></tr><tr id="a43f476c-ab8b-425d-9536-836fa623f884"><td id="?q@L" class="" style="width:264px">codeKarle</td><td id="FLPg" class="" style="width:515px"><a href="https://www.youtube.com/@codeKarle/videos">https://www.youtube.com/@codeKarle/videos</a></td></tr><tr id="1655d841-0ea6-4f52-8d78-7749ce345a06"><td id="?q@L" class="" style="width:264px">Ravi Tandon</td><td id="FLPg" class="" style="width:515px"><a href="https://www.linkedin.com/posts/saumyaawasthi_system-design-ugcPost-7077599927178018816-L4c9/?utm_source=share&amp;utm_medium=member_android">https://www.linkedin.com/posts/saumyaawasthi_system-design-ugcPost-7077599927178018816-L4c9/?utm_source=share&amp;utm_medium=member_android</a></td></tr><tr id="0b70bf23-bdac-4e14-a47f-dd9edef2eedc"><td id="?q@L" class="" style="width:264px">Grokking System Design Interview</td><td id="FLPg" class="" style="width:515px"><a href="https://www.studocu.com/en-us/document/university-of-maryland/computer-system-design-and-architecture/grokking-the-system-design-interview-design-gurus-z-lib/26631193">https://www.studocu.com/en-us/document/university-of-maryland/computer-system-design-and-architecture/grokking-the-system-design-interview-design-gurus-z-lib/26631193</a></td></tr><tr id="466aa5c5-893f-4440-a7bb-384f5e3a1106"><td id="?q@L" class="" style="width:264px">CS75 (Summer 2012) Lecture 9 Scalability Harvard Web Development David Malan</td><td id="FLPg" class="" style="width:515px"><a href="https://www.youtube.com/watch?v=-W9F__D3oY4&amp;ab_channel=JorgeScott">https://www.youtube.com/watch?v=-W9F__D3oY4&amp;ab_channel=JorgeScott</a></td></tr><tr id="03f7a493-7049-4c12-ba1f-1329e9cc8a9a"><td id="?q@L" class="" style="width:264px">Mastering System Design Interviews: Strategies and Insights</td><td id="FLPg" class="" style="width:515px"><a href="https://www.youtube.com/watch?v=SUd0s0RQh7Q&amp;ab_channel=LevelUpwithCatoNetworks">https://www.youtube.com/watch?v=SUd0s0RQh7Q&amp;ab_channel=LevelUpwithCatoNetworks</a></td></tr><tr id="b458b7fd-d857-428f-a6d3-cc1f548b2151"><td id="?q@L" class="" style="width:264px">The System Design Primer</td><td id="FLPg" class="" style="width:515px">https://github.com/donnemartin/system-design-primer</td></tr><tr id="a4981bee-2d4c-4d3b-970c-c4199e7dfdd3"><td id="?q@L" class="" style="width:264px">Top 45 System Desgin Problems</td><td id="FLPg" class="" style="width:515px"><a href="https://www.linkedin.com/posts/ashishps1_i-searched-through-internet-to-find-most-activity-7113016999437365248-4f1J/?utm_source=share&amp;utm_medium=member_android">https://www.linkedin.com/posts/ashishps1_i-searched-through-internet-to-find-most-activity-7113016999437365248-4f1J/?utm_source=share&amp;utm_medium=member_android</a></td></tr><tr id="78e2f0a9-bad3-4dc4-b202-a74a9d4afe4c"><td id="?q@L" class="" style="width:264px">Byte Byte Go - System Design </td><td id="FLPg" class="" style="width:515px"></td></tr></tbody></table><p id="0fc652cd-064f-44ea-81f2-00dacffec77a" class="">
+</p><p id="d937c8b7-d0ee-4948-8b53-a4d37370f93a" class="">
+</p></details></li></ul><p id="b6cf02a9-35e4-4461-8191-b6367fba4ffa" class="">
+</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

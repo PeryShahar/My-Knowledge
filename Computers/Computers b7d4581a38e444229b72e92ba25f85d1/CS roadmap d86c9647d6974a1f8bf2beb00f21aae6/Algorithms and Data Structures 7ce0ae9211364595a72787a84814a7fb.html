@@ -1,0 +1,2267 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Algorithms and Data Structures</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-interactiveBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="7ce0ae92-1136-4595-a727-87a84814a7fb" class="page sans"><header><img class="page-cover-image" src="https://www.notion.so/images/page-cover/met_vincent_van_gogh_ginoux.jpg" style="object-position:center 34.17%"/><div class="page-header-icon page-header-icon-with-cover"><span class="icon">🗄️</span></div><h1 class="page-title">Algorithms and Data Structures</h1><p class="page-description"></p></header><div class="page-body"><figure id="1350fcb7-dad7-4113-a562-d326845a26b5" class="image"><a href="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/1696854280550.gif"><img style="width:800px" src="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/1696854280550.gif"/></a></figure><ul id="eec47600-a628-4e56-884a-e97065d40cb8" class="toggle"><li><details open=""><summary>Algorithms</summary><figure id="c97728a9-9396-4f39-a5c2-98c748f4d8d6"><div class="source"><a href="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/algo.pdf">algo.pdf</a></div></figure><ul id="b08c279e-fb3c-4f9b-bf66-f9b719c2014e" class="toggle"><li><details open=""><summary>Analysis Of Algorithms (also big O notation)</summary><figure id="54b31534-5423-43af-ad89-edf8642859ea"><div class="source"><a href="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/AnalysisOfAlgorithms.pdf">AnalysisOfAlgorithms.pdf</a></div></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="165d0fbf-34f3-4e32-bde0-4b23c2526717"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">A time complexity equations works by inserting the <strong>size</strong> of the data-set as an integer <strong><mark class="highlight-red">n</mark></strong>, and returning the number of <mark class="highlight-red"><strong>operations</strong></mark> that need to be conducted by the computer before the function can finish
+
+Examining the exact running time is <strong>not</strong> the best solution to calculate time complexity (with timer for example).
+
+- The running time is depends mostly on the<strong> input size.
+- Big o Notation </strong>is used to measure the performance of any algorithm by providing the<strong> order of growth </strong>of the function.
+- We want the <strong>approximate runtime</strong> time and not the exact time.</div></figure><ul id="465b9a0b-f2d2-4f88-821f-86fe9a23475e" class="toggle"><li><details open=""><summary>Input</summary><figure id="2342fb0c-414d-4b52-a205-1c925f5878ca" class="image"><a href="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-02-19_13-23-55.png"><img style="width:1239px" src="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-02-19_13-23-55.png"/></a></figure><figure id="704b8f73-3490-4457-bfda-154bf7f67ac3" class="image"><a href="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-02-19_13-25-50.png"><img style="width:1180px" src="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-02-19_13-25-50.png"/></a></figure></details></li></ul><ul id="418b5e7a-5939-4651-82d7-7dcd1507ff0d" class="toggle"><li><details open=""><summary>Common order-of-growth</summary><figure id="2734acec-9778-4fc3-9253-fe3b30a0c1ab" class="image"><a href="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-02-20_11-33-59.png"><img style="width:1363px" src="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-02-20_11-33-59.png"/></a></figure></details></li></ul><ul id="0a5407eb-9149-4ed8-ac8d-fa66bc880e06" class="toggle"><li><details open=""><summary>Types of analyses (Bounds)</summary><figure id="30e6d5d2-a64b-4fbc-9335-22168d191853" class="image"><a href="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-02-20_11-45-15.png"><img style="width:1222px" src="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-02-20_11-45-15.png"/></a></figure><figure id="a738f6b6-50c5-4175-a27f-b2b83f880e5a" class="image"><a href="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-02-20_11-53-01.png"><img style="width:1275px" src="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-02-20_11-53-01.png"/></a></figure><figure id="9c86c493-4bb8-4679-b861-d9e2c41f849f" class="image"><a href="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-02-26_10-48-38.png"><img style="width:889px" src="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-02-26_10-48-38.png"/></a></figure><figure id="b0d7f8a1-8b39-40ec-a653-2e448f9ce48b" class="image"><a href="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-02-20_11-49-44.png"><img style="width:1275px" src="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-02-20_11-49-44.png"/></a></figure></details></li></ul><ul id="7def403b-d194-404e-a0c7-5442f721b9a5" class="toggle"><li><details open=""><summary>Memory</summary><figure id="cf86936b-d62f-468b-9eca-0b79bb6342ec" class="image"><a href="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-02-21_14-27-16.png"><img style="width:1270px" src="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-02-21_14-27-16.png"/></a></figure><figure id="e1742f5b-0ea7-4f7c-8aba-fab60928ff5a" class="image"><a href="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-02-21_14-29-18.png"><img style="width:1220px" src="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-02-21_14-29-18.png"/></a></figure><figure id="f449a40a-5a4f-4a7b-ac61-c2583f2c91b7" class="image"><a href="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-02-21_14-31-02.png"><img style="width:1220px" src="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-02-21_14-31-02.png"/></a></figure></details></li></ul></details></li></ul><ul id="2638b131-0bfd-443f-9c52-f7df2d6c3b47" class="toggle"><li><details open=""><summary>Algorithms Techniques</summary><ul id="12734f5d-c6fd-4f6d-bfe5-d35e82f22e49" class="toggle"><li><details open=""><summary>Divide and Conquer</summary><p id="5dfd582b-09cb-4ba0-aebf-ce75b8183dd6" class="">A divide and conquer algorithm is <strong>a strategy of solving a large problem by breaking the problem into smaller sub-problems</strong>. <strong>solving the sub-problems, and</strong> <strong>combining them to get the desired.</strong></p></details></li></ul></details></li></ul><ul id="3f8907a6-ff09-4bd6-9e04-4a55fbb4407f" class="toggle"><li><details open=""><summary>Notes (Abdul Bari)</summary><figure id="53ec4685-a0e2-461d-a861-2477fd70699f"><div class="source"><a href="https://www.youtube.com/watch?v=0IAPZzGSbME&amp;list=PLDN4rrl48XKpZkf03iYFl-O29szjTrs_O&amp;ab_channel=AbdulBari">https://www.youtube.com/watch?v=0IAPZzGSbME&amp;list=PLDN4rrl48XKpZkf03iYFl-O29szjTrs_O&amp;ab_channel=AbdulBari</a></div></figure><ul id="58a5806f-80de-4b95-9b29-4e1df6121b51" class="bulleted-list"><li style="list-style-type:disc">important to remember that <strong>program</strong> you write in the <span style="border-bottom:0.05em solid">implementation</span> phase and <strong>algorithm</strong> in the <span style="border-bottom:0.05em solid">design</span> phase.</li></ul><ul id="470b6ed6-8d61-4290-94d6-27b224a3542d" class="bulleted-list"><li style="list-style-type:disc">there is two kinds of Analysis: <strong><strong>Priori Analysis </strong></strong>and<strong><strong> Posteriori Testing, </strong></strong>the first one mainly focus on <span style="border-bottom:0.05em solid">the algorithm</span>, and the second one mainly focus on t<span style="border-bottom:0.05em solid">he program, language specific and hardware specific.</span></li></ul><ul id="423774b2-b84f-46e2-89c2-5acc24c65fe3" class="bulleted-list"><li style="list-style-type:disc">when you analyze algorithm we will do it mainly over: <span style="border-bottom:0.05em solid"><strong>Time</strong></span>, <strong>Space</strong>, <strong>Network transfer, Power consumption, CPU registers</strong></li></ul><ul id="f9eec56e-1525-45ef-b602-f63064ca3c9e" class="bulleted-list"><li style="list-style-type:disc"><strong><strong>Frequency Count Method</strong></strong><figure id="3cfe13c1-58a1-49cb-aa04-d9c7aee3f21a" class="image"><a href="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-03-26_17-25-18.png"><img style="width:714px" src="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-03-26_17-25-18.png"/></a></figure></li></ul><ul id="86abb0c3-14b9-4bb6-bb73-6ee9427f83ea" class="bulleted-list"><li style="list-style-type:disc">Time Complexity example<figure id="fbfd8b83-c69c-4408-99a0-ed6e6204e9d2" class="image"><a href="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Untitled.png"><img style="width:796px" src="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Untitled.png"/></a></figure><figure id="ba4f53b7-5a0f-429b-a978-6ffa5f716e8f" class="image"><a href="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-03-28_15-47-01.png"><img style="width:821px" src="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-03-28_15-47-01.png"/></a></figure><figure id="e52675db-2da3-4c87-9bd1-70d64d69fd27" class="image"><a href="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-04-04_15-53-59.png"><img style="width:645px" src="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-04-04_15-53-59.png"/></a></figure><figure id="740ed878-a08b-442d-8072-3e25a79f04bc" class="image"><a href="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-05-02_15-37-11.png"><img style="width:970px" src="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-05-02_15-37-11.png"/></a></figure></li></ul></details></li></ul><ul id="911ce1bc-4145-4f0c-a57b-fe3e6c72d4d4" class="toggle"><li><details open=""><summary>Sorts (מיונים)</summary><figure id="931f665f-83ff-42e2-896f-81fe829df495"><a href="https://visualgo.net/en/sorting" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Sorting (Bubble, Selection, Insertion, Merge, Quick, Counting, Radix) - VisuAlgo</div><div class="bookmark-description">Sorting is a very classic problem of reordering items (that can be compared, e.g., integers, floating-point numbers, strings, etc) of an array (or a list) in a certain order (increasing, non-decreasing (increasing or flat), decreasing, non-increasing (decreasing or flat), lexicographical, etc).There are many different sorting algorithms, each has its own advantages and limitations.Sorting is commonly used as the introductory problem in various Computer Science classes to showcase a range of algorithmic ideas.Without loss of generality, we assume that we will sort only Integers, not necessarily distinct, in non-decreasing order in this visualization. Try clicking Bubble Sort for a sample animation of sorting the list of 5 jumbled integers (with duplicate) above.</div></div><div class="bookmark-href"><img src="https://visualgo.net/img/favicon.png" class="icon bookmark-icon"/>https://visualgo.net/en/sorting</div></div><img src="https://visualgo.net/img/png/sorting.png" class="bookmark-image"/></a></figure><figure id="f45fa7e5-1f8b-49a6-b380-da5577e41776"><a href="https://www.toptal.com/developers/sorting-algorithms" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Sorting Algorithms Animations</div><div class="bookmark-description">Animation, code, analysis, and discussion of 8 sorting algorithms on 4 initial conditions.</div></div><div class="bookmark-href"><img src="https://bs-assets.toptal.io/blackfish-assets/public/base/images/favicons/toptal-blog-favicon114x114_01eb8c.png" class="icon bookmark-icon"/>https://www.toptal.com/developers/sorting-algorithms</div></div><img src="https://bs-uploads.toptal.io/blackfish-uploads/generic_page/seo/og_image_file/og_image/27769/og_image_76642a-76642aa3fbe8f00d2a15c9c80eec68e6.jpg" class="bookmark-image"/></a></figure><figure id="d1113174-b356-40ad-9c3c-ba27365009f0" class="image"><a href="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-03-20_16-54-14.png"><img style="width:1356px" src="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-03-20_16-54-14.png"/></a></figure><figure id="7c465d86-7a2a-4483-881b-e11f91377aad" class="image"><a href="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-05-21_10-14-17.png"><img style="width:755px" src="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-05-21_10-14-17.png"/></a></figure><ul id="a4f039eb-4fb4-40ab-8eaf-85423d0654dc" class="toggle"><li><details open=""><summary>Selection Sort (מיון בחירה)</summary><figure id="e1cb4545-b164-42e5-a00d-4ea9b5362667"><a href="https://www.geeksforgeeks.org/selection-sort/" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Selection Sort Algorithm - GeeksforGeeks</div><div class="bookmark-description">A Computer Science portal for geeks. It contains well written, well thought and well explained computer science and programming articles, quizzes and practice/competitive programming/company interview Questions.</div></div><div class="bookmark-href"><img src="https://www.geeksforgeeks.org/wp-content/uploads/gfg_200X200.png" class="icon bookmark-icon"/>https://www.geeksforgeeks.org/selection-sort/</div></div><img src="https://media.geeksforgeeks.org/wp-content/cdn-uploads/20220203094305/Selection-Sort-Flowhchart.png" class="bookmark-image"/></a></figure><pre id="9c984e30-9173-4ae9-bcf8-c07bcb3bf28c" class="code"><code>export function selectionSort(arr) {
+  for (let i = 0; i &lt; arr.length; i++) { 
+    let min = i; 
+    for (let j = i + 1; j &lt; arr.length; j++) { 
+      if (arr[j] &lt; arr[min]) {
+        min = j;   
+      }
+    }
+    if (min !== i) {
+      [arr[i], arr[min]] = [arr[min], arr[i]]; 
+    }
+  }
+  return arr; 
+}</code></pre><figure id="475568bd-4a5a-4bb7-955c-76903fe80c47" class="image"><a href="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-02-28_10-16-23.png"><img style="width:1088px" src="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-02-28_10-16-23.png"/></a></figure><figure id="1cb6921e-0802-46df-a0df-55fcd573c261" class="image"><a href="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Selection-Sort-Animation.gif"><img style="width:100px" src="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Selection-Sort-Animation.gif"/></a></figure></details></li></ul><ul id="2c8c4fc9-a12a-4662-8fe2-e6fafd05abeb" class="toggle"><li><details open=""><summary>Insertion Sort (מיון הכנסה)</summary><figure id="84187bf9-802f-4ea3-a451-11e02a654bd7"><a href="https://www.geeksforgeeks.org/insertion-sort/" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Insertion Sort - GeeksforGeeks</div><div class="bookmark-description">A Computer Science portal for geeks. It contains well written, well thought and well explained computer science and programming articles, quizzes and practice/competitive programming/company interview Questions.</div></div><div class="bookmark-href"><img src="https://www.geeksforgeeks.org/wp-content/uploads/gfg_200X200.png" class="icon bookmark-icon"/>https://www.geeksforgeeks.org/insertion-sort/</div></div><img src="https://media.geeksforgeeks.org/wp-content/uploads/insertionsort.png" class="bookmark-image"/></a></figure><pre id="dbdba2c5-6f5a-4555-9bd0-c268a408a333" class="code"><code>export function insertionSort(arr) {
+  for (let i = 1; i &lt; arr.length; i++) {
+    let current = arr[i];
+
+    let j = i - 1;
+
+    while (j &gt; -1 &amp;&amp; current &lt; arr[j]) {
+      arr[j + 1] = arr[j];
+      j--;
+    }
+    arr[j + 1] = current;
+  }
+  return arr;
+}</code></pre><figure id="de835b11-44cd-45e4-baba-9204311ac5b0" class="image"><a href="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Insertion-sort-example.gif"><img style="width:500px" src="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Insertion-sort-example.gif"/></a></figure></details></li></ul><ul id="71a92a8a-a9f1-4f80-b978-c9d82751778c" class="toggle"><li><details open=""><summary>Bubble Sort (מיון בועות)</summary><pre id="e37b3aaf-2d1e-4484-a644-9310f35a2eb7" class="code"><code>export function bubbleSort(arr) {
+  for (let i = 0; i &lt; arr.length; i++) {
+    for (let j = 0; j &lt; arr.length - i - 1; j++) {
+      if (arr[j] &gt; arr[j + 1]) {
+        let temp = arr[j];
+        arr[j] = arr[j + 1];
+        arr[j + 1] = temp;
+      }
+    }
+  }
+  return arr;
+}</code></pre><figure id="b95dd0c6-a232-4668-8beb-c60ce2e79e24" class="image"><a href="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Bubble-sort-example-300px.gif"><img style="width:300px" src="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Bubble-sort-example-300px.gif"/></a></figure></details></li></ul><ul id="260acefd-5509-4449-896d-b347d5605cbf" class="toggle"><li><details open=""><summary>Shell Sort (מיון של)</summary><figure id="becd32f6-8621-4489-a58c-f78d7198d6e3"><a href="https://www.geeksforgeeks.org/shellsort/" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">ShellSort - GeeksforGeeks</div><div class="bookmark-description">A Computer Science portal for geeks. It contains well written, well thought and well explained computer science and programming articles, quizzes and practice/competitive programming/company interview Questions.</div></div><div class="bookmark-href"><img src="https://www.geeksforgeeks.org/wp-content/uploads/gfg_200X200.png" class="icon bookmark-icon"/>https://www.geeksforgeeks.org/shellsort/</div></div><img src="https://media.geeksforgeeks.org/wp-content/cdn-uploads/gq/2014/06/scene00721.jpg" class="bookmark-image"/></a></figure><figure id="6cac806e-9676-44c6-b111-0e3276efdccf" class="image"><a href="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-03-01_13-22-26.png"><img style="width:1314px" src="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-03-01_13-22-26.png"/></a></figure><pre id="9f018fcf-70c3-426d-b4ec-8e968f09f6bf" class="code"><code>export function shellSort(arr) {
+  const len = arr.length;
+  let gap = Math.floor(len / 2);
+
+  while (gap &gt; 0) {
+    for (let i = gap; i &lt; len; i++) {
+      let j = i;
+      let current = arr[i];
+      while (j - gap &gt;= 0 &amp;&amp; current &lt; arr[j - gap]) {
+        arr[j] = arr[j - gap];
+        j = j - gap;
+      }
+      arr[j] = current;
+    }
+    gap = Math.floor(gap / 2);
+  }
+  return arr;
+}</code></pre><figure id="221dacd6-0d7b-4bd7-a936-41652b3f8aa6" class="image"><a href="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/20210707133409.gif"><img style="width:634px" src="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/20210707133409.gif"/></a></figure></details></li></ul><ul id="1b757624-e556-4899-a7cb-94df21cd281d" class="toggle"><li><details open=""><summary>Merge Sort (מיון מיזוג)</summary><figure id="b2a23554-4dcb-4d99-a538-96cb6fe335cf"><a href="https://www.geeksforgeeks.org/merge-sort/" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Merge Sort Algorithm - GeeksforGeeks</div><div class="bookmark-description">Like QuickSort , Merge Sort is a Divide and Conquer algorithm. It divides input array in two halves, calls itself for the two halves and then merges the two</div></div><div class="bookmark-href"><img src="https://www.geeksforgeeks.org/wp-content/uploads/gfg_200X200.png" class="icon bookmark-icon"/>https://www.geeksforgeeks.org/merge-sort/</div></div><img src="https://media.geeksforgeeks.org/wp-content/uploads/20220722205737/MergeSortTutorial.png" class="bookmark-image"/></a></figure><pre id="5740febb-9ea1-421e-aa08-09bc12a6c179" class="code"><code>export function mergeSort(arr) {
+  const mid = arr.length / 2;
+
+  if (arr.length &lt; 2) {
+    return arr;
+  }
+
+  const left = arr.splice(0, mid);
+  return merge(mergeSort(left), mergeSort(arr));
+}
+
+function merge(left, right) {
+  let arr = [];
+  while (left.length &amp;&amp; right.length) {
+    if (left[0] &lt; right[0]) {
+      arr.push(left.shift());
+    } else {
+      arr.push(right.shift());
+    }
+  }
+
+  return [...arr, ...left, ...right];
+}</code></pre><figure id="cfbdd62d-8d43-469a-80a5-4abd5bfb3b0b" class="image"><a href="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-03-05_16-17-53.png"><img style="width:942px" src="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-03-05_16-17-53.png"/></a></figure><figure id="fe70ebe8-d4f5-47f5-8e23-804a9f378741" class="image"><a href="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Merge-sort-example-300px.gif"><img style="width:300px" src="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Merge-sort-example-300px.gif"/></a></figure></details></li></ul><ul id="da2a46c3-c00d-462a-88c0-8a3215549814" class="toggle"><li><details open=""><summary>Quick Sort (מיון מהיר)</summary><figure id="8ac34485-cf86-4642-b870-78809eceb1bf"><a href="https://www.geeksforgeeks.org/quick-sort/" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">QuickSort - GeeksforGeeks</div><div class="bookmark-description">A Computer Science portal for geeks. It contains well written, well thought and well explained computer science and programming articles, quizzes and practice/competitive programming/company interview Questions.</div></div><div class="bookmark-href"><img src="https://www.geeksforgeeks.org/wp-content/uploads/gfg_200X200.png" class="icon bookmark-icon"/>https://www.geeksforgeeks.org/quick-sort/</div></div><img src="https://media.geeksforgeeks.org/wp-content/uploads/20220525094716/Artboard1.jpg" class="bookmark-image"/></a></figure><pre id="2214286d-19b2-48fb-9ab0-6183e97aa827" class="code"><code>export function quickSort(arr, left = 0, right = arr.length - 1) {
+    if (left &gt;= right) {
+      return;
+    }
+  
+    let pivotIndex = partition(arr, left, right);
+    quickSort(arr, left, pivotIndex - 1);
+    quickSort(arr, pivotIndex + 1, right);
+  
+    return arr;
+  }
+  
+  function partition(arr, left, right) {
+    let pivotValue = arr[right];
+    let partitionIndex = left;
+  
+    for (let i = left; i &lt; right; i++) {
+      if (arr[i] &lt; pivotValue) {
+        swap(arr, i, partitionIndex);
+        partitionIndex++;
+      }
+    }
+  
+    swap(arr, right, partitionIndex);
+    return partitionIndex;
+  }
+  
+  function swap(arr, firstIndex, secondIndex) {
+    let temp = arr[firstIndex];
+    arr[firstIndex] = arr[secondIndex];
+    arr[secondIndex] = temp;
+  }
+
+
+  
+
+
+  export function quickSortCheatMode(arr) {
+    if (arr.length &lt;= 1) return arr;
+    let pivot = arr[0];
+    let left = arr.filter(x =&gt; x &lt; pivot);
+    let right = arr.filter(x =&gt; x &gt; pivot);
+    return [...quickSort(left), pivot, ...quickSort(right)]
+  }</code></pre><figure id="31be44c4-e054-48f4-a459-a74524fc10fb" class="image"><a href="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-03-09_11-18-18.png"><img style="width:1326px" src="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-03-09_11-18-18.png"/></a></figure><figure id="bf2fd173-7a6a-4b70-9df9-caa2d5551369" class="image"><a href="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Quicksort-example.gif"><img style="width:300px" src="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Quicksort-example.gif"/></a></figure></details></li></ul><ul id="cfc0faf6-6899-478a-8fc7-2ba4b96d7fd7" class="toggle"><li><details open=""><summary>Counting Sort (מיון מנייה)</summary><pre id="2459f0db-ca4a-4a50-8fa3-9b386ac2e2db" class="code"><code>function countingSort(arr) {
+  if (arr.length === 0) {
+    return arr;
+  }
+
+  const max = Math.max(...arr);
+  const counts = Array(max + 1).fill(0);
+
+  for (let i = 0; i &lt; arr.length; i++) {
+    counts[arr[i]]++;
+  }
+
+  for (let i = 1; i &lt;= max; i++) {
+    counts[i] += counts[i - 1];
+  }
+
+  const sortedArr = Array(arr.length);
+
+  for (let i = arr.length - 1; i &gt;= 0; i--) {
+    const value = arr[i];
+    const position = counts[value] - 1;
+    sortedArr[position] = value;
+    counts[value]--;
+  }
+
+  return sortedArr;
+}
+
+// Example usage
+const inputArr = [4, 2, 2, 8, 3, 3, 1];
+const sortedArr = countingSort(inputArr);
+console.log(sortedArr);  // Output: [1, 2, 2, 3, 3, 4, 8]</code></pre></details></li></ul><ul id="ab27bb03-f9df-4e9a-a06d-4469b126353a" class="toggle"><li><details open=""><summary>Bucket Sort (מיון סלים)</summary><pre id="32f28190-5203-48af-98e4-c03455cb6104" class="code"><code>function bucketSort(arr, bucketSize = 5) {
+  if (arr.length === 0) {
+    return arr;
+  }
+
+  const min = Math.min(...arr);
+  const max = Math.max(...arr);
+  const bucketCount = Math.floor((max - min) / bucketSize) + 1;
+
+  const buckets = Array(bucketCount);
+  for (let i = 0; i &lt; bucketCount; i++) {
+    buckets[i] = [];
+  }
+
+  for (let i = 0; i &lt; arr.length; i++) {
+    const value = arr[i];
+    const bucketIndex = Math.floor((value - min) / bucketSize);
+    buckets[bucketIndex].push(value);
+  }
+
+  const sortedArr = [];
+  for (let i = 0; i &lt; bucketCount; i++) {
+    if (bucketSize === 1) {
+      // If bucket size is 1, no need to sort as each bucket has only one element
+      sortedArr.push(...buckets[i]);
+    } else if (bucketCount === 1) {
+      // If there is only one bucket, no need to sort as all elements are in the same bucket
+      sortedArr.push(...buckets[i]);
+    } else {
+      // Sort each bucket using another sorting algorithm (e.g., Insertion Sort, QuickSort, etc.)
+      const sortedBucket = bucketSort(buckets[i], bucketSize - 1);
+      sortedArr.push(...sortedBucket);
+    }
+  }
+
+  return sortedArr;
+}
+
+// Example usage
+const inputArr = [4, 2, 2, 8, 3, 3, 1];
+const sortedArr = bucketSort(inputArr);
+console.log(sortedArr);  // Output: [1, 2, 2, 3, 3, 4, 8]</code></pre></details></li></ul><ul id="446af711-c4d2-42d4-bdcf-727f80a3fe90" class="toggle"><li><details open=""><summary>Radix Sort (מיון בסיס)</summary><pre id="e9801cbc-2429-4281-ae73-c1c2d894ece4" class="code"><code>export function radixSort(arr) {
+  let maxDigits = 0;
+
+  for (let i = 0; i &lt; arr.length; i++) {
+    maxDigits = Math.max(maxDigits, getNumberOfDigits(arr[i]));
+  }
+
+  for (let i = 0; i &lt; maxDigits; i++) {
+    let buckets = Array.from({ length: 10 }, () =&gt; []);
+
+    for (let j = 0; j &lt; arr.length; j++) {
+      let digit = getDigit(arr[j], i);
+      buckets[digit].push(arr[j]);
+    }
+
+    arr = [].concat(...buckets);
+  }
+
+  return arr;
+}
+
+function getDigit(num, place) {
+  return Math.floor(Math.abs(num) / Math.pow(10, place)) % 10;
+}
+
+function getNumberOfDigits(num) {
+  return Math.floor(Math.log10(Math.abs(num))) + 1;
+}</code></pre></details></li></ul><ul id="15e6b41f-a672-4c07-822f-f4466c0b23b1" class="toggle"><li><details open=""><summary>Sorting Complexity</summary><figure id="fb8d1ce9-9f5f-464b-a554-5ef5fa56b60e" class="image"><a href="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-03-06_09-52-58.png"><img style="width:1211px" src="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-03-06_09-52-58.png"/></a></figure></details></li></ul></details></li></ul><ul id="ce931ef7-78f7-4d70-9454-758827293142" class="toggle"><li><details open=""><summary>Gale-Shapley Problem (בעיית הזיווג היציב)</summary><figure id="baee401f-646a-4dcb-9b6e-fb65ea17160b"><a href="https://towardsdatascience.com/gale-shapley-algorithm-simply-explained-caa344e643c2" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Gale–Shapley algorithm simply explained</div><div class="bookmark-description">From this article, you will learn about stable pairing or stable marriage problem. You will learn how to solve that problem using Game…</div></div><div class="bookmark-href"><img src="https://miro.medium.com/fit/c/152/152/1*sHhtYhaCe2Uc3IU0IgKwIQ.png" class="icon bookmark-icon"/>https://towardsdatascience.com/gale-shapley-algorithm-simply-explained-caa344e643c2</div></div><img src="https://miro.medium.com/max/481/1*Q9fuszSJYriEzJ_L46-JWA.png" class="bookmark-image"/></a></figure><pre id="c4fd321e-a91a-499a-8993-3dec105cb82b" class="code"><code>function stableMarriage(menPreferences, womenPreferences) {
+  const n = menPreferences.length;
+  const engagedMen = new Array(n).fill(-1);
+  const engagedWomen = new Array(n).fill(-1);
+  const proposalIndex = new Array(n).fill(0);
+
+  while (true) {
+    let freeMan = -1;
+    for (let man = 0; man &lt; n; man++) {
+      if (engagedMen[man] === -1) {
+        freeMan = man;
+        break;
+      }
+    }
+    if (freeMan === -1) {
+      break; // All men are engaged
+    }
+
+    while (true) {
+      const woman = menPreferences[freeMan][proposalIndex[freeMan]];
+      proposalIndex[freeMan]++;
+
+      if (engagedWomen[woman] === -1) {
+        engagedMen[freeMan] = woman;
+        engagedWomen[woman] = freeMan;
+        break;
+      } else {
+        const currentPartner = engagedWomen[woman];
+        if (isHigherPreference(womenPreferences, woman, freeMan, currentPartner)) {
+          engagedMen[currentPartner] = -1;
+          engagedMen[freeMan] = woman;
+          engagedWomen[woman] = freeMan;
+          break;
+        }
+      }
+    }
+  }
+
+  return engagedMen;
+}
+
+function isHigherPreference(preferences, woman, man1, man2) {
+  const preferenceList = preferences[woman];
+  return preferenceList.indexOf(man1) &lt; preferenceList.indexOf(man2);
+}</code></pre><figure id="983d38ac-3a2c-411a-941c-82b1cc1a05bc" class="image"><a href="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-02-22_14-43-35.png"><img style="width:888px" src="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-02-22_14-43-35.png"/></a></figure><figure id="2710ecbf-ab78-4a4d-b177-7fba24bbf147" class="image"><a href="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/731px-Gale-Shapley.gif"><img style="width:731px" src="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/731px-Gale-Shapley.gif"/></a></figure><figure id="d797bcb6-1eeb-4d5d-9452-c04601c50887" class="image"><a href="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-02-22_14-51-13.png"><img style="width:1258px" src="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-02-22_14-51-13.png"/></a></figure></details></li></ul><ul id="fea6ade1-b347-4833-a3f3-203987c61f2b" class="toggle"><li><details open=""><summary>Recursive Algorithms (נוסחאות נסיגה)</summary><figure id="253bd1a0-dd42-4d12-a341-4bfadeb9a1d7" class="image"><a href="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-02-27_14-58-14.png"><img style="width:1716px" src="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-02-27_14-58-14.png"/></a></figure><ul id="9e303e56-856a-422e-a348-47886533068c" class="toggle"><li><details open=""><summary>The Iteration Method</summary><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="d2ca29f2-5554-42ec-9373-d392c90fd95d"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">הרעיון בשיטה זו, הוא שפותרים את נוסחת הנסיגה ע&quot;י כך ש&quot;מציבים אותה בתוך עצמה&quot; מספר פעמים, עד שמתקבל ביטוי סגור שאת הסיבוכיות שלו אנו יודעים לחשב.</div></figure></details></li></ul><ul id="e693ef4b-d8a4-41a5-bfc3-cf6d62de234f" class="toggle"><li><details open=""><summary>The Recursion Tree Method</summary><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="6db62df2-ae92-4739-94a0-14a7f011d602"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">גרסה יותר &quot;ויזואלית&quot; של שיטת האיטרציות. בשיטה הזו נצייר את עץ הקריאות הרקורסיביות, ונסכום את כמות העבודה על פני כל הצמתים.</div></figure></details></li></ul><ul id="5a61e18c-7a86-4a13-b795-61d3005911d8" class="toggle"><li><details open=""><summary>The Master Theorem</summary></details></li></ul><ul id="5c47e92f-ca69-4ad1-95c6-f6bebb64e1b9" class="toggle"><li><details open=""><summary>Induction</summary></details></li></ul><p id="5232cefb-1f07-4dd2-a2c2-3bec9f65fdea" class="">
+</p></details></li></ul><ul id="30cd5d7e-00c8-477f-a745-ea32c15468f1" class="toggle"><li><details open=""><summary>Knuth Shuffle</summary><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="f9833d39-e32e-47df-9812-728c4acb27c7"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Knuth Shuffle - shuffling items in a list</div></figure><figure id="fbada73b-8f5a-4296-be8e-050f769b5e1c"><div class="source"><a href="https://www.youtube.com/watch?v=i8kD33wx9Mo&amp;ab_channel=JamesCutajar">https://www.youtube.com/watch?v=i8kD33wx9Mo&amp;ab_channel=JamesCutajar</a></div></figure><figure id="5673ad4f-3176-4fa3-a730-52ee16c3ceda" class="image"><a href="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-02-16_10-22-07.png"><img style="width:558px" src="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-02-16_10-22-07.png"/></a></figure></details></li></ul><ul id="b765ad45-9975-44d0-a587-da03a7b265ca" class="toggle"><li><details open=""><summary>Convex Hull</summary><figure id="6004a725-dc92-4af9-b548-97cd34067c5b" class="image"><a href="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-03-02_12-33-49.png"><img style="width:1288px" src="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-03-02_12-33-49.png"/></a></figure></details></li></ul><ul id="eb2d13b1-8381-4061-8cde-4012e8b39025" class="toggle"><li><details open=""><summary>Dijkstra’s Shortest Path</summary><pre id="5d79e6ae-a552-450d-87b5-eb56b8b5841f" class="code"><code>function dijkstra(graph, start) {
+  const distances = {};
+  const visited = new Set();
+  const queue = new PriorityQueue();
+
+  // Initialize distances to infinity for all nodes except the start node
+  for (let node in graph) {
+    distances[node] = Infinity;
+  }
+  distances[start] = 0;
+
+  queue.enqueue(start, 0);
+
+  while (!queue.isEmpty()) {
+    const { element: currentNode, priority } = queue.dequeue();
+
+    if (visited.has(currentNode)) continue;
+
+    visited.add(currentNode);
+
+    for (let neighbor in graph[currentNode]) {
+      const distance = graph[currentNode][neighbor];
+      const totalDistance = distances[currentNode] + distance;
+
+      if (totalDistance &lt; distances[neighbor]) {
+        distances[neighbor] = totalDistance;
+        queue.enqueue(neighbor, totalDistance);
+      }
+    }
+  }
+
+  return distances;
+}
+
+// Example usage:
+const graph = {
+  A: { B: 4, C: 2 },
+  B: { A: 4, D: 5 },
+  C: { A: 2, D: 8, E: 10 },
+  D: { B: 5, C: 8, E: 2 },
+  E: { C: 10, D: 2 }
+};
+
+const startNode = &#x27;A&#x27;;
+const shortestDistances = dijkstra(graph, startNode);
+console.log(shortestDistances);</code></pre></details></li></ul><figure id="a2ea7fa5-fd39-461b-b6d7-e93189c0f0ca" class="image"><a href="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/1684338310358.jpeg"><img style="width:1446px" src="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/1684338310358.jpeg"/></a></figure></details></li></ul><ul id="a178bb52-5d13-4faa-932a-5b86f4ad3fac" class="toggle"><li><details open=""><summary>Data Structures </summary><figure id="a1943e6b-85bb-4736-94d2-a3a81046fbc9"><div class="source"><a href="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/dast.pdf">dast.pdf</a></div></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="390dac0d-c885-410c-ae5e-446b5d4547b3"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">A way to store, organize and manage information (or data) in a way that allows you the programmer to easily access or modify the values within them</div></figure><figure id="2d0f3f90-034a-40cd-911f-f18b9dbfaabe"><a href="https://www.javatpoint.com/data-structure-tutorial" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Data Structures | DS Tutorial - javatpoint</div><div class="bookmark-description">Data Structures | DS Tutorial with Introduction, Asymptotic Analysis, Array, Pointer, Structure, Singly Linked List, Doubly Linked List, Circular Linked List, Binary Search, Linear Search, Sorting, Bucket Sort, Comb Sort, Shell Sort, Heap Sort, Merge Sort, Selection Sort, Counting Sort, Stack, Qene, Circular Quene, Graph, Tree, B Tree, B+ Tree, Avl Tree etc.</div></div><div class="bookmark-href"><img src="https://static.javatpoint.com/images/favicon2.png" class="icon bookmark-icon"/>https://www.javatpoint.com/data-structure-tutorial</div></div></a></figure><ul id="0ef1063d-31dd-4d73-a63b-ac9b51da4783" class="toggle"><li><details open=""><summary><mark class="highlight-red"><strong>Basic</strong></mark></summary><figure id="9c572f99-5097-4c70-8b61-35eec9957414"><a href="https://www.geeksforgeeks.org/time-complexities-of-different-data-structures/" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Time complexities of different data structures - GeeksforGeeks</div><div class="bookmark-description">A Computer Science portal for geeks. It contains well written, well thought and well explained computer science and programming articles, quizzes and practice/competitive programming/company interview Questions.</div></div><div class="bookmark-href"><img src="https://www.geeksforgeeks.org/wp-content/uploads/gfg_200X200.png" class="icon bookmark-icon"/>https://www.geeksforgeeks.org/time-complexities-of-different-data-structures/</div></div><img src="https://media.geeksforgeeks.org/wp-content/cdn-uploads/gfg_200x200-min.png" class="bookmark-image"/></a></figure><figure id="19b42f40-c5c8-4dee-8b06-e5a29312a89e"><a href="https://www.baeldung.com/cs/adt" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">What is Abstract Data Type? | Baeldung on Computer Science</div><div class="bookmark-description">Explore three popular ADTs: list, queue, stack.</div></div><div class="bookmark-href"><img src="https://www.baeldung.com/wp-content/themes/baeldung/favicon/cs/android-chrome-192x192.png" class="icon bookmark-icon"/>https://www.baeldung.com/cs/adt</div></div><img src="https://www.baeldung.com/wp-content/uploads/sites/4/2021/09/Featured-CS-8.png" class="bookmark-image"/></a></figure><figure id="16046435-5375-427c-982b-269672cc49a5" class="image"><a href="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-03-02_16-24-35.png"><img style="width:1177px" src="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-03-02_16-24-35.png"/></a></figure><p id="58c8c804-92e3-469c-9c1b-44c622d2f227" class="">
+</p><figure id="19200c00-80ab-4ea7-ab35-2ef1058579ca" class="image"><a href="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-02-15_17-10-11.png"><img style="width:1097px" src="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-02-15_17-10-11.png"/></a></figure><figure id="1b140132-6ecc-4129-af0b-a4630a215a72" class="image"><a href="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-02-15_17-15-02.png"><img style="width:937px" src="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-02-15_17-15-02.png"/></a></figure><figure id="4945d47c-7103-4268-b84d-c7289f6b9b9f" class="image"><a href="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-03-02_16-16-44.png"><img style="width:1177px" src="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-03-02_16-16-44.png"/></a></figure><figure id="f206509d-2330-4d16-8706-04bac505c5a1" class="image"><a href="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-04-04_15-39-10.jpg"><img style="width:925px" src="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-04-04_15-39-10.jpg"/></a></figure><figure id="5e921265-e6fb-4b78-82dc-dce42ec89040" class="image"><a href="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/a8a5a4fc-5cc9-44db-b8ca-08dd83c34737_1160x1384.png"><img style="width:1160px" src="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/a8a5a4fc-5cc9-44db-b8ca-08dd83c34737_1160x1384.png"/></a></figure></details></li></ul><ul id="548507f1-fdc6-4315-a2dc-c0d5691d1645" class="toggle"><li><details open=""><summary>Arrays</summary><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="a4f83c20-4e1a-4cf2-9574-87d412fc3a88"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><strong>Arrays</strong><p id="cf50001d-3ae1-41bf-8009-84c80dbb630a" class="">Arrays are a fixed-size collection of elements of the <strong>same</strong> data type, which are stored in <strong>contiguous</strong> memory locations. Each element in the array can be accessed using its <strong>index</strong>, which is an integer that represents its position in the array. In most programming languages, arrays have a <strong>fixed</strong> length, which means that their size cannot be changed once they are created. (the amount of memory they use is also fixed and cannot be changed at runtime)</p><p id="cbfd79ca-5bbd-4e18-b523-d9e72918514e" class="">Some common operations and their time complexities for arrays are:</p><ul id="1b3252e1-6df9-4ba1-9ab2-f3fcce0a741e" class="bulleted-list"><li style="list-style-type:disc"><strong>Accessing</strong> an element by index: O(1)</li></ul><ul id="b9d0d8f6-6b45-45da-a973-90245bf0cb71" class="bulleted-list"><li style="list-style-type:disc"><strong>Searching</strong> an element: O(n) //unsorted array - linear search</li></ul><ul id="b0062487-0b20-4633-8c1e-2e65206bde13" class="bulleted-list"><li style="list-style-type:disc"><strong>Updating</strong> an element by index: O(1)</li></ul><ul id="ca8bb5af-3d87-4204-85aa-7eb31c226642" class="bulleted-list"><li style="list-style-type:disc"><strong>Inserting</strong> an element (also at the beginning) of the array: O(n) //all the elements need to move right one</li></ul><ul id="f7b8fc56-5835-478e-8d93-6e181825e5ff" class="bulleted-list"><li style="list-style-type:disc"><strong>Inserting</strong> an element at the end of the array: O(1) (amortized)</li></ul><ul id="22c302c1-154f-4ce0-81ab-ffe42bea59a6" class="bulleted-list"><li style="list-style-type:disc"><strong>Removing</strong> an element (also from the beginning) of the array: O(n) //all the elements need to move down one</li></ul><ul id="5e5af6ec-3797-4155-8f48-c649d766bce4" class="bulleted-list"><li style="list-style-type:disc"><strong>Removing</strong> an element from the end of the array: O(1)</li></ul><p id="7bbda221-3752-492f-965e-1aa7c80ed066" class="">Arrays are <strong>efficient</strong> for random access and for accessing or updating elements by index (O(1)), also for storing similar contiguous data, but can be <strong>inefficient</strong> for inserting or removing elements from the beginning of the array or in the middle of the array and size of the array can’t be changed once initialized</p><p id="e3949b2a-e13a-4ade-a5b3-dec239fc0ec5" class="">
+</p><ul id="69b0e4ed-0aad-413b-a629-1222eef697aa" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-red">Random Access Data Structure</mark> </li></ul></div></figure><pre id="08be80d8-22b8-4415-a769-a2b6a3567240" class="code"><code>class Array {
+  constructor() {
+    this.length = 0;
+    this.data = {};
+  }
+
+  get(index) {
+    return this.data[index];
+  }
+
+  push(item) {
+    this.data[this.length] = item;
+    this.length++;
+  }
+
+  pop() {
+    const lastItem = this.data[this.length - 1];
+    delete this.data[this.length - 1];
+    this.length--;
+    return lastItem;
+  }
+
+  delete(index) {
+    const item = this.data[index];
+    this.shiftItems(index);
+    return item;
+  }
+
+  shiftItems(index) {
+    for (let i = index; i &lt; this.length - 1; i++) {
+      this.data[i] = this.data[i + 1];
+    }
+    delete this.data[this.length - 1];
+    this.length--;
+  }
+}</code></pre><figure id="94027715-81b1-45a4-b3d3-8de7e090d62b" class="image"><a href="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-05-09_14-48-10.png"><img style="width:1326px" src="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-05-09_14-48-10.png"/></a></figure></details></li></ul><ul id="25a4ffe9-bf33-4c58-8254-09e9113bc5e0" class="toggle"><li><details open=""><summary>Array List</summary><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="bddd887c-a6fb-4e1c-ba0f-5229be122650"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><strong>Array Lists</strong><p id="52a2f40f-4d0d-44cb-be2a-ddadb9cf3d8f" class="">Array lists, also known as <strong>dynamic</strong> arrays or <strong>resizable</strong> arrays, are similar to arrays but have the added flexibility of being able to change their size dynamically. An array list is essentially a <strong>wrapper</strong> around an array that provides methods for adding, removing, and accessing elements while automatically resizing the underlying array as needed.</p><p id="e8ff5813-d584-470b-a296-67d9dfca7c5a" class="">Array lists are typically implemented using a fixed-size array that is allocated in memory along with some metadata that tracks the current size of the array list and the maximum capacity of the underlying array. When the array list is full, the underlying array is resized to a larger size and all elements are <strong>copied</strong> over to the new array. (Usually double the space of the array in the memory)</p><p id="68b51c12-cd4c-4825-900e-cba045045d5d" class="">Some common operations and their time complexities for array lists are:</p><ul id="8413daa0-eab1-4618-b6bf-cc8c640c23e6" class="bulleted-list"><li style="list-style-type:disc"><strong>Accessing</strong> an element by index: O(1)</li></ul><ul id="03e2892c-8a66-434e-b2a1-8a2b710df684" class="bulleted-list"><li style="list-style-type:disc"><strong>Searching</strong> an element: O(n) //unsorted array - linear search</li></ul><ul id="202f5066-2420-4adf-9908-970bf314e08f" class="bulleted-list"><li style="list-style-type:disc"><strong>Updating</strong> an element by index: O(1)</li></ul><ul id="58d3d9a8-f0fb-4812-bbc0-018a28138011" class="bulleted-list"><li style="list-style-type:disc"><strong>Inserting</strong> an element (also at the beginning) of the array: O(n) //all the elements need to move right one</li></ul><ul id="f7b2c538-3ff0-4ab8-bdb2-55626046f834" class="bulleted-list"><li style="list-style-type:disc"><strong>Inserting</strong> an element at the end of the array: O(1) (amortized)</li></ul><ul id="c3d7fc62-f904-44c1-aa62-9c0aae202cf3" class="bulleted-list"><li style="list-style-type:disc"><strong>Removing</strong> an element (also from the beginning) of the array: O(n) //all the elements need to move down one</li></ul><ul id="1bfe7eda-fc94-478e-b637-8026c2c97069" class="bulleted-list"><li style="list-style-type:disc"><strong>Removing</strong> an element from the end of the array: O(1)</li></ul><p id="0fc8c276-0986-47a9-90b1-d4246cc325af" class="">Array lists are efficient for random access and for accessing or updating elements by index, and they also have the added benefit of being able to <strong>resize</strong> dynamically. However, they can still be inefficient for inserting or removing elements from the beginning of the array list or in the middle of the array list, as all subsequent elements must be shifted over to make room or fill in the gap.</p><p id="9dfc3847-ba80-4bc6-b6ed-fbb0e3c7220f" class="">
+</p><ul id="05445e72-0489-4757-9ebf-2556edeaa1d7" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-red">Random Access Data Structure</mark> </li></ul></div></figure><pre id="959d2f18-0441-4d30-86c4-ad28308c25b6" class="code"><code>class ArrayList {
+  constructor() {
+    this.length = 0;
+    this.capacity = 1;
+    this.data = {};
+  }
+
+  get(index) {
+    return this.data[index];
+  }
+
+  push(item) {
+    if (this.length === this.capacity) {
+      this.resize(this.capacity * 2);
+    }
+    this.data[this.length] = item;
+    this.length++;
+  }
+
+  pop() {
+    const lastItem = this.data[this.length - 1];
+    delete this.data[this.length - 1];
+    this.length--;
+    if (this.length &lt; this.capacity / 4) {
+      this.resize(this.capacity / 2);
+    }
+    return lastItem;
+  }
+
+  delete(index) {
+    const item = this.data[index];
+    this.shiftItems(index);
+    if (this.length &lt; this.capacity / 4) {
+      this.resize(this.capacity / 2);
+    }
+    return item;
+  }
+
+  shiftItems(index) {
+    for (let i = index; i &lt; this.length - 1; i++) {
+      this.data[i] = this.data[i + 1];
+    }
+    delete this.data[this.length - 1];
+    this.length--;
+  }
+
+  resize(newCapacity) {
+    const newData = {};
+    for (let i = 0; i &lt; this.length; i++) {
+      newData[i] = this.data[i];
+    }
+    this.data = newData;
+    this.capacity = newCapacity;
+  }
+}</code></pre><figure id="6fe950a3-37ec-4434-8949-87330a3d95c1" class="image"><a href="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-05-09_14-42-40.png"><img style="width:1326px" src="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-05-09_14-42-40.png"/></a></figure><figure id="0929e173-47bb-4513-abe7-e869fc227ccd" class="image"><a href="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-05-09_14-44-58.png"><img style="width:1326px" src="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-05-09_14-44-58.png"/></a></figure><figure id="d765b078-bb06-44e0-a739-d99238e04ff7" class="image"><a href="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-05-09_14-41-40.png"><img style="width:1311px" src="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-05-09_14-41-40.png"/></a></figure><figure id="b971378b-60df-4caf-895d-5926b9eaa236" class="image"><a href="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-05-16_16-36-24.png"><img style="width:1345px" src="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-05-16_16-36-24.png"/></a></figure></details></li></ul><ul id="f61523ba-59dc-4eec-a3fe-9dcad984f249" class="toggle"><li><details open=""><summary>Circular Arrays</summary><figure id="dd508272-9445-4757-a378-1d27b03c7a62"><a href="https://www.geeksforgeeks.org/circular-array/" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Circular array - GeeksforGeeks</div><div class="bookmark-description">A Computer Science portal for geeks. It contains well written, well thought and well explained computer science and programming articles, quizzes and practice/competitive programming/company interview Questions.</div></div><div class="bookmark-href"><img src="https://www.geeksforgeeks.org/wp-content/uploads/gfg_200X200.png" class="icon bookmark-icon"/>https://www.geeksforgeeks.org/circular-array/</div></div><img src="https://media.geeksforgeeks.org/wp-content/cdn-uploads/gfg_200x200-min.png" class="bookmark-image"/></a></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="a0511391-9015-4b87-ac60-a3fe53a211fb"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><strong>Circular array</strong><p id="c890e56a-8ac1-4cc6-b8c8-4236b3a9a561" class="">A circular array is a data structure that is similar to a regular array, but with one key difference: the last element of the array is considered to be connected to the first element, forming a circle or loop. This means that when you reach the end of the array, you &quot;wrap around&quot; to the beginning of the array instead of going out of bounds.</p><p id="978fd715-93b9-4f95-8bbe-bbed59b3806a" class="">In other words, if you imagine a regular array as a straight line, a circular array is a line that is bent into a circle.</p><p id="e43de282-67e8-42f6-91b5-619b17218c06" class="">Circular arrays can be implemented using either a static or dynamic array. To implement a circular array, you would typically use a variable to keep track of the current position in the array, and update it accordingly when you perform operations like inserting or deleting elements.</p><p id="f955d33d-2167-4062-81eb-666e61607737" class="">One advantage of circular arrays is that they can be more efficient in certain situations than regular arrays. For example, if you need to repeatedly iterate through an array in a circular fashion (i.e., without ever reaching the end), a circular array can save time and space by avoiding the need to reset the iterator when it reaches the end of the array.</p><p id="ce0b0ffe-2064-443d-859d-ea28dc1c8a84" class="">Circular arrays can be used in a variety of applications, including:</p><ul id="7a00dc3f-8793-458f-b7ac-d2992f512b1a" class="bulleted-list"><li style="list-style-type:disc">Implementing circular buffers or queues, which are data structures that store a fixed amount of data and overwrite the oldest data when new data is added. Circular buffers are often used in embedded systems or audio processing applications.</li></ul><ul id="72967ce7-05b6-43b6-9336-c79509b6489e" class="bulleted-list"><li style="list-style-type:disc">Implementing circular lists, which are linked lists where the last node is connected to the first node, forming a loop. Circular lists can be used to implement round-robin scheduling algorithms, among other things.</li></ul><ul id="3f60b9ce-cb5d-4052-971d-649bbe0c4793" class="bulleted-list"><li style="list-style-type:disc">Implementing circular stacks, which are stacks where the top element is connected to the bottom element, forming a loop. Circular stacks can be used to implement undo/redo functionality in software applications.</li></ul><p id="68650fd4-e95c-4d54-b2a6-ae266bf3c752" class="">In terms of time complexity, most operations on a circular array have the same time complexity as their regular array counterparts, except for iterating through the array. Since circular arrays can be iterated in a circular fashion, iterating through a circular array has a time complexity of O(n), where n is the number of elements in the array, instead of O(2n) for a regular array. However, this advantage only applies when the entire array needs to be iterated. Other operations like insertion, deletion, and accessing elements have the same time complexity as their regular array counterparts.</p></div></figure></details></li></ul><ul id="5ec61eb8-5574-4dbd-9f1a-d8feaf051f80" class="toggle"><li><details open=""><summary>Singly Linked Lists (רשימה מקושרת)</summary><figure id="a7479b82-e44c-4973-90bb-d72259893400"><a href="https://www.javatpoint.com/singly-linked-list" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Linked List (Data Structures) - javatpoint</div><div class="bookmark-description">Linked List - Singly and Doubly with Introduction, Asymptotic Analysis, Array, Pointer, Structure, Singly Linked List, Doubly Linked List, Circular Linked List, Binary Search, Linear Search, Sorting, Bucket Sort, Comb Sort, Shell Sort, Heap Sort, Merge Sort, Selection Sort, Counting Sort, Stack, Qene, Circular Quene, Graph, Tree, B Tree, B+ Tree, Avl Tree etc.</div></div><div class="bookmark-href"><img src="https://static.javatpoint.com/images/favicon2.png" class="icon bookmark-icon"/>https://www.javatpoint.com/singly-linked-list</div></div></a></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="2dec13fa-f3a3-43d8-8129-9af41cf2c00e"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><strong>Singly Linked List</strong><p id="5b0ab338-85ab-43fe-b95c-2aaf75c6d22c" class="">A singly linked list is a data structure consisting of a sequence of nodes, where each node stores a <strong>value</strong> and a <strong>reference</strong> to the next node in the list. The first node is called the head, and the last node has a reference to null, indicating the end of the list.</p><p id="e9368a83-188c-4b4d-8426-8705ae78a9ac" class="">In the real world, singly linked lists can be used to represent a train of cars, where each car is connected to the next one through a coupling. The first car in the train is the head, and the last car has no coupling, indicating the end of the train. Similarly, a chain of people holding hands can be represented as a singly linked list, where each person is a node holding the hand of the next person in the chain.</p><p id="a50974c2-98c2-486f-b27a-4a8c228fe4cd" class="">In computer science, singly linked lists are commonly used to <strong>implement</strong> dynamic data structures such as stacks, queues, and hash tables. For example, a stack can be implemented using a singly linked list, where the head of the list represents the top of the stack, and elements are added or removed from the head using the push and pop operations. Similarly, a queue can be implemented using a singly linked list, where elements are added to the tail of the list using the enqueue operation and removed from the head using the dequeue operation.
+</p><ul id="b9dc0625-e53e-4506-80aa-1654bf4a0d07" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-red">Sequential Linear Data Structure</mark></li></ul></div></figure><pre id="e1971011-76f1-4bae-bae9-84545f3ffd55" class="code"><code>class Node {
+    constructor(value) {
+        this.value = value;
+        this.next = null;
+    }
+}
+
+class LinkedList {
+		constructor() {
+        this.head = null;
+        this.tail = null;
+        this.size = 0;
+    }
+
+add(value) { //add last
+        const node = new Node(value);
+        if (!this.head) {
+            this.head = node;
+            this.tail = node;
+        } else {
+            this.tail.next = node;
+            this.tail = node;
+        }
+        this.size++;
+    }
+
+remove(value) {
+        if (!this.head) {
+            return false;
+        }
+
+        if (this.head.value === value) {
+            return this.removeFirst();
+        }
+
+        if (this.tail.value === value) {
+            return this.removeLast();
+        }
+
+        return this.removeFromMiddle(value);
+    }
+
+    removeFirst() {
+        if (!this.head) {
+            return false;
+        }
+
+        if (this.head === this.tail) {
+            this.head = null;
+            this.tail = null;
+        } else {
+            this.head = this.head.next;
+        }
+        this.size--;
+        return true;
+    }
+
+    removeLast() {
+        if (!this.tail) {
+            return false;
+        }
+
+        if (this.head === this.tail) {
+            this.head = null;
+            this.tail = null;
+        } else {
+            let curr = this.head;
+            let prev = null;
+            while (curr.next) {
+                prev = curr;
+                curr = curr.next;
+            }
+            prev.next = null;
+            this.tail = prev;
+        }
+        this.size--;
+        return true;
+    }
+
+    removeFromMiddle(value) {
+        let curr = this.head;
+        let prev = null;
+        while (curr) {
+            if (curr.value === value) {
+                if (prev) {
+                    prev.next = curr.next;
+                }
+                this.size--;
+                return true;
+            }
+            prev = curr;
+            curr = curr.next;
+        }
+        return false;
+    }
+
+contains(value) {
+    let curr = this.head;
+    while (curr) {
+      if (curr.value === value) {
+        return true;
+      }
+      curr = curr.next;
+    }
+    return false;
+  }
+
+insertByIndex(value, index) { // add in middle
+    if (index &lt; 0 || index &gt; this.size) {
+      throw new Error(&#x27;Invalid index&#x27;);
+    }
+
+    if (index === 0) {
+      this.addFirst(value);
+      return;
+    }
+
+    if (index === this.size) {
+      this.add(value);
+      return;
+    }
+
+    const newNode = new Node(value);
+    let curr = this.head;
+    let prev = null;
+    let currentIndex = 0;
+
+    while (currentIndex &lt; index) {
+      prev = curr;
+      curr = curr.next;
+      currentIndex++;
+    }
+
+    prev.next = newNode;
+    newNode.next = curr;
+    this.size++;
+  }
+
+addFirst(value) { // add first
+    const newNode = new Node(value);
+    if (!this.head) {
+      this.head = newNode;
+      this.tail = newNode;
+    } else {
+      newNode.next = this.head;
+      this.head = newNode;
+    }
+    this.size++;
+  }
+
+}</code></pre><figure id="00a81c09-b7a6-4f79-b316-17f5290475fa" class="image"><a href="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-05-15_17-08-55.png"><img style="width:1320px" src="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-05-15_17-08-55.png"/></a></figure><figure id="f639cbf4-198f-4e37-974b-71a99bd2065d" class="image"><a href="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-05-16_16-25-52.png"><img style="width:1320px" src="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-05-16_16-25-52.png"/></a></figure><figure id="cffd210e-4edc-4932-9861-971954bc7ab1" class="image"><a href="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-05-16_16-37-12.png"><img style="width:1302px" src="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-05-16_16-37-12.png"/></a></figure></details></li></ul><ul id="2cac3fe1-107f-48c4-8978-7f42d0f4231e" class="toggle"><li><details open=""><summary>Doubly Linked Lists (רשימה מקושרת דו-כיוונית)</summary><figure id="043840f0-18cf-47a6-8335-b9cd9e41c0a9"><a href="https://www.javatpoint.com/doubly-linked-list" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Doubly Linked List - javatpoint</div><div class="bookmark-description">Doubly Linked List with Introduction, Asymptotic Analysis, Array, Pointer, Structure, Singly Linked List, Doubly Linked List, Circular Linked List, Binary Search, Linear Search, Sorting, Bucket Sort, Comb Sort, Shell Sort, Heap Sort, Merge Sort, Selection Sort, Counting Sort, Stack, Qene, Circular Quene, Graph, Tree, B Tree, B+ Tree, Avl Tree etc.</div></div><div class="bookmark-href"><img src="https://static.javatpoint.com/images/favicon2.png" class="icon bookmark-icon"/>https://www.javatpoint.com/doubly-linked-list</div></div></a></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="b106610d-583f-4a1d-a7cb-d008867b53d8"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><strong>Doubly Linked List</strong><p id="cbe8407c-cfe1-4006-b990-fbe9a6bc2ad2" class="">A doubly linked list is a variation of a linked list where each node contains a value, a reference to the <strong>next</strong> node, and a reference to the <strong>previous</strong> node. This additional reference to the previous node allows for efficient traversal in <strong>both</strong> directions: forward and backward.</p><p id="25293378-50b9-4634-8b07-030da41456ce" class="">In a doubly linked list, each node has two pointers, <code><strong>next</strong></code> and <code><strong>prev</strong></code>, which point to the next and previous nodes in the list, respectively. The first node of the list is called the head, and the last node is called the tail. The tail&#x27;s <code><strong>next</strong></code> pointer is set to null to indicate the end of the list, and the head&#x27;s <code><strong>prev</strong></code> pointer is also set to null as it does not have a previous node.</p><p id="3c819f1a-3d82-4c0c-af30-87069e85ce9d" class="">Doubly linked lists offer several advantages over singly linked lists:</p><ol type="1" id="80b8cc9e-ebce-416a-a7dc-4557288dfa6f" class="numbered-list" start="1"><li>Bi-directional traversal: With the <code><strong>prev</strong></code> pointer, it is possible to traverse the list backward, which can be useful in scenarios where both forward and backward traversal is required. This allows for efficient operations such as iterating in reverse order or searching for elements from the end of the list.</li></ol><ol type="1" id="52889dbb-6bdc-45a3-9431-e01db4e7863d" class="numbered-list" start="2"><li>Efficient removal of the last node: Unlike singly linked lists, doubly linked lists allow for efficient removal of the last node, as the tail node&#x27;s <code><strong>prev</strong></code> pointer provides direct access to the previous node. This avoids the need to traverse the entire list to find the previous node, which is necessary in singly linked lists.</li></ol><p id="bfaa65ff-6bc5-48b3-ab1c-7b592546cce3" class="">Examples:</p><ol type="1" id="f3d47444-3699-44b0-855c-fb16ecf5279a" class="numbered-list" start="1"><li>Web browser history: Web browsers often use doubly linked lists to implement the navigation history. Each page visited is represented as a node in the list, with the <code><strong>next</strong></code> pointer pointing to the next page visited and the <code><strong>prev</strong></code> pointer pointing to the previous page. This allows users to navigate backward and forward through their browsing history efficiently.</li></ol><ol type="1" id="bc5228f7-ea3e-4cbc-8008-88a608c7b009" class="numbered-list" start="2"><li>Undo/Redo functionality in text editors: Text editors and other software applications that support undo and redo functionality often utilize doubly linked lists. Each state change or action is stored as a node, allowing users to move back and forth through the history of changes. The <code><strong>prev</strong></code> pointer allows for efficient traversal in both directions.</li></ol><ol type="1" id="f860e6a2-eea4-472b-8fc1-ab6fd0dd1fdf" class="numbered-list" start="3"><li>Music playlist: Doubly linked lists can be used to represent playlists in music applications. Each song in the playlist is represented as a node, with the <code><strong>next</strong></code> pointer pointing to the next song and the <code><strong>prev</strong></code> pointer pointing to the previous song. This enables users to navigate through the playlist in both directions, allowing for operations such as skipping to the previous or next song.</li></ol><p id="a3764715-dd2c-4dd8-a90e-130f5d78c295" class="">In computer science, doubly linked lists are commonly used in various algorithms and data structures, such as:</p><ul id="257d2252-5b0e-4c2a-8b41-23fa7d6c6687" class="bulleted-list"><li style="list-style-type:disc">LRU (Least Recently Used) Cache: Doubly linked lists are often used to implement an LRU cache, where the most recently accessed elements are stored at the head, and the least recently accessed elements are evicted from the tail. The <code><strong>prev</strong></code> pointer allows for efficient removal of the least recently used element.</li></ul><ul id="9518c5ee-189c-4152-877d-202dba9263a5" class="bulleted-list"><li style="list-style-type:disc">Deque (Double-Ended Queue): A deque is a data structure that supports insertion and removal from both ends efficiently. Doubly linked lists provide an efficient implementation of a deque, allowing for constant time insertion and removal at both ends using the <code><strong>next</strong></code> and <code><strong>prev</strong></code> pointers.</li></ul><ul id="fae84c0f-fe81-42fe-856f-8b37533d1cee" class="bulleted-list"><li style="list-style-type:disc">Skip List: Skip lists are a probabilistic data structure that uses multiple layers of linked lists to provide efficient search, insertion, and deletion operations. Each layer of the skip list is typically implemented using a doubly linked list, enabling efficient traversal in both directions for skip list operations.</li></ul><p id="cc73b3a3-68d2-4a92-852e-c6b7b6e368f3" class="">Doubly linked lists provide flexibility and efficient traversal in both directions, making them a valuable data structure in a wide range of applications and algorithms.</p><ul id="d8d8e62b-385b-4444-8fbc-c056614cc43b" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-red">Sequential Linear Data Structure</mark></li></ul></div></figure><pre id="728d300c-3e1f-4de9-844b-d80b36eedb37" class="code"><code>class Node {
+    constructor(value) {
+        this.value = value;
+        this.next = null;
+        this.prev = null;
+    }
+}
+
+class DoublyLinkedList {
+    constructor() {
+        this.head = null;
+        this.tail = null;
+        this.size = 0;
+    }
+
+    add(value) { // add last
+        const node = new Node(value);
+        if (!this.head) {
+            this.head = node;
+            this.tail = node;
+        } else {
+            node.prev = this.tail;
+            this.tail.next = node;
+            this.tail = node;
+        }
+        this.size++;
+    }
+
+    remove(value) {
+        if (!this.head) {
+            return false;
+        }
+
+        if (this.head.value === value) {
+            return this.removeFirst();
+        }
+
+        if (this.tail.value === value) {
+            return this.removeLast();
+        }
+
+        return this.removeFromMiddle(value);
+    }
+
+    removeFirst() {
+        if (!this.head) {
+            return false;
+        }
+
+        if (this.head === this.tail) {
+            this.head = null;
+            this.tail = null;
+        } else {
+            this.head = this.head.next;
+            this.head.prev = null;
+        }
+        this.size--;
+        return true;
+    }
+
+    removeLast() {
+        if (!this.tail) {
+            return false;
+        }
+
+        if (this.head === this.tail) {
+            this.head = null;
+            this.tail = null;
+        } else {
+            this.tail = this.tail.prev;
+            this.tail.next = null;
+        }
+        this.size--;
+        return true;
+    }
+
+    removeFromMiddle(value) {
+        let curr = this.head;
+        while (curr) {
+            if (curr.value === value) {
+                curr.prev.next = curr.next;
+                curr.next.prev = curr.prev;
+                this.size--;
+                return true;
+            }
+            curr = curr.next;
+        }
+        return false;
+    }
+
+    contains(value) {
+        let curr = this.head;
+        while (curr) {
+            if (curr.value === value) {
+                return true;
+            }
+            curr = curr.next;
+        }
+        return false;
+    }
+
+    insertByIndex(value, index) { // add in the middle
+        if (index &lt; 0 || index &gt; this.size) {
+            throw new Error(&#x27;Invalid index&#x27;);
+        }
+
+        if (index === 0) {
+            this.addFirst(value);
+            return;
+        }
+
+        if (index === this.size) {
+            this.add(value);
+            return;
+        }
+
+        const newNode = new Node(value);
+        let curr = this.head;
+        let currentIndex = 0;
+
+        while (currentIndex &lt; index) {
+            curr = curr.next;
+            currentIndex++;
+        }
+
+        newNode.prev = curr.prev;
+        newNode.next = curr;
+        curr.prev.next = newNode;
+        curr.prev = newNode;
+        this.size++;
+    }
+
+    addFirst(value) { // add first
+        const newNode = new Node(value);
+        if (!this.head) {
+            this.head = newNode;
+            this.tail = newNode;
+        } else {
+            newNode.next = this.head;
+            this.head.prev = newNode;
+            this.head = newNode;
+        }
+        this.size++;
+    }
+}</code></pre><figure id="053f21de-b5e1-4abe-b8b9-313c51f3a5e9" class="image"><a href="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-05-16_17-02-01.png"><img style="width:1302px" src="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-05-16_17-02-01.png"/></a></figure></details></li></ul><ul id="923ca30a-f368-4c1b-913f-4e36f4e65c0a" class="toggle"><li><details open=""><summary>Stacks &amp; Queues</summary><figure id="44163218-4059-4a4b-ba96-c20d05a69353" class="image"><a href="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-02-26_10-57-16.png"><img style="width:1160px" src="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-02-26_10-57-16.png"/></a></figure><ul id="d8d79b65-08dd-466c-8af9-ced2369ec724" class="toggle"><li><details open=""><summary>Stacks</summary><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="f1f42ed5-8d9a-451f-a501-8d31158fb571"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><strong>Stack</strong><p id="4a81bb99-5767-4385-b1af-e05d3245ed97" class="">A stack is a linear data structure that follows the Last-In-First-Out (<strong>LIFO</strong>) principle. It means that the element which is added last to the stack will be removed first. Stacks can be thought of as a collection of elements arranged one on top of the other, like a stack of plates.</p><p id="37484685-53de-4859-b42e-61dcb96de2f8" class="">Stacks are commonly used in programming for tasks such as expression evaluation, backtracking, and handling <strong>recursive</strong> function calls. They are also used in many real-world applications such as undo/redo functionality in software applications, browsing history in web browsers, and more.</p><ul id="5765c4a5-f653-4d85-b7eb-c80d4b7208ce" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-red">Sequential Access Data Structure</mark> </li></ul><ul id="5ea6f088-acfa-438e-bc11-4dcef8518e19" class="bulleted-list"><li style="list-style-type:disc">can only accessed in particular order</li></ul><ul id="ae817c30-a6a5-41be-b39c-815f712e2617" class="bulleted-list"><li style="list-style-type:disc">Each element is dependent on the others</li></ul></div></figure><pre id="2f6df26f-c16c-476b-ac6b-9d37f9ad983d" class="code"><code>class Stack {
+  constructor() {
+    this.items = {};
+    this.count = 0;
+  }
+
+  push(element) {
+    this.items[this.count] = element;
+    this.count++;
+  }
+
+  pop() {
+    if (this.count === 0) {
+      return undefined;
+    }
+
+    this.count--;
+    const result = this.items[this.count];
+    delete this.items[this.count]; //this.items[this.count] = undefined;
+    return result;
+  }
+
+  peek() {
+    if (this.count === 0) {
+      return undefined;
+    }
+
+    return this.items[this.count - 1];
+  }
+
+//search
+	contains(element) { //search
+    for (let i = 0; i &lt; this.count; i++) {
+      if (this.items[i] === element) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  size() {
+    return this.count;
+  }
+
+  isEmpty() {
+    return this.count === 0;
+  }
+
+  clear() {
+    this.items = {};
+    this.count = 0;
+  }
+}</code></pre><figure id="c9131d50-dffb-4bcf-b892-418bf878d168" class="image"><a href="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-02-26_11-31-15.png"><img style="width:1160px" src="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-02-26_11-31-15.png"/></a></figure><figure id="4c41d4a8-77e2-4977-9503-fb323eb4a673" class="image"><a href="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-05-14_17-04-46.png"><img style="width:1320px" src="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-05-14_17-04-46.png"/></a></figure></details></li></ul><ul id="0bcb763e-bf77-45f0-921b-b569b1ae2ab3" class="toggle"><li><details open=""><summary>Queues</summary><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="7612710c-67c2-4948-9641-62526426f0c0"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><strong>Queues</strong><p id="3f2e1790-9d0a-4ecd-8e89-cf47e0ecbd3f" class="">queues are a type of linear data structure that follow the <strong>FIFO</strong> (first in, first out) principle. This means that the first element added to the queue will be the first one to be removed. Think of it as a line of people waiting to be served - the person who arrived first will be the first to be served.</p><p id="5f131d58-f041-4b07-8748-029a38e1b139" class="">Queues are commonly used in computer science and programming, especially in operating systems, network programming, and simulation algorithms. For example, in an operating system, processes are placed in a queue and are serviced one by one. In network programming, packets are sent over the network in the order they were received. In simulation algorithms, events are scheduled in the order they will occur.</p><ul id="21f62205-803b-4a86-a8cd-e26ce7e256d3" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-red">Sequential Access Data Structure</mark> </li></ul><ul id="a2afe363-8331-4245-85de-2de067ec0d17" class="bulleted-list"><li style="list-style-type:disc">can only accessed in particular order</li></ul></div></figure><pre id="899e0a3e-239c-4f0f-aa8f-aeec0808ae2c" class="code"><code>class Queue {
+  constructor() {
+    this.items = {};
+    this.headIndex = 0;
+    this.tailIndex = 0;
+  }
+
+  enqueue(element) { // can do with push array method
+    this.items[this.tailIndex] = element;
+    this.tailIndex++;
+  }
+
+  dequeue() { //can do with shift array method
+    if (this.headIndex === this.tailIndex) {
+      return undefined;
+    }
+
+    const result = this.items[this.headIndex];
+    delete this.items[this.headIndex]; //this.items[this.headIndex] = undefined;
+    this.headIndex++;
+    return result;
+  }
+
+  front() { //also called peek
+    if (this.headIndex === this.tailIndex) {
+      return undefined;
+    }
+
+    return this.items[this.headIndex];
+  }
+
+//search
+	contains(element) {
+    for (let i = this.headIndex; i &lt; this.tailIndex; i++) {
+      if (this.queue[i] === element) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  size() {
+    return this.tailIndex - this.headIndex;
+  }
+
+  isEmpty() {
+    return this.size() === 0;
+  }
+}</code></pre><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="689f8835-6ddb-4d3b-bbee-0c23f9e8f6b4"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Dequeue an element from the front of the queue (i.e., the <code><strong>dequeue</strong></code> operation) has a time complexity of <strong>O(1)</strong>, since it simply removes the element at the front index and increments the front index by one.
+
+However, if the queue is implemented using an <strong>array</strong> or a <strong>linked list,</strong> removing an element from the front of the queue may have a time complexity of <strong>O(n)</strong> in the worst case, where n is the number of elements in the queue. This is because removing an element from the front of an array or a linked list requires shifting all the remaining elements to the left by one position.</div></figure><figure id="7a194ad0-03e3-404a-9bfa-593ba96bd13e" class="image"><a href="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-02-27_13-02-34.png"><img style="width:897px" src="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-02-27_13-02-34.png"/></a></figure><figure id="1bdafe4b-79ba-4704-91a8-ef5c7fe8c137" class="image"><a href="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-05-14_17-28-43.png"><img style="width:1320px" src="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-05-14_17-28-43.png"/></a></figure></details></li></ul></details></li></ul><ul id="c7f4f34e-c4ad-4fda-b523-c20bcfeba2a3" class="toggle"><li><details open=""><summary>Dictionaries (Maps) &amp; Hash Tables (Hash Maps)</summary><figure id="f6f5abd8-58c5-497a-bc3b-d2ea7a641c77"><a href="https://samwho.dev/hashing/" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Hashing</div><div class="bookmark-description">A visual, interactive introduction to hash functions.</div></div><div class="bookmark-href"><img src="https://samwho.dev/favicon.ico" class="icon bookmark-icon"/>https://samwho.dev/hashing/</div></div><img src="https://samwho.dev/images/hashing-card.png?h=08ea469310c79706ee33" class="bookmark-image"/></a></figure><ul id="9e9fb6c8-fc44-4e91-9d13-9a5e4fc00e2c" class="toggle"><li><details open=""><summary>Dictionaries (Maps)</summary><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="11b0599f-4aac-4a1e-ba9c-1886550609f7"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><strong>Dictionary</strong>
+A dictionary, also known as a map or associative array, is an abstract data type that stores key-value pairs. It allows you to efficiently store, retrieve, and update values based on their associated keys. In JavaScript, dictionaries are commonly implemented using objects or Map data structure.
+
+Dictionaries are useful when you need to store and retrieve data based on specific keys, allowing for efficient lookup and manipulation of values associated with those keys. They are widely used in various programming scenarios, such as caching, indexing, and data organization.
+
+Dictionaries are build upon hash tables, and the key’s in our key/value pairs are stored in memory in 
+<ul id="e529f1e1-948b-49a6-bc3d-996f30735843" class="bulleted-list"><li style="list-style-type:disc">Each key can only appear once within the dictionary</li></ul><ul id="aa7b6c19-d0cd-46f0-aa6b-eba704a8ade7" class="bulleted-list"><li style="list-style-type:disc">Each key can only have one value</li></ul><ul id="ab131c36-9167-431a-8480-055207fcf490" class="toggle"><li><details open=""><summary>Differences Between Maps and Objects</summary><p id="f9d888ee-3ba2-4205-b763-0c879f07f787" class="">In JavaScript, both objects and maps are used to store and manipulate data, but they have some key differences in terms of their behavior and intended use.</p><ol type="1" id="1395fac8-3f3a-40e4-987b-30e942719e41" class="numbered-list" start="1"><li>Syntax and Key Types:<ul id="c51d00c4-1f16-4895-9c7d-ede6fbe58bc6" class="bulleted-list"><li style="list-style-type:disc">Objects: In JavaScript objects, keys should be strings or symbols. Non-string keys, such as numbers or objects, are automatically converted to strings. Objects use curly braces <code><strong>{}</strong></code> to define an object literal, and properties are accessed using dot notation (<code><strong>object.property</strong></code>) or bracket notation (<code><strong>object[&#x27;property&#x27;]</strong></code>).</li></ul><ul id="9208cbad-ab73-4723-a718-340666e748dc" class="bulleted-list"><li style="list-style-type:disc">Maps: JavaScript maps allow keys of any data type, including objects, functions, and even NaN. Maps are created using the <code><strong>Map</strong></code> constructor or the map literal syntax, and values are accessed using the <code><strong>get()</strong></code> and <code><strong>set()</strong></code> methods.</li></ul></li></ol><ol type="1" id="f082aadc-7605-48e6-94d5-1a54422618de" class="numbered-list" start="2"><li>Order of Keys:<ul id="2452aed5-3947-4421-8282-bd94c73f6530" class="bulleted-list"><li style="list-style-type:disc">Objects: The order of keys in objects is not guaranteed. When iterating over an object&#x27;s properties, there is no specified order in which they will be returned.</li></ul><ul id="d1d9ba80-5b41-4612-9f66-f0bcb4226187" class="bulleted-list"><li style="list-style-type:disc">Maps: Maps preserve the order of key-value pairs. When iterating over a map, the entries are returned in the order in which they were inserted.</li></ul></li></ol><ol type="1" id="1f326097-c683-4b81-9081-f746d6108138" class="numbered-list" start="3"><li>Iteration and Size:<ul id="490217f7-234e-43d3-b8b2-e9c2ec8310ea" class="bulleted-list"><li style="list-style-type:disc">Objects: To iterate over the properties of an object, you can use <code><strong>for...in</strong></code> loops or <code><strong>Object.keys()</strong></code>/<code><strong>Object.values()</strong></code>/<code><strong>Object.entries()</strong></code> methods. The size of an object is determined by the number of properties it has.</li></ul><ul id="218bdf3e-4106-46cc-b11b-7146bfe5771a" class="bulleted-list"><li style="list-style-type:disc">Maps: Maps have built-in iteration methods like <code><strong>forEach</strong></code>, <code><strong>for...of</strong></code> loops, and <code><strong>entries()</strong></code>, <code><strong>keys()</strong></code>, and <code><strong>values()</strong></code> methods. Maps also have a <code><strong>size</strong></code> property to determine the number of key-value pairs stored in it.</li></ul></li></ol><ol type="1" id="44c5de2f-7492-41ea-805a-bdc277abf61a" class="numbered-list" start="4"><li>Key Equality:<ul id="5097e4d6-9c6d-4f08-b225-d69ff58a88ed" class="bulleted-list"><li style="list-style-type:disc">Objects: In objects, keys are compared using the abstract equality algorithm (<code><strong>==</strong></code>), which can lead to unexpected results due to type coercion.</li></ul><ul id="4b792bb6-c399-4c5b-bb51-20c5b06cbc13" class="bulleted-list"><li style="list-style-type:disc">Maps: Maps use the &quot;SameValueZero&quot; equality algorithm for comparing keys, which means two keys are considered equal if they have the same type and are either the same object or have an equivalent value.</li></ul></li></ol><ol type="1" id="4f94ad8d-d7ea-4d3d-88b1-7150de4ef8e2" class="numbered-list" start="5"><li>Use Cases:<ul id="ecb0b7c5-934f-4a70-9741-eebc0b27dc9c" class="bulleted-list"><li style="list-style-type:disc">Objects: Objects are widely used in JavaScript and are particularly suitable for representing real-world entities or structures. They provide a convenient way to organize and access data, using their properties as named identifiers.</li></ul><ul id="e5f960d1-b1d6-4dea-ae3c-12729816a8f1" class="bulleted-list"><li style="list-style-type:disc">Maps: Maps are often used in scenarios where the order of insertion is important or when working with keys of different types. Maps are especially useful when the keys are unknown or dynamically generated.</li></ul></li></ol><p id="5827b39e-37b6-4b31-afdb-67ad8180ea4e" class="">To summarize, objects require keys to be strings (or symbols) and are suitable for general data structures and modeling. Maps, on the other hand, offer additional features such as preserving insertion order and supporting keys of any data type, making them more flexible for certain use cases.</p></details></li></ul></div></figure><pre id="2392cb99-7e0b-4d0d-8f09-7a36fd4caaeb" class="code"><code>const dictionary = {
+  key1: &#x27;value1&#x27;,
+  key2: &#x27;value2&#x27;,
+  key3: &#x27;value3&#x27;
+};
+
+// Accessing values using keys
+console.log(dictionary[&#x27;key1&#x27;]); // Output: value1
+console.log(dictionary.key2);   // Output: value2
+
+// Modifying a value
+dictionary.key3 = &#x27;new value&#x27;;
+console.log(dictionary.key3);   // Output: new value
+
+// Adding a new key-value pair
+dictionary.key4 = &#x27;value4&#x27;;
+console.log(dictionary.key4);   // Output: value4
+
+// Removing a key-value pair
+delete dictionary.key2;
+console.log(dictionary.key2);   // Output: undefined</code></pre><pre id="f9e6f37e-6f05-43f3-86bd-670a9ef1cae1" class="code"><code>const dictionary = new Map();
+
+// Adding key-value pairs
+dictionary.set(&#x27;key1&#x27;, &#x27;value1&#x27;);
+dictionary.set(&#x27;key2&#x27;, &#x27;value2&#x27;);
+dictionary.set(&#x27;key3&#x27;, &#x27;value3&#x27;);
+
+// Accessing values using keys
+console.log(dictionary.get(&#x27;key1&#x27;));   // Output: value1
+console.log(dictionary.get(&#x27;key2&#x27;));   // Output: value2
+
+// Modifying a value
+dictionary.set(&#x27;key3&#x27;, &#x27;new value&#x27;);
+console.log(dictionary.get(&#x27;key3&#x27;));   // Output: new value
+
+// Removing a key-value pair
+dictionary.delete(&#x27;key2&#x27;);
+console.log(dictionary.get(&#x27;key2&#x27;));   // Output: undefined</code></pre></details></li></ul><ul id="d8cd5c15-047c-4564-a8fc-04be9d2cbeb7" class="toggle"><li><details open=""><summary>Hash Tables (Hash Maps)</summary><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="3c4ca0a1-8e6d-44de-9336-c2e406c8061f"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><strong>Hash Tables</strong><p id="dbaec4c4-aaf3-4fc0-ae4b-217c35dd53bd" class="">A hash table, also known as a hash map, is a data structure that allows efficient storage and retrieval of key-value pairs. It uses a technique called hashing to transform keys into array indices, allowing for constant-time average-case operations.</p><p id="93b8c4f1-10e6-4547-aea2-699c1f1a7ab2" class="">In a hash table, keys are first passed through a hash function that converts them into a unique numeric value, called a hash code. This hash code is used as an index to store the corresponding value in an array, called the hash table or hash array. The hash function should ideally distribute the keys uniformly across the array to minimize collisions, where multiple keys map to the same index.</p><p id="be87903d-c2fc-4f1e-8d7b-9cdc4e6ea0e8" class="">When inserting a key-value pair into a hash table, the hash function is applied to the key to determine the index where the value should be stored. If there is already a value stored at that index (a collision), various techniques like chaining or open addressing can be used to resolve the collision and store the value.</p><p id="6b0b7517-8fc4-4ce4-bf48-37cd86c2a95c" class="">Retrieving a value from a hash table involves applying the hash function to the key to determine the index, and then accessing the value stored at that index. This process allows for fast lookup, usually with an average time complexity of O(1). However, in the worst case scenario, when many keys collide and end up at the same index, the time complexity for retrieval can degrade to O(n), where n is the number of key-value pairs in the hash table.</p><p id="fbc46946-b1ea-4c14-9baa-78b2bdd83fd7" class="">Hash tables are widely used due to their efficiency in storing and retrieving data. They are commonly used to implement dictionaries, caches, symbol tables, and other applications that require fast lookup.</p></div></figure><pre id="40b70613-97c4-4949-98c7-762be937a97e" class="code"><code>class HashTable {
+  constructor(size = 100) {
+    this.size = size;
+    this.table = new Array(size);
+  }
+
+  // Hash function to generate an index
+  hash(key) {
+    let hash = 0;
+    for (let i = 0; i &lt; key.length; i++) {
+      hash = (hash + key.charCodeAt(i) * (i + 1)) % this.size;
+    }
+    return hash;
+  }
+
+  // Insert a key-value pair into the hash table
+  insert(key, value) {
+    const index = this.hash(key);
+    if (!this.table[index]) {
+      this.table[index] = [];
+    }
+    this.table[index].push({ key, value });
+  }
+
+  // Retrieve the value associated with a key from the hash table
+  get(key) {
+    const index = this.hash(key);
+    if (this.table[index]) {
+      for (const entry of this.table[index]) {
+        if (entry.key === key) {
+          return entry.value;
+        }
+      }
+    }
+    return undefined;
+  }
+
+  // Remove a key-value pair from the hash table
+  remove(key) {
+    const index = this.hash(key);
+    if (this.table[index]) {
+      const entries = this.table[index];
+      for (let i = 0; i &lt; entries.length; i++) {
+        if (entries[i].key === key) {
+          entries.splice(i, 1);
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+
+  // Check if the hash table contains a specific key
+  contains(key) {
+    return this.get(key) !== undefined;
+  }
+}</code></pre><figure id="dff463f6-cdca-4d85-b9f3-aa9237a2ad82" class="image"><a href="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-05-21_16-11-38.png"><img style="width:1331px" src="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-05-21_16-11-38.png"/></a></figure></details></li></ul><ul id="93661911-97ea-4c75-8f8a-02a43db545b3" class="toggle"><li><details open=""><summary>Hash Collision</summary><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="8761382e-bf09-4748-abfd-c6ee704e0f73"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Hash collision occurs in a hash table when <strong>two different keys produce the same hash code or index.</strong> This means that multiple keys are mapped to the same location within the underlying array structure of the hash table.
+
+Hash collisions are inevitable because the number of possible keys is usually <strong>much larger than the number of available indices</strong> in the hash table. Even with a good hash function, it is still possible for two different keys to produce the same hash code.
+
+When a collision occurs, various collision resolution techniques are used to handle the situation and ensure that all keys can still be stored and retrieved correctly. The most commonly used collision resolution methods are:
+
+<strong>Chaining</strong>: In this technique, each slot in the hash table&#x27;s array contains a linked list or an array of entries. When a collision occurs, the new key-value pair is appended to the existing entries at that slot. This way, multiple keys with the same hash code can coexist in the same index by forming a chain.
+
+<strong>Open Addressing</strong>: In this technique, when a collision occurs, the algorithm looks for the next available slot in the array to place the key-value pair. Various methods can be used to determine the next slot, such as linear probing (checking the next slot sequentially), quadratic probing (using a quadratic function to calculate the next slot), or double hashing (applying a second hash function to calculate the next slot).
+
+The choice of collision resolution method depends on factors like the expected number of collisions, the desired performance, and the specific requirements of the application.
+
+It&#x27;s important to note that hash collisions can impact the performance of hash tables. When many keys collide and form long chains or require extensive probing, the efficiency of hash table operations can degrade. This can result in increased time complexity for operations like insertion, retrieval, and deletion, as they may require traversing through linked lists or performing additional probing.
+
+To mitigate the impact of collisions, it is crucial to use a good hash function that distributes the keys uniformly across the array. A good hash function aims to minimize collisions and evenly distribute the keys, reducing the likelihood of collisions and maintaining the desired performance characteristics of the hash table.
+
+Overall, handling hash collisions is a fundamental aspect of implementing and using hash tables effectively. By employing appropriate collision resolution techniques and optimizing the hash function, hash tables can provide efficient key-value storage and retrieval even in the presence of collisions.</div></figure><figure id="281b5a93-ca8f-4c9c-bc43-489a705801b1" class="image"><a href="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-05-28_11-05-28.png"><img style="width:1144px" src="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-05-28_11-05-28.png"/></a></figure><figure id="0f7cb853-fdb4-4064-aeed-2f747b6b68bd" class="image"><a href="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-05-28_11-05-59.png"><img style="width:1144px" src="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-05-28_11-05-59.png"/></a></figure></details></li></ul><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="08a294c2-115f-4ba9-a2ff-85c896a4782b"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><strong>Difference between Hash Tables and Dictionaries:</strong><p id="a4e9ea14-90ad-49e3-9cfc-f3f9f37bb762" class="">In practice, hash tables and dictionaries are often used interchangeably, as they both provide key-value pair storage and retrieval. However, there are some conceptual differences between the two:</p><ul id="6db3cec6-832b-4a58-8a23-139b2d5465dd" class="bulleted-list"><li style="list-style-type:disc">Hash tables are a data structure implementation that uses a hash function and an array to store key-value pairs. They are a lower-level data structure concept.</li></ul><ul id="abe633b3-4a2a-4f43-8263-84d86ddf20a8" class="bulleted-list"><li style="list-style-type:disc">Dictionaries are a higher-level data structure concept that describes the abstract idea of storing key-value pairs for efficient retrieval. Dictionaries can be implemented using various underlying data structures, including hash tables.</li></ul><p id="7e203691-c7ba-41ba-a0ab-fff812e18d1b" class="">In essence, a dictionary is a concept, while a hash table is one possible implementation of that concept. Hash tables provide an efficient way to implement dictionaries by utilizing hashing and array-based storage.</p><p id="e09c24c9-aba4-4250-9f45-3b7fd0890042" class="">In some programming languages or frameworks, dictionaries may have additional features or functionalities beyond what is provided by a basic hash table implementation. For example, dictionaries in Python (using the <code><strong>dict</strong></code> data type) support various built-in methods and operations that go beyond the basic functionalities of a hash table.</p><p id="6aba1624-42ca-4647-991a-2b3b643593a9" class="">In summary, hash tables are a specific implementation of dictionaries, offering efficient storage and retrieval of key-value pairs using hashing techniques and arrays.</p></div></figure><figure id="5e32b289-eb64-4c1d-9b26-22206bcdb5ec" class="image"><a href="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-05-28_11-12-30.png"><img style="width:1292px" src="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-05-28_11-12-30.png"/></a></figure></details></li></ul><ul id="cbde46f7-a20b-4c5b-a6a5-d86c6475696b" class="toggle"><li><details open=""><summary>Trees</summary><figure id="621898ea-83e5-44ab-88f5-976984313a6e"><a href="https://www.javatpoint.com/tree" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Tree in Data Structures - javatpoint</div><div class="bookmark-description">Tree in Data Structures with Introduction, Asymptotic Analysis, Array, Pointer, Structure, Singly Linked List, Doubly Linked List, Circular Linked List, Binary Search, Linear Search, Sorting, Bucket Sort, Comb Sort, Shell Sort, Heap Sort, Merge Sort, Selection Sort, Counting Sort, Stack, Qene, Circular Quene, Graph, Tree, B Tree, B+ Tree, Avl Tree etc.</div></div><div class="bookmark-href"><img src="https://static.javatpoint.com/images/favicon2.png" class="icon bookmark-icon"/>https://www.javatpoint.com/tree</div></div></a></figure><ul id="26771285-0754-40d5-a986-3863f1d6e6c7" class="toggle"><li><details open=""><summary>Terminology</summary><figure id="b9697750-fd51-433b-973a-8d486298faed" class="image"><a href="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-05-03_09-22-56.png"><img style="width:1188px" src="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-05-03_09-22-56.png"/></a></figure><figure id="cdbab7ab-92a9-43d8-ab59-425974d5efc6" class="image"><a href="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-04-02_17-22-52.png"><img style="width:1128px" src="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-04-02_17-22-52.png"/></a></figure><figure id="c78c491e-463a-4d57-b6ec-a9cf9b5f1ab7" class="image"><a href="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-04-02_17-23-28.png"><img style="width:1132px" src="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-04-02_17-23-28.png"/></a></figure><figure id="714caedf-2efe-4292-ba28-2563b11a221c" class="image"><a href="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-04-02_17-23-59-1.png"><img style="width:1157px" src="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-04-02_17-23-59-1.png"/></a></figure><figure id="b9ca0615-2734-4147-8cae-868d426db352" class="image"><a href="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-04-02_17-25-30.png"><img style="width:1123px" src="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-04-02_17-25-30.png"/></a></figure><figure id="d29fb542-7a19-401c-bc44-912b4e56994b" class="image"><a href="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-05-28_11-20-56.png"><img style="width:1287px" src="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-05-28_11-20-56.png"/></a></figure><figure id="4db97de8-4852-46de-abac-d73324284467" class="image"><a href="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-05-28_11-22-22.png"><img style="width:1287px" src="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-05-28_11-22-22.png"/></a></figure></details></li></ul><ul id="40d27b48-2e3b-4377-ae97-7f7011d0443a" class="toggle"><li><details open=""><summary>Binary Trees / Binary Search Trees</summary><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="ceee3cba-91bf-4d7f-b15b-c836e173c177"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><strong>A binary tree</strong> is a tree data structure where each node has at most two children, referred to as the left and right child. Each child itself is also a binary tree.<p id="d9c42348-5f0c-4719-8e83-d4108d8cfce3" class=""><strong>A binary search tree (BST)</strong> is a binary tree where the value of each node is greater than or equal to its left child and less than or equal to its right child. This property allows for efficient searching and sorting of data. When inserting a new node into a BST, it is compared to the current node and inserted as the left child if it is less than the current node, or the right child if it is greater than or equal to the current node.
+</p><ul id="64b0c928-915f-47e9-ace0-3db3a9083abe" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-red">Hierarchically Access Data Structure</mark> </li></ul></div></figure><ul id="50b106a4-9a20-4f13-a1ef-72edf3c84596" class="toggle"><li><details open=""><summary>Basic</summary><figure id="6ce3197e-f34f-4b3e-818e-4b396699db76" class="image"><a href="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-04-03_09-53-16.png"><img style="width:936px" src="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-04-03_09-53-16.png"/></a></figure><figure id="5d932593-6d0e-47a5-b4cc-833af942fb2d" class="image"><a href="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-04-03_09-54-31.png"><img style="width:925px" src="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-04-03_09-54-31.png"/></a></figure><figure id="84b20518-4917-4602-9d3d-7a4423628f2a" class="image"><a href="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-04-03_09-58-04.png"><img style="width:925px" src="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-04-03_09-58-04.png"/></a></figure><figure id="5784ce55-b514-4d1f-a23b-587987aac3bd" class="image"><a href="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-04-02_10-46-26.png"><img style="width:1382px" src="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-04-02_10-46-26.png"/></a></figure><figure id="bd0fa338-e25e-4ba6-9502-24d0027731a9" class="image"><a href="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-04-02_10-47-53.png"><img style="width:1295px" src="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-04-02_10-47-53.png"/></a></figure><figure id="aa136fcd-f9ce-4def-b344-94630cf74937" class="image"><a href="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-04-02_10-56-55.png"><img style="width:1295px" src="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-04-02_10-56-55.png"/></a></figure><figure id="f06bc051-ce82-4911-aa2e-5a85b3a71299" class="image"><a href="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-04-02_10-59-53.png"><img style="width:1301px" src="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-04-02_10-59-53.png"/></a></figure></details></li></ul><ul id="fa5d9a35-8211-4c4e-805d-963d9eac1644" class="toggle"><li><details open=""><summary>Binary Tree Array Representation</summary><pre id="1e03a678-707e-4837-8d56-7d54027109cd" class="code"><code>const binaryTree = [1, 2, 3, 4, 5, null, 7];
+
+// The binary tree looks like this:
+
+//        1
+//       / \
+//      2   3
+//     / \   \
+//    4   5   7</code></pre></details></li></ul><ul id="bc45dee1-9274-4794-ae55-095989f685aa" class="toggle"><li><details open=""><summary>BST - Find (Depth-First)</summary><pre id="4ccc0888-a76a-4cf8-9e13-8094828ac8da" class="code"><code>find(node, value) {
+                if (node === null) {
+                    return false
+                }
+                else if (node.value === value) {
+                    return true;
+                }
+                else if (value &lt; node.value) {
+                    return this.find(node.left, value)
+                } else {
+                    (value &gt; node.value)
+                    return this.find(node.right, value)
+                }
+            }</code></pre></details></li></ul><ul id="642fddbd-3366-4805-ad34-7504f5d142c0" class="toggle"><li><details open=""><summary>BST - Insert (Depth-First)</summary><figure id="ec9a10d1-6970-4a88-844f-cce22dde62a7" class="image"><a href="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-04-04_14-52-13.png"><img style="width:1002px" src="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-04-04_14-52-13.png"/></a></figure><figure id="8763d717-732b-4a12-9ac4-e50761965e29" class="image"><a href="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-04-04_15-06-33.png"><img style="width:1053px" src="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-04-04_15-06-33.png"/></a></figure><pre id="db194e69-832b-4c0a-a359-10280618a1e3" class="code"><code>inserting(value) {
+                let node = new Node(value);
+                if (this.root == null) {
+                    this.root = node;
+                } else {
+                    this.insertNode(this.root, node);
+                }
+            }
+
+            insertNode(root, newNode) {
+                if (newNode.value &lt; root.value) {
+                    if (root.left == null) {
+                        root.left = newNode;
+                    } else {
+                        this.insertNode(root.left, newNode);
+                    }
+                } else if (newNode.value &gt; root.value) {
+                    if (root.right == null) {
+                        root.right = newNode;
+                    } else {
+                        this.insertNode(root.right, newNode);
+                    }
+                }
+            }</code></pre></details></li></ul><ul id="238a5127-0937-42b0-8fd9-eec67fe72bf4" class="toggle"><li><details open=""><summary>BST - Remove/Delete (Depth-First)</summary><figure id="275b3dba-21fe-4db6-a42c-fe0d2507b42f" class="image"><a href="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-04-04_15-08-55.png"><img style="width:1053px" src="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-04-04_15-08-55.png"/></a></figure><figure id="a5e0e5b4-a797-413c-a5fa-46a64b11474e" class="image"><a href="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-04-04_15-09-59.png"><img style="width:1053px" src="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-04-04_15-09-59.png"/></a></figure><figure id="4bc44107-aad8-49a9-a8eb-93fba42b2d57" class="image"><a href="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-04-04_15-12-06.png"><img style="width:1053px" src="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-04-04_15-12-06.png"/></a></figure><pre id="0e68c92f-28f7-4456-ac8e-6702da514a5e" class="code"><code>remove(value) {
+    this.root = this._removeNode(this.root, value);
+  }
+
+  _removeNode(node, value) {
+    if (node === null) {
+      return null;
+    } else if (value &lt; node.value) {
+      node.left = this._removeNode(node.left, value);
+      return node;
+    } else if (value &gt; node.value) {
+      node.right = this._removeNode(node.right, value);
+      return node;
+    } else {
+      // case 1: no children
+      if (node.left === null &amp;&amp; node.right === null) {
+        node = null;
+        return node;
+      }
+
+      // case 2: one child
+      if (node.left === null) {
+        node = node.right;
+        return node;
+      } else if (node.right === null) {
+        node = node.left;
+        return node;
+      }
+
+      // case 3: two children
+      const minRightNode = this._findMinNode(node.right);
+      node.value = minRightNode.value;
+      node.right = this._removeNode(node.right, minRightNode.value);
+      return node;
+    }
+  }
+
+  _findMinNode(node) {
+    if (node.left === null) {
+      return node;
+    } else {
+      return this._findMinNode(node.left);
+    }
+  }</code></pre></details></li></ul></details></li></ul><ul id="5ee4a786-de4b-426d-bc03-fe20ad543e4a" class="toggle"><li><details open=""><summary>Tree Traverslas</summary><figure id="164997b0-a19e-49a4-9115-94f1d997e98a"><a href="https://dev.to/abdisalan_js/4-ways-to-traverse-binary-trees-with-animations-5bi5" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">4 Ways To Traverse Binary Trees (with animations!)</div><div class="bookmark-description">in-order, depth-first-search, breadth-first-search, and post-order</div></div><div class="bookmark-href"><img src="https://res.cloudinary.com/practicaldev/image/fetch/s--t7tVouP9--/c_limit,f_png,fl_progressive,q_80,w_192/https://practicaldev-herokuapp-com.freetls.fastly.net/assets/devlogo-pwa-512.png" class="icon bookmark-icon"/>https://dev.to/abdisalan_js/4-ways-to-traverse-binary-trees-with-animations-5bi5</div></div><img src="https://res.cloudinary.com/practicaldev/image/fetch/s--zwiA2id6--/c_imagga_scale,f_auto,fl_progressive,h_500,q_auto,w_1000/https://dev-to-uploads.s3.amazonaws.com/i/cdgl7fif7ut6hyhg3emw.jpg" class="bookmark-image"/></a></figure><ul id="821bf0f8-efbb-4281-abd4-ed3e17df05db" class="toggle"><li><details open=""><summary>InOrder, preOrder, postOrder (Depth First Search) </summary><pre id="7e734c87-6425-4211-8238-7ba20d38ac77" class="code"><code>// Stack as a data structure 
+         class Node {
+            constructor(value) {
+               this.value = value;
+               this.left = null;
+               this.right = null;
+            }
+         }
+         class BinarySearchTree {
+            constructor() {
+               this.root = null;
+            }
+
+            inserting(value) {
+               let node = new Node(value);
+               if(this.root == null) {
+                  this.root = node;
+               }else {
+                  this.insertNode(this.root, node);
+               }
+            }
+
+            insertNode(root, newNode) {
+               if(newNode.value &lt; root.value) {
+                  if(root.left == null) {
+                     root.left = newNode;
+                  } else {
+                     this.insertNode(root.left, newNode);
+                  }
+               } else if(newNode.value &gt; root.value) {
+                  if(root.right == null) {
+                     root.right = newNode;
+                  } else {
+                     this.insertNode(root.right, newNode);
+                  }
+               }
+            }
+            getRootNode() {
+               return this.root;
+            }
+
+            /* implementation of individual operations of traversal in tree */
+
+            preorderTrav(root) {
+               if(root != null) {
+                  document.write(root.value); // Traverse the root node
+                  this.preorderTrav(root.left); /* Traverse the left subtree */
+                  this.preorderTrav(root.right); /* Traverse the right subtree */
+               }
+            }
+
+            inorderTrav(root) {
+               if(root != null) {
+                  this.inorderTrav(root.left); /* Traverse the left subtree */
+                  document.write(root.value); // Traverse the root node
+                  this.inorderTrav(root.right); /* Traverse the right subtree */
+               }
+            }
+
+            postorderTrav(root) {
+               if(root != null) {
+                  this.postorderTrav(root.left); /* Traverse the left subtree */
+                  this.postorderTrav(root.right); /* Traverse the right subtree */
+                  document.write(root.value); // Traverse the root node
+               }
+            }
+         }
+         
+         var bst = new BinarySearchTree();
+         bst.inserting(30);
+         bst.inserting(50);
+         bst.inserting(20);
+         bst.inserting(14);
+         bst.inserting(44);
+         bst.inserting(34);
+         bst.inserting(26);
+         bst.inserting(10);
+         bst.inserting(19);
+         bst.inserting(54);
+         
+         var root = bst.getRootNode();
+         document.write(&quot;preorder traversal of the binary tree is &lt;br&gt;&quot;);
+         bst.preorderTrav(root);
+         document.write(&#x27;&lt;br&gt;&#x27;);
+         document.write(&#x27;inorder traversal of the binary tree is &lt;br&gt;&#x27;);
+         bst.inorderTrav(root);
+         document.write(&#x27;&lt;br&gt;&#x27;);
+         document.write(&#x27;Postorder traversal of the binary tree is &lt;br&gt;&#x27;);
+         bst.postorderTrav(root);
+         document.write(&#x27;&lt;br&gt;&#x27;);
+      </code></pre></details></li></ul><ul id="c8c95787-4498-497b-8f52-62c47395600c" class="toggle"><li><details open=""><summary>Level Order (Breadth-First Search)</summary><pre id="324ec2d1-f955-4a5e-a4fe-0a8a964c5327" class="code"><code>// Queue as a data structure 
+function bfs(root) {
+  const nodes = [root];
+
+  while (nodes.length &gt; 0) {
+    const node = nodes.shift();
+    console.log(node.val);
+    if (node.left) {
+      nodes.push(node.left);
+    }
+    if (node.right) {
+      nodes.push(node.right);
+    }
+  }
+}
+
+//////////////////////////////////////////////
+
+import { Deque } from &quot;typescript-collections&quot;;
+
+function bfs(root: TreeNode): void {
+  const q = new Deque&lt;TreeNode&gt;();
+
+  q.enqueue(root);
+
+  while (!q.isEmpty()) {
+    const node = q.dequeue();
+    console.log(node.val);
+    if (node.left) {
+      q.enqueue(node.left);
+    }
+    if (node.right) {
+      q.enqueue(node.right);
+    }
+  }
+}</code></pre><p id="7a46e4f5-175a-43db-8223-8c354c29914f" class="">
+</p></details></li></ul></details></li></ul><ul id="e5f728ce-2f55-4a81-9ef5-98a49cfef778" class="toggle"><li><details open=""><summary>Binary Tree Comparison </summary><figure id="6830813e-71a0-423d-8787-2a8d4a98b7f5"><a href="https://www.educative.io/check-if-two-binary-trees-are-identical" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Check if Two Binary Trees are Identical</div><div class="bookmark-description">Given the roots of two binary trees, determine if these trees are identical or not.</div></div><div class="bookmark-href"><img src="https://www.educative.io/static/favicons/faviconV2.png" class="icon bookmark-icon"/>https://www.educative.io/check-if-two-binary-trees-are-identical</div></div><img src="https://www.educative.io/static/imgs/logos/LinkImageV3.png" class="bookmark-image"/></a></figure><pre id="9ad25111-5efa-46db-ae7d-3c27df80594f" class="code"><code>function compare(a, b) {
+
+	//structural check
+	if(a === null &amp;&amp; b === null) {
+    return true;
+  }
+
+	//structural check
+	if(a === null || b === null) {
+    return false;
+  }
+
+	//value check
+	if(a.value !== b.value) {
+    return false;
+  }
+
+ return compare(a.left,b.left) &amp;&amp; compare(a.right,b.right)
+};</code></pre></details></li></ul><ul id="d7904b4b-be77-4f2d-8443-18788e7fd872" class="toggle"><li><details open=""><summary>Tries / Prefix Tree</summary><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="00f1bba5-d90c-4917-9827-c93b46cff98f"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><strong>Tries</strong><p id="bb1ead81-eba1-4382-a805-35e05bd10a84" class="">A trie, also known as a <strong>prefix</strong> tree, is a tree-like data structure used for efficient <strong>retrieval of strings or words.</strong> It provides a way to store and search for words with common prefixes. The name &quot;trie&quot; comes from the word &quot;retrieval&quot; because it excels at searching and retrieving strings.</p><p id="b404e3b7-f05f-4ea1-8780-8d0555c5caed" class="">In a trie, <strong>each node represents a character, and the edges represent the possible characters that can follow</strong>. The root node represents an empty string or the starting point of the trie. Each node can have multiple children nodes, corresponding to different characters. By traversing from the root to a specific node, you can form a string or word.</p><p id="edc60299-5c51-4012-9610-74671b58c327" class="">One key advantage of tries is their ability to quickly determine if a given string or word is present in the trie. Starting from the root, each character is used to navigate down the tree, following the edges. If the traversal reaches the end of the string and the final node&#x27;s <code><strong>isEndOfWord</strong></code><strong> flag</strong> is set, it means the word is present in the trie. This allows for efficient search operations with a time complexity of O(L), where L is the length of the word.</p><p id="0a4f880e-6f16-4a81-9608-927f443830eb" class="">Tries are commonly used in scenarios that involve word-based operations, such as dictionaries, spell checkers, autocomplete features, and IP routing tables. They excel in applications where efficient prefix matching is required, such as finding all words starting with a given prefix.</p></div></figure><pre id="5e00b88e-e2be-4338-9909-2ac551bbcc24" class="code"><code>class TrieNode {
+  constructor() {
+    this.children = new Map();
+    this.isEndOfWord = false;
+  }
+}
+
+class Trie {
+  constructor() {
+    this.root = new TrieNode();
+  }
+
+  insert(word) {
+    let currentNode = this.root;
+
+    for (let i = 0; i &lt; word.length; i++) {
+      const char = word[i];
+      if (!currentNode.children.has(char)) {
+        currentNode.children.set(char, new TrieNode());
+      }
+      currentNode = currentNode.children.get(char);
+    }
+
+    currentNode.isEndOfWord = true;
+  }
+
+  search(word) {
+    let currentNode = this.root;
+
+    for (let i = 0; i &lt; word.length; i++) {
+      const char = word[i];
+      if (!currentNode.children.has(char)) {
+        return false;
+      }
+      currentNode = currentNode.children.get(char);
+    }
+
+    return currentNode.isEndOfWord;
+  }
+
+  startsWith(prefix) {
+    let currentNode = this.root;
+
+    for (let i = 0; i &lt; prefix.length; i++) {
+      const char = prefix[i];
+      if (!currentNode.children.has(char)) {
+        return false;
+      }
+      currentNode = currentNode.children.get(char);
+    }
+
+    return true;
+  }
+
+  remove(word) {
+    if (!this.search(word)) {
+      return false;
+    }
+
+    const stack = [];
+    let currentNode = this.root;
+
+    for (let i = 0; i &lt; word.length; i++) {
+      stack.push({ node: currentNode, char: word[i] });
+      currentNode = currentNode.children.get(word[i]);
+    }
+
+    if (currentNode.children.size &gt; 0) {
+      currentNode.isEndOfWord = false;
+      return true;
+    }
+
+    for (let i = stack.length - 1; i &gt;= 0; i--) {
+      const { node, char } = stack[i];
+      if (node.children.size === 1) {
+        node.children.delete(char);
+      } else {
+        break;
+      }
+    }
+
+    return true;
+  }
+
+  printAllWords() {
+    const words = [];
+
+    const traverse = (node, prefix) =&gt; {
+      if (node.isEndOfWord) {
+        words.push(prefix);
+      }
+
+      for (const [char, childNode] of node.children) {
+        traverse(childNode, prefix + char);
+      }
+    };
+
+    traverse(this.root, &#x27;&#x27;);
+
+    return words;
+  }
+}
+
+// Create a new trie
+const trie = new Trie();
+
+// Insert words into the trie
+trie.insert(&#x27;apple&#x27;);
+trie.insert(&#x27;banana&#x27;);
+trie.insert(&#x27;orange&#x27;);
+trie.insert(&#x27;grape&#x27;);
+
+// Search for words in the trie
+console.log(trie.search(&#x27;apple&#x27;));    // Output: true
+console.log(trie.search(&#x27;banana&#x27;));   // Output: true
+console.log(trie.search(&#x27;orange&#x27;));   // Output: true
+console.log(trie.search(&#x27;grape&#x27;));    // Output: true
+console.log(trie.search(&#x27;pineapple&#x27;)); // Output: false
+
+// Check if words with prefixes exist in the trie
+console.log(trie.startsWith(&#x27;app&#x27;));   // Output: true
+console.log(trie.startsWith(&#x27;ban&#x27;));   // Output: true
+console.log(trie.startsWith(&#x27;or&#x27;));    // Output: true
+console.log(trie.startsWith(&#x27;gr&#x27;));    // Output: true
+console.log(trie.startsWith(&#x27;pin&#x27;));   // Output: false
+
+// Remove a word from the trie
+console.log(trie.remove(&#x27;banana&#x27;));    // Output: true
+console.log(trie.search(&#x27;banana&#x27;));    // Output: false
+
+// Print all words in the trie
+console.log(trie.printAllWords());     // Output: [ &#x27;apple&#x27;, &#x27;orange&#x27;, &#x27;grape&#x27; ]</code></pre><figure id="d4ae785a-fa72-4612-868f-36c35eb89b1e" class="image"><a href="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-05-28_11-42-37.png"><img style="width:1290px" src="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-05-28_11-42-37.png"/></a></figure></details></li></ul><ul id="17475309-9391-404d-9c86-f3a0e577a29c" class="toggle"><li><details open=""><summary>Heaps</summary><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="990a855d-a17b-420d-acbf-bad2b9318f8e"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><strong>Heaps</strong><p id="04fbc397-cf1c-4736-aa6d-a928d5802927" class="">A heap is a specialized tree-based data structure that satisfies the heap property. In a heap, for every node <code><strong>i</strong></code> other than the root, the value stored in <code><strong>i</strong></code> is <strong>greater than or equal to the values stored in its children.</strong> This property ensures that the <strong>largest (in a max-heap) or smallest (in a min-heap) </strong>element is always at the root of the heap.</p><p id="8bb8ce2d-ac2b-4e63-b60e-f126ebb43ab6" class="">Heaps are commonly used to implement <strong>priority queues</strong>, where elements with <strong>higher priority</strong> (lower value in a min-heap or higher value in a max-heap) are given precedence. They also have applications in various algorithms, such as heap sort.
+
+Also, it’s important to know that the best implementation of heap should be using <strong>array list (the formula to store it is: 2i+1, 2i+2, where first gets the left child and the second get the right child, and using (i-1)/2 will give us the parent)</strong></p><p id="26c92e70-4dfa-4aae-a8b4-1683f8459a5f" class="">
+</p></div></figure><pre id="b3973a10-9ee2-4e16-ab3e-be6388f759c5" class="code"><code>class MinHeap {
+    constructor() {
+        this.data = [];
+        this.length = 0;
+    }
+
+    insert(value) {
+        this.data[this.length] = value;
+        this.heapifyUp(this.length);
+        this.length++;
+    }
+
+    delete() {
+        if (this.length === 0) {
+            return -1;
+        }
+        const out = this.data[0];
+        this.length--;
+
+        if (this.length === 0) {
+            this.data = [];
+            return out;
+        }
+
+        this.data[0] = this.data[this.length];
+        console.log(this.data)
+        this.heapifyDown(0);
+        return out;
+    }
+
+    parent(index) {
+        return Math.floor((index - 1) / 2);
+    }
+
+    leftChild(parentIndex) {
+        return (2 * parentIndex) + 1;
+    }
+
+    rightChild(parentIndex) {
+        return (2 * parentIndex) + 2;
+    }
+
+    heapifyUp(index) {
+        if (index === 0) {
+            return;
+        }
+        const p = this.parent(index);
+        const parentValue = this.data[p];
+        const value = this.data[index];
+
+        if (parentValue &gt; value) {
+            this.data[index] = parentValue;
+            this.data[p] = value;
+            this.heapifyUp(p)
+        }
+    }
+
+    heapifyDown(index) {
+        const leftIndex = this.leftChild(index);
+        const rightIndex = this.rightChild(index);
+
+        if (index &gt;= this.length || leftIndex &gt;= this.length) {
+            return;
+        }
+
+        const leftValue = this.data[leftIndex];
+        const rightValue = this.data[rightIndex];
+        const value = this.data[index];
+
+        if (leftValue &gt; rightValue &amp;&amp; value &gt; rightValue) {
+            this.data[index] = rightValue;
+            this.data[rightIndex] = value;
+            this.heapifyDown(rightIndex)
+        } else if (rightValue &gt; leftValue &amp;&amp; value &gt; leftValue) {
+            this.data[index] = leftValue;
+            this.data[leftIndex] = value;
+            this.heapifyDown(leftIndex)
+        }
+    }
+}
+
+const heap = new MinHeap();
+heap.insert(10)
+heap.insert(51)
+heap.insert(32)
+heap.insert(23)
+heap.insert(3)
+heap.insert(6)
+heap.insert(47)</code></pre><figure id="63352796-bff2-4347-a036-d3466d392bd4" class="image"><a href="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-03-22_14-24-17.png"><img style="width:989px" src="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-03-22_14-24-17.png"/></a></figure><figure id="d819dfd4-c9fa-4613-b9e9-679dddf2a267" class="image"><a href="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-05-29_10-01-33.png"><img style="width:1326px" src="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-05-29_10-01-33.png"/></a></figure><ul id="c80ae259-007c-4af4-981e-ea2698fd469f" class="toggle"><li><details open=""><summary>Heap Sort</summary><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="b5a83d34-18d4-4405-be75-f8af9c6e8c69"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><strong>Heap Sort</strong> is a comparison-based sorting algorithm that uses a heap data structure to sort elements. The algorithm works as follows:<ol type="1" id="c9470e47-167e-4519-8449-5c19cb472882" class="numbered-list" start="1"><li>Build a max-heap from the input array: Starting from the last non-leaf node and moving up to the root, ensure that the heap property is satisfied for each node.</li></ol><ol type="1" id="b92e3fde-72ad-4c54-8ce2-5ed236d4d9a5" class="numbered-list" start="2"><li>Swap the root node (which contains the maximum value in a max-heap) with the last element in the array.</li></ol><ol type="1" id="95ef0e46-4c81-415e-9cb8-e8d87e9d2087" class="numbered-list" start="3"><li>Exclude the last element (which is the maximum value) from further consideration by reducing the heap size.</li></ol><ol type="1" id="17192d9c-7423-45e5-b957-c71a60df9ad3" class="numbered-list" start="4"><li>Restore the heap property by heapifying the root node (which now contains a new element from the remaining unsorted portion of the array).</li></ol><ol type="1" id="f5311d6a-eeb2-48d0-bc49-5a0c391e424b" class="numbered-list" start="5"><li>Repeat steps 2-4 until the heap size is reduced to 1.</li></ol><ol type="1" id="bc971273-e28a-44f9-be43-f2cae7989713" class="numbered-list" start="6"><li>The sorted elements are obtained by extracting elements from the heap in reverse order.</li></ol></div></figure><pre id="64eb3aa0-cac1-4fa9-b0b4-5a790d6eca5c" class="code"><code>// Heapify a subtree rooted at index i in arr[]
+function heapify(arr, heapSize, i) {
+  let largest = i; // Initialize the largest as root
+  const left = 2 * i + 1; // Left child
+  const right = 2 * i + 2; // Right child
+
+  // If left child is larger than root
+  if (left &lt; heapSize &amp;&amp; arr[left] &gt; arr[largest]) {
+    largest = left;
+  }
+
+  // If right child is larger than largest so far
+  if (right &lt; heapSize &amp;&amp; arr[right] &gt; arr[largest]) {
+    largest = right;
+  }
+
+  // If largest is not root, swap and heapify the affected subtree
+  if (largest !== i) {
+    [arr[i], arr[largest]] = [arr[largest], arr[i]];
+    heapify(arr, heapSize, largest);
+  }
+}
+
+function heapSort(arr) {
+  const n = arr.length;
+
+  // Build a max-heap (rearrange the array)
+  for (let i = Math.floor(n / 2) - 1; i &gt;= 0; i--) {
+    heapify(arr, n, i);
+  }
+
+  // Extract elements from the heap one by one
+  for (let i = n - 1; i &gt; 0; i--) {
+    // Move current root to the end
+    [arr[0], arr[i]] = [arr[i], arr[0]];
+
+    // Call heapify on the reduced heap
+    heapify(arr, i, 0);
+  }
+
+  return arr;
+}
+
+// Example usage
+const array = [7, 3, 9, 2, 4, 1, 5];
+const sortedArray = heapSort(array);
+console.log(sortedArray); // [1, 2, 3, 4, 5, 7, 9]</code></pre></details></li></ul></details></li></ul><ul id="5d9d6fe7-0e3a-40de-b422-3b7a7e7e9f40" class="toggle"><li><details open=""><summary>2-3 Trees</summary><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="63c8ce86-d456-42f9-bf61-be9bcbf77093"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><strong>2-3 trees </strong>are a type of tree data structure that can be used for efficient searching and sorting of data. Unlike binary search trees, 2-3 trees can have either two or three children per node. In a 2-node, there is one key separating two children, while in a 3-node, there are two keys separating three children. The keys in the tree are sorted in order, and all nodes in the tree have the same depth. This allows for quick search and insertion of new elements. The tree also maintains its balance, which makes it more efficient than other types of trees for certain types of operations.</div></figure><figure id="f1e9d4fb-a80c-4033-baa5-11884c40a0a1" class="image"><a href="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-04-04_14-14-57.png"><img style="width:1324px" src="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-04-04_14-14-57.png"/></a></figure></details></li></ul><ul id="cd7a30b0-6dfd-4a4e-9eba-e63d0ba27879" class="toggle"><li><details open=""><summary>Red-Black BST</summary><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="f1e2b938-b284-45dc-87ae-e32a4ea0c6db"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Red-Black Trees are a special type of binary search tree that helps keep the tree balanced, which makes searching, inserting, and deleting items in the tree faster. Each node in a Red-Black tree is colored either red or black, and the tree is designed to ensure that no path from the root to a leaf is more than twice as long as any other path. This is done by performing rotations and color flips. Red-Black trees are commonly used in programming because they have a worst-case time complexity of O(log n) for search, insert, and delete operations. This means they are efficient for large data sets.<p id="4a1b9d7e-4f30-4654-b53b-0347f6624afd" class="">The important properties of a Red-Black tree are:</p><ul id="46056daf-83d9-47d8-8811-7305172a23ff" class="bulleted-list"><li style="list-style-type:disc">Every node is either red or black</li></ul><ul id="820e7256-4cdc-4f3d-a5cb-a4a585f8f4f1" class="bulleted-list"><li style="list-style-type:disc">The root is black</li></ul><ul id="45c2353f-87f0-47fc-9ca8-ad2f55f5b18c" class="bulleted-list"><li style="list-style-type:disc">Every leaf (NULL) is black</li></ul><ul id="6746060f-747e-4028-a0a3-a497f08536f8" class="bulleted-list"><li style="list-style-type:disc">If a node is red, then both its children are black</li></ul><ul id="2ebcf4db-e480-45b6-b8d8-2f1e0407d05e" class="bulleted-list"><li style="list-style-type:disc">Every simple path from a node to a descendant leaf contains the same number of black nodes</li></ul><p id="d05e2b95-fbcb-4e38-9136-5b8cc0732fda" class="">These properties ensure that the tree is balanced and that no path from the root to a leaf is more than twice as long as any other path.</p></div></figure><p id="883f3508-aa2c-474c-b6b3-c04d5a8ee267" class="">
+</p></details></li></ul></details></li></ul><ul id="6095bf17-ba8d-4e97-afb0-030c1197cf49" class="toggle"><li><details open=""><summary>Graphs</summary><figure id="81e843ba-da99-4060-9d65-e1079c5fe30c"><a href="https://www.geeksforgeeks.org/introduction-to-graphs-data-structure-and-algorithm-tutorials/" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Introduction to Graphs - Data Structure and Algorithm Tutorials - GeeksforGeeks</div><div class="bookmark-description">A Computer Science portal for geeks. It contains well written, well thought and well explained computer science and programming articles, quizzes and practice/competitive programming/company interview Questions.</div></div><div class="bookmark-href"><img src="https://www.geeksforgeeks.org/wp-content/uploads/gfg_200X200.png" class="icon bookmark-icon"/>https://www.geeksforgeeks.org/introduction-to-graphs-data-structure-and-algorithm-tutorials/</div></div><img src="https://media.geeksforgeeks.org/wp-content/uploads/20200630111809/graph18.jpg" class="bookmark-image"/></a></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="2973fe6e-6d9e-4cda-9680-d71c64749642"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><strong>Graphs</strong><p id="942d8395-0f8d-416a-8f8a-54158f75d760" class="">A graph is a <strong>non-linear</strong> data structure consisting of a collection of <strong>vertices</strong> (or nodes) and <strong>edges</strong> that connect these vertices. Graphs are used to represent relationships between objects or entities. <strong>The vertices represent the objects</strong>, and <strong>the edges represent the connections or relationships between them.</strong></p><p id="d317a4b9-c7e3-49f4-89a6-94ce94dd7eff" class=""><strong>Undirected Graph:</strong>
+In an undirected graph, <strong>the edges have no direction and can be traversed in both directions.</strong> It represents a symmetric relationship between vertices. For example, consider a network of friends on a social media platform. Each person is a vertex, and the connections between them are represented by undirected edges. If person A is friends with person B, it implies that person B is also friends with person A.</p><p id="81960e9b-53fb-4676-856b-f3e18138dc38" class="">Real-world example: Social networks, such as Facebook or LinkedIn, can be represented as undirected graphs. Each user is a vertex, and friendships or connections between users are represented by undirected edges. This representation allows for analyzing connections, finding mutual friends, or identifying communities within the network.</p><p id="8df2705b-4146-4416-9c15-003194fd8f5b" class=""><strong>Directed Graph:</strong>
+In a directed graph, the edges have a specific direction, indicating a one-way relationship between vertices. It represents asymmetric relationships. For example, consider a web page linking structure. Each web page is a vertex, and the hyperlinks between them are represented by directed edges. If web page A has a link pointing to web page B, it implies that there is a hyperlink from A to B, but not necessarily vice versa.</p><p id="0da28095-6500-4ce8-9a26-7cb0715e1477" class="">Real-world example: The World Wide Web can be represented as a directed graph. Each web page is a vertex, and hyperlinks between pages are represented by directed edges. This representation allows for analyzing the structure of the web, finding popular pages, or understanding the flow of information between websites.</p><p id="c982aba4-9245-47c6-abb9-07ad4ba7de4f" class=""><strong>Cyclic Graph:</strong>
+A cyclic graph is a graph that contains at least one cycle, which is a path that starts and ends at the same vertex. A cycle can be traversed indefinitely by following the edges. Cyclic graphs can exist in both undirected and directed graphs.</p><p id="2f08c86a-acba-4dbb-9f32-7b40f2ba301c" class="">Real-world example: A transportation network with one-way streets can be represented as a directed cyclic graph. Each intersection is a vertex, and the directed edges represent the one-way streets. The cycles in this graph represent the ability to loop around a particular set of streets to return to the starting point.</p><p id="957ba5b7-16bd-44e4-afda-d3a7ad40fa39" class=""><strong>Acyclic Graph:</strong>
+An acyclic graph is a graph that does not contain any cycles. It is a directed graph where it is not possible to start at any vertex and return to the same vertex by following the directed edges.</p><p id="e6dc30d7-6e3b-4ace-9040-d318c7f72eee" class="">Real-world example: In project management, a dependency graph can be represented as an acyclic directed graph. Each task is a vertex, and the directed edges represent dependencies between tasks. This representation helps in determining the order in which tasks should be executed to avoid circular dependencies.</p><p id="e7611f0e-5cd0-4159-916e-02436ac654e4" class=""><strong>Weighted Graph:</strong>
+A weighted graph is a graph where each edge has an associated weight or cost. The weights can represent distances, costs, or any other value associated with the edge. Weighted graphs can be either undirected or directed.</p><p id="a05b3db9-4914-4c8c-92b1-ee664e83b58c" class="">Real-world example: Transportation networks with distances between locations can be represented as weighted graphs. Each location is a vertex, and the weighted edges represent the distances between the locations. This representation allows for finding the shortest path or calculating the optimal route between two locations.</p><p id="de9d04b9-e60a-41e5-b2e1-63ea13b5b149" class="">Graphs have various applications in computer science, including:</p><ul id="68bd1197-45f6-4d9c-8721-f09a47c08b82" class="bulleted-list"><li style="list-style-type:disc">Pathfinding algorithms: Graphs help in finding the shortest path between two vertices, such as Dijkstra&#x27;s algorithm or A* algorithm.</li></ul><ul id="5d1db44d-64e8-4882-840c-93dcb2665ddc" class="bulleted-list"><li style="list-style-type:disc">Network analysis: Graphs help in analyzing network structures, identifying key nodes, detecting communities, or finding influential users.</li></ul><ul id="3480682a-09fc-47b6-a997-51b080ed29dc" class="bulleted-list"><li style="list-style-type:disc">Data structures: Graphs are used as the underlying structure for other data structures like trees, heaps, or hash tables.</li></ul><ul id="be27f447-b998-4a3f-9a33-116881cd1f7d" class="bulleted-list"><li style="list-style-type:disc">Compiler design: Graphs are used for control flow analysis, dependency analysis, and optimization.</li></ul><ul id="7835f279-8003-42cc-ae42-18ac485a8910" class="bulleted-list"><li style="list-style-type:disc">Web crawling: Graphs help in crawling and indexing web pages, following hyperlinks, and building search engine indexes.</li></ul><p id="85c07c22-5121-4b29-ba6b-4a1f86450c74" class="">These are just a few examples of the importance and applications of graphs in real-world scenarios and computer science. The flexibility and versatility of graphs make them a fundamental data structure in various domains.</p></div></figure><pre id="2d8dd296-d9de-4b98-82f2-6582ca5dcd8e" class="code"><code>class Graph {
+   constructor() {
+      this.adjacencyList = {};
+   }
+   addVertex(vertex) {
+      if (!this.adjacencyList[vertex]) this.adjacencyList[vertex] = [];
+   }
+   addEdge(vertex1, vertex2) {
+      this.adjacencyList[vertex1].push(vertex2);
+      this.adjacencyList[vertex2].push(vertex1);
+   }
+   print() {
+      for (const [vertex, edges] of Object.entries(this.adjacencyList)) {
+         console.log(`${vertex} -&gt; ${edges.join(&quot;, &quot;)}`);
+      }
+   }
+   breadthFirstSearch(start) {
+      const queue = [start];
+      const result = [];
+      const visited = {};
+      let currentVertex;
+      visited[start] = true;
+      while (queue.length) {
+         currentVertex = queue.shift();
+         result.push(currentVertex);
+         this.adjacencyList[currentVertex].forEach((neighbor) =&gt; {
+            if (!visited[neighbor]) {
+               visited[neighbor] = true;
+               queue.push(neighbor);
+            }
+         });
+      }
+      return result;
+   }
+   depthFirstSearch(start) {
+      const result = [];
+      const visited = {};
+      const adjacencyList = this.adjacencyList;
+      (function dfs(vertex) {
+         if (!vertex) return null;
+         visited[vertex] = true;
+         result.push(vertex);
+         adjacencyList[vertex].forEach(neighbor =&gt; {
+            if (!visited[neighbor]) {
+               return dfs(neighbor);
+            }
+         });
+      })(start);
+      return result;
+   }
+}
+const graph = new Graph();
+graph.addVertex(&quot;A&quot;);
+graph.addVertex(&quot;B&quot;);
+graph.addVertex(&quot;C&quot;);
+graph.addVertex(&quot;D&quot;);
+graph.addEdge(&quot;A&quot;, &quot;B&quot;);
+graph.addEdge(&quot;A&quot;, &quot;C&quot;);
+graph.addEdge(&quot;B&quot;, &quot;D&quot;);
+graph.addEdge(&quot;C&quot;, &quot;D&quot;);
+console.log(&quot;Initial Graph:&quot;);
+graph.print();
+console.log(&quot;BFS: &quot;+graph.breadthFirstSearch(&#x27;A&#x27;));
+console.log(&quot;DFS: &quot;+graph.depthFirstSearch(&#x27;A&#x27;));</code></pre><figure id="3d248c51-82e4-47e1-8733-bba6ce8ffa8a" class="image"><a href="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-05-29_10-31-11.png"><img style="width:1326px" src="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-05-29_10-31-11.png"/></a></figure><figure id="f25fd74f-247b-4f2c-a39f-ae4b947299dc" class="image"><a href="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/dir.png"><img style="width:1033px" src="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/dir.png"/></a></figure><figure id="27d663d4-b3f2-46b5-baad-92b17d163590" class="image"><a href="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/2z9J2E5.png"><img style="width:1500px" src="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/2z9J2E5.png"/></a></figure><figure id="4f93c96a-605a-441f-b2ef-1483cdd75a9f" class="image" style="text-align:center"><a href="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/download.png"><img style="width:297px" src="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/download.png"/></a><figcaption><strong>Weighted Graph</strong></figcaption></figure><figure id="9896f5cd-aaa0-4358-9eb1-a37299b35c9c" class="image"><a href="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/graph-representation6.png"><img style="width:906px" src="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/graph-representation6.png"/></a></figure><figure id="8ff4fd00-2357-4675-8d4c-14ccfc2b4326" class="image"><a href="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/graph-representations3.png"><img style="width:542px" src="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/graph-representations3.png"/></a></figure></details></li></ul><ul id="62ed8adc-6e4d-40a5-8c93-4aadc61f76ff" class="toggle"><li><details open=""><summary>Priority Queues, Symbol Tables, Vector, Union Find, LRU Cache</summary><ul id="fa6aefd3-4d47-4814-b694-e0c14c3c90c3" class="toggle"><li><details open=""><summary>Priority Queue</summary><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="9bf76e11-3f73-4635-b11a-1bf0e9cec053"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Mainly we implement Priority Queues with <strong>Heaps</strong></div></figure><figure id="aa9a8adf-8ca1-4a8c-90e3-00ed773ce9c6"><a href="https://github.com/williamfiset/Algorithms/tree/master/src/main/java/com/williamfiset/algorithms/datastructures/priorityqueue" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Algorithms/src/main/java/com/williamfiset/algorithms/datastructures/priorityqueue at master · williamfiset/Algorithms</div><div class="bookmark-description">A collection of algorithms and data structures. Contribute to williamfiset/Algorithms development by creating an account on GitHub.</div></div><div class="bookmark-href"><img src="https://github.com/fluidicon.png" class="icon bookmark-icon"/>https://github.com/williamfiset/Algorithms/tree/master/src/main/java/com/williamfiset/algorithms/datastructures/priorityqueue</div></div><img src="https://opengraph.githubassets.com/8a42dc7a4ab3596e68b6beb107d8283d5379ce3fc14b8a1c208769d35f20e596/williamfiset/Algorithms" class="bookmark-image"/></a></figure><ul id="d3c72b6a-19f1-47da-b5be-8bf048ac4bbc" class="toggle"><li><details open=""><summary>Priority Queue</summary><figure id="d9768c4b-88c3-426d-8b12-00a4a0a1c8f4"><div class="source"><a href="https://www.youtube.com/watch?v=wptevk0bshY&amp;list=PLDV1Zeh2NRsCLFSHm1nYb9daYf60lCcag&amp;ab_channel=WilliamFiset">https://www.youtube.com/watch?v=wptevk0bshY&amp;list=PLDV1Zeh2NRsCLFSHm1nYb9daYf60lCcag&amp;ab_channel=WilliamFiset</a></div></figure><figure id="e1630fda-8298-4989-9645-48c7635db966"><a href="https://www.geeksforgeeks.org/priority-queue-set-1-introduction/" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">What is Priority Queue | Introduction to Priority Queue - GeeksforGeeks</div><div class="bookmark-description">A Computer Science portal for geeks. It contains well written, well thought and well explained computer science and programming articles, quizzes and practice/competitive programming/company interview Questions.</div></div><div class="bookmark-href"><img src="https://www.geeksforgeeks.org/wp-content/uploads/gfg_200X200.png" class="icon bookmark-icon"/>https://www.geeksforgeeks.org/priority-queue-set-1-introduction/</div></div><img src="https://media.geeksforgeeks.org/wp-content/cdn-uploads/Priority-Queue-min-1024x512.png" class="bookmark-image"/></a></figure><figure id="7f1fb2a8-0d93-4ba7-893d-068b3ca5659d" class="image"><a href="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-03-22_14-20-35.png"><img style="width:927px" src="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-03-22_14-20-35.png"/></a></figure><figure id="7a1a4f3a-bcdb-4f32-98f1-d3ee37ea8b4c" class="image"><a href="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-03-22_14-28-33.png"><img style="width:989px" src="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-03-22_14-28-33.png"/></a></figure><figure id="ccb49c0b-a852-4198-97b1-57e350520cff" class="image"><a href="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-03-21_17-08-43.png"><img style="width:1356px" src="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-03-21_17-08-43.png"/></a></figure></details></li></ul><ul id="1f4cf33b-2a48-4428-b47a-eac9e34ec4ed" class="toggle"><li><details open=""><summary>Priority Queue with Heaps</summary><figure id="6d544471-c1c0-4c73-a81a-ceea35bc89f6" class="image"><a href="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-03-22_14-29-50.png"><img style="width:989px" src="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-03-22_14-29-50.png"/></a></figure><figure id="f99ec0ce-da7d-46bd-9651-69ab09d66778" class="image"><a href="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-03-26_16-59-18.png"><img style="width:1053px" src="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-03-26_16-59-18.png"/></a></figure><figure id="3109a436-45ab-48db-bfc9-cce24be9d5c8" class="image"><a href="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-03-26_17-03-31.png"><img style="width:960px" src="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-03-26_17-03-31.png"/></a></figure><figure id="86392d86-f52c-47fa-acab-2c850f2cb8c7" class="image"><a href="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-03-26_17-17-28.png"><img style="width:1104px" src="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-03-26_17-17-28.png"/></a></figure><ul id="52a27bd3-50ac-4638-bf47-e438f73e02af" class="bulleted-list"><li style="list-style-type:disc">to add number to the tree we should place it in the bottom (from left to right) and then use method called <strong>bubble-up </strong></li></ul><ul id="b4d28ba8-a3e3-430e-a89b-5689ceacff8c" class="bulleted-list"><li style="list-style-type:disc">to remove number from the tree we use <strong>poll</strong>, and it’s always get the root first. (we put instead of the root the number in the bottom of tree) and then <strong>bubble-down.
+</strong>to remove specific element from the tree, we first search it, we mark it and then we swap it with another node from the bottom. and then we <strong>bubble-up.</strong></li></ul></details></li></ul></details></li></ul><ul id="82ea3eac-e0c1-4765-8d74-ad50cd44810c" class="toggle"><li><details open=""><summary>Symbol Table</summary><figure id="9fdaeb74-291b-4b6f-9802-501793b9a3f8"><a href="https://www.geeksforgeeks.org/symbol-table-compiler/" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Symbol Table in Compiler - GeeksforGeeks</div><div class="bookmark-description">A Computer Science portal for geeks. It contains well written, well thought and well explained computer science and programming articles, quizzes and practice/competitive programming/company interview Questions.</div></div><div class="bookmark-href"><img src="https://www.geeksforgeeks.org/wp-content/uploads/gfg_200X200.png" class="icon bookmark-icon"/>https://www.geeksforgeeks.org/symbol-table-compiler/</div></div><img src="https://media.geeksforgeeks.org/wp-content/uploads/asd1-1.png" class="bookmark-image"/></a></figure><figure id="ea41aea6-6cd2-4965-a139-34d17489f78b" class="image"><a href="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-03-28_12-17-13.png"><img style="width:1220px" src="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-03-28_12-17-13.png"/></a></figure><figure id="118289de-33c3-4c69-9e95-4d5b5c6908dd" class="image"><a href="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-03-28_12-19-28.png"><img style="width:1354px" src="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-03-28_12-19-28.png"/></a></figure></details></li></ul><ul id="cdf53339-64e1-417d-bade-97e6d1d4eb9a" class="toggle"><li><details open=""><summary>Vector</summary><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="53ecc0f7-97cc-4468-a6bf-a9f1e1f40f25"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">The word &quot;vector&quot; is borrowed from math when applied to computer science/programming, which can make its usage confusing. Even the question posed here could be interpreted in multiple ways.<p id="f98a9e34-a1e5-497b-a4f7-be7e199d85a6" class="">The simplest example of vectors in math is the number line, which is used to teach elementary math, especially to help visualize negative numbers, subtraction of negative numbers, addition of negative numbers, etc.</p><p id="df7e59eb-eea1-4b39-82af-fffad528e368" class="">In math, a vector is a distance and direction from a point. This is why it can cause confusion in programming, because a vector data structure could be a set of three points, X, Y, and Z, in a structure used in 3D graphics engines, or a 2D point with just X and Y coordinates. In that context, the subtraction of two such points results in a vector; the vector describes how far and in what direction to travel from one of the source operands to the other.</p><p id="259deeab-bdd4-42cf-9538-27c945e0e760" class="">This concept applies to storage, like STL vectors or Java vectors, in that storage is represented as a distance from an address. A memory address is similar to a point in space, or on a number line.</p><p id="cdc9ef84-d36c-4386-9065-0ab015dc22d2" class="">The concept is related to arrays because arrays could be the storage allocated for a vector, but the vector is a larger concept than the array. A vector must include the concept of distance from a starting point. If you think of the beginning of an array as the starting point, the distance to the end of the array is its size.</p><p id="38a3c3a8-533a-4dbf-a7ff-d3e1b0c8940a" class="">So, the data structure representing a vector must include the size. An array doesn&#x27;t have storage to include the size; it&#x27;s assumed by the way it&#x27;s allocated. If you dynamically allocate an array, there is no data structure storing the size of that array. The programmer must assume to know that size or store it in some integer or long.</p><p id="ed533861-4d3a-4b59-a271-3a055d8043cd" class="">The vector data structure, like the design of a vector class, does need to store the size. At a minimum, there would be a starting point, which is the base of an array or some address in memory, and a distance from that point indicating size.</p><p id="b3c4416f-5d0c-4c40-80e7-37f57d6cab34" class="">That&#x27;s really &quot;RAM&quot;-oriented in description because there&#x27;s one more point not yet described, which must be part of the data describing the vector: the notion of element size. If a vector represents bytes, and memory storage is typically measured in bytes, an address and a distance (or size) would represent a vector of bytes, but nothing else. That&#x27;s a very machine-level way of thinking. A higher-level thought, that of some structure, has its own size, say, the size of a float or double or of a structure or class in C++. Whatever the element size is, the memory required to store N of them requires that the vector data structure have some knowledge of what it&#x27;s storing and how large that thing is. This is why you&#x27;d think in terms of &quot;a vector of strings&quot; or &quot;a vector of points&quot;. A vector must also store an element size.</p><p id="93817b00-158b-4df8-bf50-df2c36251bdd" class="">So, a basic vector data structure must have:</p><ul id="fca167af-124b-4820-9c67-2902c0c59027" class="bulleted-list"><li style="list-style-type:disc">An address (the starting point)</li></ul><ul id="966fb94a-0ce1-42e6-859c-1cdda40e69b1" class="bulleted-list"><li style="list-style-type:disc">An element size (each thing it stores is X bytes long)</li></ul><ul id="d3e47802-0649-4c4d-be88-f2bcd77cb09c" class="bulleted-list"><li style="list-style-type:disc">A number of elements stored (how many elements times element size is the minimum storage size).</li></ul><p id="e0243551-e8a3-4084-b2a7-36c7923c733d" class="">One important &quot;assumption&quot; made in this simple three-item list of entries in the vector data structure is that the address is allocated memory, which must be freed at some point, and is to be guarded against access beyond the end of the vector.</p><p id="ab2fdeb8-48b8-44a2-9dbd-4ac1f4c86964" class="">That means something is missing. In order to make a vector class work, there must be a recognizable difference between the number of items stored in the vector and the amount of memory allocated for that storage. Typically, as you might realize from the use of vector from the STL, it may &quot;know&quot; it has room to store 10 items but currently only has 2 of them.</p><p id="4bce6277-2fe1-4655-819b-1635b6caa7db" class="">So, a working vector class would also have to store the amount of memory allocation. This would be how it could dynamically extend itself. It would now have sufficient information to expand storage automatically.</p><p id="fe2c938e-8fe1-42d1-8ad6-36727c31415b" class="">Thinking through just how you would make a vector class operate gives you the structure of data required to operate a vector class.</p></div></figure><figure id="784ce27f-6bb3-40c3-a2ba-2046fd1bad19" class="image"><a href="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-03-06_10-55-45.png"><img style="width:1468px" src="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-03-06_10-55-45.png"/></a></figure></details></li></ul><ul id="1a66b65a-c688-4b91-9d4d-e08937604d4f" class="toggle"><li><details open=""><summary>Union Find (איחוד קבוצות זרות)</summary><figure id="dc310670-d91b-486a-a10b-f7799efcea4b"><div class="source"><a href="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/union-find.pdf">union-find.pdf</a></div></figure><figure id="908492a5-6cb5-40cf-978d-009bb1f29c8b"><a href="https://www.youtube.com/watch?v=ibjEGG7ylHk&amp;list=PLDV1Zeh2NRsBI1C-mR6ZhHTyfoEJWlxvq&amp;ab_channel=WilliamFiset" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Union Find Introduction</div><div class="bookmark-description">Introduction to the Disjoint Set (Union find) data structure
+
+Related Videos:
+Union find intro: https://www.youtube.com/watch?v=ibjEGG7ylHk
+Union find kruskal&#x27;s algorithm: https://www.youtube.com/watch?v=JZBQLXgSGfs
+Union find union and find: https://www.youtube.com/watch?v=0jNmHPfA_yE
+Union find path compression: https://www.youtube.com/watch?v=VHRhJWacxis
+Union find code: https://www.youtube.com/watch?v=KbFlZYCpONw
+
+Data Structures Source Code:
+https://github.com/williamfiset/algorithms
+
+====================================
+
+Practicing for interviews? I have used, and recommend `Cracking the Coding Interview` which got me a job at Google. Link on Amazon: https://amzn.to/3cvMof5
+
+A lot of the content on this channel is inspired by the book `Competitive Programming` by Steven Halim which I frequently use as a resource and reference. Link on Amazon: https://amzn.to/3wC2nix ===================================
+
+Practicing for interviews? I have used, and recommend `Cracking the Coding Interview` which got me a job at Google. Link on Amazon: https://amzn.to/3cvMof5
+
+A lot of the content on this channel is inspired by the book `Competitive Programming` by Steven Halim which I frequently use as a resource and reference. Link on Amazon: https://amzn.to/3wC2nix</div></div><div class="bookmark-href"><img src="https://www.youtube.com/s/desktop/c93a795b/img/favicon_144x144.png" class="icon bookmark-icon"/>https://www.youtube.com/watch?v=ibjEGG7ylHk&amp;list=PLDV1Zeh2NRsBI1C-mR6ZhHTyfoEJWlxvq&amp;ab_channel=WilliamFiset</div></div><img src="https://i.ytimg.com/vi/ibjEGG7ylHk/maxresdefault.jpg" class="bookmark-image"/></a></figure><ul id="bbc59bb9-7296-45e1-b9eb-242017aa0177" class="toggle"><li><details open=""><summary>Basics</summary><figure id="016d93d0-b473-47fc-ba49-af0cb1924ef6" class="image"><a href="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-02-19_13-28-11.png"><img style="width:1180px" src="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-02-19_13-28-11.png"/></a></figure><figure id="58be1135-d3f8-4980-8701-e59b41bb87e4" class="image"><a href="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-02-19_13-30-42.png"><img style="width:894px" src="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-02-19_13-30-42.png"/></a></figure><figure id="dd1eead6-a3b4-4e0a-9980-b7cddb429fc0" class="image"><a href="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-02-19_13-32-30.png"><img style="width:980px" src="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-02-19_13-32-30.png"/></a></figure></details></li></ul><ul id="164a53f7-16a1-4701-af38-e1cf892c5b7d" class="toggle"><li><details open=""><summary>Kruskal’s Algorithm</summary><figure id="a36b12c9-59f1-4b80-a3ec-9ae5a3f453d0" class="image"><a href="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-02-19_14-32-11.png"><img style="width:1070px" src="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-02-19_14-32-11.png"/></a></figure><figure id="82e9876c-83e7-4a73-b5cd-7ee43b8f5cea" class="image"><a href="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-02-19_14-32-26.png"><img style="width:1080px" src="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-02-19_14-32-26.png"/></a></figure><figure id="26f65580-2060-4e7e-ab86-0b0cd2baf9be" class="image"><a href="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-02-19_14-32-43.png"><img style="width:1064px" src="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-02-19_14-32-43.png"/></a></figure><figure id="d574f38b-3234-493b-8088-de1b1367a103" class="image"><a href="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-02-19_14-34-30.png"><img style="width:1110px" src="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-02-19_14-34-30.png"/></a></figure></details></li></ul><ul id="c5aa4269-6497-46be-852d-b369c8735630" class="toggle"><li><details open=""><summary>Operations</summary><figure id="0575d5e4-4702-47e0-a7f3-b40d71ca0a05" class="image"><a href="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-02-19_14-46-52.png"><img style="width:951px" src="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-02-19_14-46-52.png"/></a></figure><figure id="34bbd738-b968-4d2e-9296-d1786c35e979" class="image"><a href="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-02-19_14-47-19.png"><img style="width:1037px" src="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-02-19_14-47-19.png"/></a></figure><figure id="e3a40813-e316-41c3-a5cb-a893f55d63be" class="image"><a href="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-02-19_14-47-32.png"><img style="width:1043px" src="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-02-19_14-47-32.png"/></a></figure><figure id="95085bc4-273f-4d68-b1d6-cfb4845199b7" class="image"><a href="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-02-19_14-47-43.png"><img style="width:953px" src="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-02-19_14-47-43.png"/></a></figure></details></li></ul><ul id="cdb9c933-d61d-454f-818f-cf742303b1bf" class="toggle"><li><details open=""><summary>Path Compression</summary><figure id="3a91ce47-af41-4ff2-8768-f33997fdbcc2" class="image"><a href="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-02-19_15-06-46.png"><img style="width:973px" src="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-02-19_15-06-46.png"/></a></figure><figure id="2f9be3e4-5224-4296-b57d-640bc0ed95c0" class="image"><a href="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-02-19_15-08-41.png"><img style="width:589px" src="Algorithms%20and%20Data%20Structures%207ce0ae9211364595a72787a84814a7fb/Screenshot_from_2023-02-19_15-08-41.png"/></a></figure></details></li></ul><ul id="a37e67d7-4bcb-4373-965c-7b6d5f6f55a9" class="toggle"><li><details open=""><summary>Code</summary><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="c208463e-303e-4475-80a5-ba2c517629f1"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><a href="https://github.com/williamfiset/Algorithms/blob/master/src/main/java/com/williamfiset/algorithms/datastructures/unionfind/UnionFind.java">https://github.com/williamfiset/Algorithms/blob/master/src/main/java/com/williamfiset/algorithms/datastructures/unionfind/UnionFind.java</a></div></figure></details></li></ul></details></li></ul><ul id="824779b5-8f60-4a36-a4ce-e21695391a15" class="toggle"><li><details open=""><summary>LRU (Least Recently Used) Cache</summary><pre id="b1ff2201-80eb-496a-a6e8-5c3a6bdaf8ed" class="code"><code>class Node {
+  constructor(key, value) {
+    this.key = key;
+    this.value = value;
+    this.prev = null;
+    this.next = null;
+  }
+}
+
+class LRUCache {
+  constructor(capacity) {
+    this.capacity = capacity;
+    this.cache = new Map();
+    this.head = new Node(null, null);
+    this.tail = new Node(null, null);
+    this.head.next = this.tail;
+    this.tail.prev = this.head;
+  }
+
+  get(key) {
+    if (this.cache.has(key)) {
+      const node = this.cache.get(key);
+      this.moveToHead(node);
+      return node.value;
+    }
+    return -1;
+  }
+
+  put(key, value) { //update
+    if (this.cache.has(key)) {
+      const node = this.cache.get(key);
+      node.value = value;
+      this.moveToHead(node);
+    } else {
+      const newNode = new Node(key, value);
+      this.cache.set(key, newNode);
+      this.addToHead(newNode);
+
+      if (this.cache.size &gt; this.capacity) {
+        const tailNode = this.removeTail();
+        this.cache.delete(tailNode.key);
+      }
+    }
+  }
+
+  addToHead(node) {
+    node.prev = this.head;
+    node.next = this.head.next;
+    this.head.next.prev = node;
+    this.head.next = node;
+  }
+
+  removeNode(node) {
+    node.prev.next = node.next;
+    node.next.prev = node.prev;
+  }
+
+  moveToHead(node) {
+    this.removeNode(node);
+    this.addToHead(node);
+  }
+
+  removeTail() {
+    const tailNode = this.tail.prev;
+    this.removeNode(tailNode);
+    return tailNode;
+  }
+}
+
+// Example usage
+const cache = new LRUCache(2);
+cache.put(1, &#x27;Apple&#x27;);
+cache.put(2, &#x27;Banana&#x27;);
+console.log(cache.get(1));  // Output: &#x27;Apple&#x27;
+cache.put(3, &#x27;Orange&#x27;);
+console.log(cache.get(2));  // Output: -1 (not found)
+console.log(cache.get(3));  // Output: &#x27;Orange&#x27;
+cache.put(4, &#x27;Mango&#x27;);
+console.log(cache.get(1));  // Output: -1 (not found)
+console.log(cache.get(3));  // Output: &#x27;Orange&#x27;
+console.log(cache.get(4));  // Output: &#x27;Mango&#x27;</code></pre></details></li></ul></details></li></ul></details></li></ul><ul id="9ca508d5-b5ee-456f-b72a-a9468035439c" class="toggle"><li><details open=""><summary>Resources</summary><table id="1ba95089-4ed0-42ab-87ac-88696c497913" class="simple-table"><tbody><tr id="9ac7caf2-17cb-463e-ab3e-d1ffd67af69e"><td id="?q@L" class="" style="width:264px">Algorithms - Abdul Bari</td><td id="FLPg" class="" style="width:515px"><a href="https://www.youtube.com/playlist?list=PLDN4rrl48XKpZkf03iYFl-O29szjTrs_O">https://www.youtube.com/playlist?list=PLDN4rrl48XKpZkf03iYFl-O29szjTrs_O</a></td></tr><tr id="69bbe27e-798d-4bd9-8dc5-685f4c4025b7"><td id="?q@L" class="" style="width:264px">Data Structures - Computer Science Course for Beginners</td><td id="FLPg" class="" style="width:515px"><a href="https://www.youtube.com/watch?v=zg9ih6SVACc&amp;ab_channel=freeCodeCamp.org">https://www.youtube.com/watch?v=zg9ih6SVACc&amp;ab_channel=freeCodeCamp.org</a></td></tr><tr id="359f97d0-725f-4c02-9a77-cccc640dc8e7"><td id="?q@L" class="" style="width:264px">The Last Algorithms Course You&#x27;ll Need</td><td id="FLPg" class="" style="width:515px"><a href="https://frontendmasters.com/courses/algorithms/">https://frontendmasters.com/courses/algorithms/</a></td></tr><tr id="1f17e268-24a8-468a-9528-80ecc2ef8c36"><td id="?q@L" class="" style="width:264px">Data Structure Visualizations</td><td id="FLPg" class="" style="width:515px"><a href="https://www.cs.usfca.edu/~galles/visualization/Algorithms.html">https://www.cs.usfca.edu/~galles/visualization/Algorithms.html</a></td></tr><tr id="f79b4b1b-9698-4b86-bb34-906bcc6b0a60"><td id="?q@L" class="" style="width:264px"></td><td id="FLPg" class="" style="width:515px"></td></tr><tr id="22267180-6728-4f15-ad31-640a1e0bb87e"><td id="?q@L" class="" style="width:264px"></td><td id="FLPg" class="" style="width:515px"></td></tr></tbody></table><p id="084766b8-2cbe-4978-94f9-28f3fb21204f" class="">
+</p><p id="7a867196-624d-40ad-9fa3-a616ae770b9f" class="">
+</p></details></li></ul><p id="81a3f53e-7170-43fa-aa86-362c25c63611" class="">
+</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

@@ -1,0 +1,1187 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>React</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-interactiveBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="4328ada6-ebdc-40be-8989-fda6e5e29209" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">📄</span></div><h1 class="page-title">React</h1><p class="page-description"></p></header><div class="page-body"><figure id="f4bf502f-4e83-45db-b513-fc40d28f9092"><div class="source"><a href="React%204328ada6ebdc40be8989fda6e5e29209/advanced-react.pdf">advanced-react.pdf</a></div></figure><ul id="4e4f0e3f-5261-427b-afe3-1629f882e2e3" class="toggle"><li><details open=""><summary>React VS React DOM</summary></details></li></ul><hr id="75f3f769-c8b1-46bf-bb7d-317146ac57c5"/><ul id="3a0e42d0-8766-4028-b998-bf62208723d3" class="toggle"><li><details open=""><summary>Behind The Scenes </summary><ul id="981a888c-ded6-45ea-8c33-a13b6a7ce865" class="toggle"><li><details open=""><summary>Reconciliation</summary><figure id="dcccc7ee-5a3a-4696-9f97-a23ef0311941" class="image"><a href="React%204328ada6ebdc40be8989fda6e5e29209/Screenshot_from_2023-05-17_16-26-17.png"><img style="width:1030px" src="React%204328ada6ebdc40be8989fda6e5e29209/Screenshot_from_2023-05-17_16-26-17.png"/></a></figure><figure id="006b2bab-398a-4008-8584-f07e010bb19f" class="image"><a href="React%204328ada6ebdc40be8989fda6e5e29209/Screenshot_from_2023-05-17_16-27-05.png"><img style="width:1145px" src="React%204328ada6ebdc40be8989fda6e5e29209/Screenshot_from_2023-05-17_16-27-05.png"/></a></figure><figure id="41c47f71-fcd2-4c9d-b2d9-b7d9e439bcd8" class="image"><a href="React%204328ada6ebdc40be8989fda6e5e29209/Screenshot_from_2023-05-17_16-30-49.png"><img style="width:1314px" src="React%204328ada6ebdc40be8989fda6e5e29209/Screenshot_from_2023-05-17_16-30-49.png"/></a></figure><figure id="875dcde1-4865-45e7-b123-80d7a904df42" class="image"><a href="React%204328ada6ebdc40be8989fda6e5e29209/Screenshot_from_2023-05-17_16-49-42.png"><img style="width:1314px" src="React%204328ada6ebdc40be8989fda6e5e29209/Screenshot_from_2023-05-17_16-49-42.png"/></a></figure><p id="3d5d4fc4-a23d-45bb-91fe-128227aae11e" class="">
+</p><figure id="76d8d9a3-d068-48da-9b5a-13c09a657dcd" class="image"><a href="React%204328ada6ebdc40be8989fda6e5e29209/Screenshot_from_2023-07-24_12-37-33.png"><img style="width:750px" src="React%204328ada6ebdc40be8989fda6e5e29209/Screenshot_from_2023-07-24_12-37-33.png"/></a></figure></details></li></ul><ul id="030bf3f7-af8b-4485-9930-ab7f005834a7" class="toggle"><li><details open=""><summary>Diffing algorithm</summary></details></li></ul><ul id="73577065-4221-410e-9b51-590b98f515f7" class="toggle"><li><details open=""><summary>Stack Reconciliation VS Fiber Reconciliaion</summary></details></li></ul><ul id="97924aea-0f01-4028-88bb-d7c1a315aa12" class="toggle"><li><details open=""><summary>Fiber</summary></details></li></ul><ul id="82fa74ec-0dea-4490-bcab-91b690849412" class="toggle"><li><details open=""><summary>ShadowDOM</summary></details></li></ul></details></li></ul><hr id="d689794d-737c-43c9-bb94-bd2f39ec15db"/><ul id="06af27d6-b1d8-43ce-9a82-f0990125c703" class="toggle"><li><details open=""><summary>JSX</summary><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="48aff83c-014b-4a9e-9f18-58ca551b830f"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">JSX expressions in React must have a single parent element because JSX is transformed into JavaScript function calls, and JavaScript functions can only return a single value. The JSX syntax is designed to closely resemble HTML, where multiple elements can be nested within a single parent element.
+
+JSX is transformed into JavaScript function calls by Babel, the popular JavaScript compiler often used with React.
+</div></figure><pre id="00add729-fa93-44ed-b7d2-f9bc75291a34" class="code"><code>1.//JSX
+const element = &lt;h1&gt;Hello, world!&lt;/h1&gt;; 
+
+2. // JSX code is transpiled by Babel, it will be transformed into the following JavaScript function call:
+The React.createElement function is a built-in function provided by React. 
+It takes three arguments: 
+the element type (in this case, &quot;h1&quot;), 
+the props object (in this case, null since there are no props), 
+and the children (in this case, the text content &quot;Hello, world!&quot;).
+
+const element = React.createElement(&quot;h1&quot;, null, &quot;Hello, world!&quot;);</code></pre><pre id="0757425e-0ed3-4a9c-88c6-dfe8a1cc092d" class="code"><code>1. // JSX
+const element = (
+  &lt;div&gt;
+    &lt;h1&gt;Hello&lt;/h1&gt;
+    &lt;p&gt;World&lt;/p&gt;
+  &lt;/div&gt;
+);
+
+2. // After transpilation
+const element = React.createElement(
+  &quot;div&quot;,
+  null,
+  React.createElement(&quot;h1&quot;, null, &quot;Hello&quot;),
+  React.createElement(&quot;p&quot;, null, &quot;World&quot;)
+);</code></pre><figure id="b3d43cfd-f6e3-45e8-b3c6-ec848dbe9d62" class="image"><a href="React%204328ada6ebdc40be8989fda6e5e29209/Screenshot_from_2023-06-26_16-34-41.png"><img style="width:955px" src="React%204328ada6ebdc40be8989fda6e5e29209/Screenshot_from_2023-06-26_16-34-41.png"/></a></figure><figure id="68484539-e367-4bcc-ab57-51458bbf0215" class="image"><a href="React%204328ada6ebdc40be8989fda6e5e29209/Screenshot_from_2023-06-26_16-34-36.png"><img style="width:955px" src="React%204328ada6ebdc40be8989fda6e5e29209/Screenshot_from_2023-06-26_16-34-36.png"/></a></figure></details></li></ul><ul id="2e2fafb2-9439-4755-9877-20a0cdaaaf69" class="toggle"><li><details open=""><summary>Render</summary><ul id="6a641627-7ae0-4be2-aa57-4819f12ffaf7" class="toggle"><li><details open=""><summary><strong>Why component re-render</strong></summary><p id="78f5b280-9f69-48b9-b099-4fae0c3361d2" class=""><strong>initial render</strong> - happens when a component first appears on the screen
+<strong>re-render</strong> - second and any consecutive render of a component that is already on the screen.</p><ol type="1" id="1c6234c2-7993-490f-b8eb-9709530bac41" class="numbered-list" start="1"><li>re-render when the <strong>state</strong> changes</li></ol><figure id="890dc1e8-16c9-42e0-aeaa-293fb6538039" class="image"><a href="React%204328ada6ebdc40be8989fda6e5e29209/Screenshot_from_2023-01-10_16-51-40.png"><img style="width:1062px" src="React%204328ada6ebdc40be8989fda6e5e29209/Screenshot_from_2023-01-10_16-51-40.png"/></a></figure><p id="9363b57b-5bcc-4fd5-90e9-f41da74cb5db" class="">
+</p><ol type="1" id="bc1de6a2-3af8-49ad-bf9d-032b58c186a9" class="numbered-list" start="2"><li>re-render when the <strong>parent</strong> changes (re-render his children)</li></ol><figure id="0ee0e285-7e30-4941-a0b9-b16ce0fb5a8a" class="image"><a href="React%204328ada6ebdc40be8989fda6e5e29209/Screenshot_from_2023-01-10_16-55-05.png"><img style="width:640px" src="React%204328ada6ebdc40be8989fda6e5e29209/Screenshot_from_2023-01-10_16-55-05.png"/></a></figure><p id="bbddfd96-4843-49fe-a098-2a4e2e6aff4d" class="">
+</p><ol type="1" id="b1e5f10e-93ad-4f26-b274-0563dee8b5fc" class="numbered-list" start="3"><li>re-render when the <strong>context value</strong> changes (state management)</li></ol><figure id="1bd8bfae-ef96-4f7d-99a9-0b6369ba740a" class="image"><a href="React%204328ada6ebdc40be8989fda6e5e29209/Screenshot_from_2023-01-10_17-22-20.png"><img style="width:1185px" src="React%204328ada6ebdc40be8989fda6e5e29209/Screenshot_from_2023-01-10_17-22-20.png"/></a></figure><p id="1b28a9b1-2ad2-443d-a91c-3946da1c0322" class="">
+</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="a8e4ff79-1ab9-4576-ba53-c31deb54e60b"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">A component is <strong>not</strong> re-render when its props changes</div></figure><figure id="dd8489e2-7541-4397-9c91-5b4ba8798930" class="image"><a href="React%204328ada6ebdc40be8989fda6e5e29209/Screenshot_from_2023-01-10_17-25-56.png"><img style="width:993px" src="React%204328ada6ebdc40be8989fda6e5e29209/Screenshot_from_2023-01-10_17-25-56.png"/></a></figure></details></li></ul><ul id="5677e688-aa47-4c32-ae73-7c103a524e7f" class="toggle"><li><details open=""><summary><strong><strong>Preventing React re-renders with composition (Isolate state changes)</strong></strong></summary><ul id="a60b3961-b33b-41d1-9508-30931d1a1244" class="toggle"><li><details open=""><summary>Moving state down </summary><p id="763d1325-265c-4294-9f6e-b7c41a416ea0" class=""><mark class="highlight-red">DON’T DO THIS!</mark></p><figure id="16fd756e-5d71-4d2b-9391-5f0d222eb881" class="image"><a href="React%204328ada6ebdc40be8989fda6e5e29209/Screenshot_from_2023-01-26_12-54-26.png"><img style="width:1161px" src="React%204328ada6ebdc40be8989fda6e5e29209/Screenshot_from_2023-01-26_12-54-26.png"/></a></figure><p id="205b2211-8eca-4972-92d7-7477faad1476" class=""><mark class="highlight-teal">DO THIS!</mark></p><figure id="4874c2b4-01df-42c6-a473-d1acc3522887" class="image"><a href="React%204328ada6ebdc40be8989fda6e5e29209/Screenshot_from_2023-01-26_12-56-44.png"><img style="width:1204px" src="React%204328ada6ebdc40be8989fda6e5e29209/Screenshot_from_2023-01-26_12-56-44.png"/></a></figure></details></li></ul><ul id="3ccb67c9-dd31-4e5d-aca1-11154ad68f1b" class="toggle"><li><details open=""><summary>Components as children prop</summary><p id="18f7fb17-83f4-41ad-bb62-b2aab85604d6" class=""><mark class="highlight-red">DON’T DO THIS!</mark></p><figure id="d87d584f-5e47-47f3-92ef-ea4abe61eb7f" class="image"><a href="React%204328ada6ebdc40be8989fda6e5e29209/Screenshot_from_2023-01-26_13-00-02.png"><img style="width:1204px" src="React%204328ada6ebdc40be8989fda6e5e29209/Screenshot_from_2023-01-26_13-00-02.png"/></a></figure><p id="20643310-a459-405b-82c3-2513c20d9e16" class=""><mark class="highlight-teal">DO THIS!</mark></p><figure id="4ffd5fc7-af5d-4ad6-a8c3-3c9dd9512978" class="image"><a href="React%204328ada6ebdc40be8989fda6e5e29209/Screenshot_from_2023-01-26_13-02-20.png"><img style="width:1204px" src="React%204328ada6ebdc40be8989fda6e5e29209/Screenshot_from_2023-01-26_13-02-20.png"/></a></figure></details></li></ul><ul id="b62deb41-d66f-4137-a78a-c01dff76ec91" class="toggle"><li><details open=""><summary>Components as props</summary><p id="5cd8bbe2-dd47-44f1-8520-c13a6a6bd633" class=""><mark class="highlight-red">DON&#x27;T DO THIS!</mark></p><figure id="964d2d9f-b2e3-4166-8048-4b8378d2eee7" class="image"><a href="React%204328ada6ebdc40be8989fda6e5e29209/Screenshot_from_2023-01-26_15-04-40.png"><img style="width:1118px" src="React%204328ada6ebdc40be8989fda6e5e29209/Screenshot_from_2023-01-26_15-04-40.png"/></a></figure><p id="5cfcfd00-1843-427a-aa5f-a19036e5af56" class=""><mark class="highlight-teal">DO THIS!</mark></p><figure id="c870d285-cda2-489a-b755-e5122df5820d" class="image"><a href="React%204328ada6ebdc40be8989fda6e5e29209/Screenshot_from_2023-01-26_15-07-09.png"><img style="width:1218px" src="React%204328ada6ebdc40be8989fda6e5e29209/Screenshot_from_2023-01-26_15-07-09.png"/></a></figure></details></li></ul></details></li></ul><ul id="2e3cd5c0-206c-4961-8b32-260942752994" class="toggle"><li><details open=""><summary><strong><strong>Preventing React re-renders with React.memo</strong></strong></summary><figure id="5edb30bf-8cc2-47bc-a163-794d5eca78c5"><div class="source"><a href="https://www.youtube.com/watch?v=feEY3Qajrwg&amp;ab_channel=Developerway">https://www.youtube.com/watch?v=feEY3Qajrwg&amp;ab_channel=Developerway</a></div></figure></details></li></ul></details></li></ul><ul id="20e01316-a446-4df6-b168-8ec43b6fedfa" class="toggle"><li><details open=""><summary>Component<strong><strong> </strong></strong>Lifecycle</summary><figure id="95b11beb-bf4c-45a2-b14c-a54a4c9d0300" class="image"><a href="React%204328ada6ebdc40be8989fda6e5e29209/1_o-JxKWia_Ic-hi1y8oWIUw.webp"><img style="width:1089px" src="React%204328ada6ebdc40be8989fda6e5e29209/1_o-JxKWia_Ic-hi1y8oWIUw.webp"/></a></figure></details></li></ul><ul id="891c4dce-33d2-4cf6-9d33-066a1a5875b3" class="toggle"><li><details open=""><summary>Hooks</summary><ul id="7f377af4-ba63-401b-b405-5f02cc35ce89" class="toggle"><li><details open=""><summary>useState</summary><figure id="c8b93763-ebf2-479d-9ad2-f052f2532678" class="image"><a href="React%204328ada6ebdc40be8989fda6e5e29209/use-state.png"><img style="width:477px" src="React%204328ada6ebdc40be8989fda6e5e29209/use-state.png"/></a></figure></details></li></ul><ul id="289980e8-bd2c-4504-ba56-b8b61eb034d0" class="toggle"><li><details open=""><summary>useEffect</summary><pre id="3b2c702b-e6c1-40dc-ab9c-46ccad0f1830" class="code"><code>import React, { useEffect, useState } from &#x27;react&#x27;;
+
+const PlantComponent = () =&gt; {
+  const [isWatered, setWatered] = useState(false);
+
+  useEffect(() =&gt; {
+    // Perform the side effect (watering the plant) when the component mounts or when `isWatered` changes.
+    if (!isWatered) {
+      console.log(&#x27;Watering the plant...&#x27;);
+      setWatered(true);
+    }
+
+    // Clean-up function
+    return () =&gt; {
+      console.log(&#x27;Cleaning up...&#x27;);
+    };
+  }, [isWatered]);
+
+  return (
+    &lt;div&gt;
+      &lt;h2&gt;Plant Component&lt;/h2&gt;
+      &lt;p&gt;{isWatered ? &#x27;The plant is watered.&#x27; : &#x27;The plant is dry.&#x27;}&lt;/p&gt;
+    &lt;/div&gt;
+  );
+};
+
+export default PlantComponent;</code></pre><p id="f4dac124-ba85-433b-a4b9-3880b14ec3b0" class="">
+</p></details></li></ul><ul id="96688233-ae95-415e-a820-6a931005edde" class="toggle"><li><details open=""><summary>useMemo</summary><figure id="925d7478-ea0f-4fa2-8d6c-8b5afc30e3f0" class="image"><a href="React%204328ada6ebdc40be8989fda6e5e29209/Screenshot_from_2023-07-16_15-15-16.png"><img style="width:868px" src="React%204328ada6ebdc40be8989fda6e5e29209/Screenshot_from_2023-07-16_15-15-16.png"/></a></figure><figure id="3d9e54d4-7ef8-47a2-9051-5a36c33035e5" class="image"><a href="React%204328ada6ebdc40be8989fda6e5e29209/Screenshot_from_2023-07-16_15-15-53.png"><img style="width:897px" src="React%204328ada6ebdc40be8989fda6e5e29209/Screenshot_from_2023-07-16_15-15-53.png"/></a></figure></details></li></ul><ul id="f855a1b1-fd27-4d43-93ed-b7981d040b70" class="toggle"><li><details open=""><summary>useCallback</summary><figure id="07e10479-ab54-4a9b-9c78-ad5e0373f518" class="image"><a href="React%204328ada6ebdc40be8989fda6e5e29209/Screenshot_from_2023-07-16_15-14-14.png"><img style="width:868px" src="React%204328ada6ebdc40be8989fda6e5e29209/Screenshot_from_2023-07-16_15-14-14.png"/></a></figure><figure id="f1d31bf6-3db1-4a5b-9d88-7f5f8d724d49" class="image"><a href="React%204328ada6ebdc40be8989fda6e5e29209/Screenshot_from_2023-07-16_15-16-32.png"><img style="width:929px" src="React%204328ada6ebdc40be8989fda6e5e29209/Screenshot_from_2023-07-16_15-16-32.png"/></a></figure></details></li></ul><ul id="ac90c7fd-f537-4d96-8da7-73d25f81b978" class="toggle"><li><details open=""><summary>useRef</summary></details></li></ul><ul id="410328cf-d6cb-4da0-a524-aed922494528" class="toggle"><li><details open=""><summary>useContext</summary><pre id="45004d86-3587-4f3d-8a11-8eb78d6f27b7" class="code"><code>// ChildComponent.js
+import React, { useContext } from &#x27;react&#x27;;
+import MyContext from &#x27;./MyContext&#x27;;
+
+function ChildComponent() {
+  const value = useContext(MyContext);
+
+  return &lt;p&gt;{value}&lt;/p&gt;;
+}
+
+export default ChildComponent;</code></pre></details></li></ul><ul id="51e499f2-509f-4bd8-87e4-b7d6d16f66c6" class="toggle"><li><details open=""><summary>useReducer</summary></details></li></ul><ul id="323f42c0-5d1c-40f7-b56a-04b3f6f31ba1" class="toggle"><li><details open=""><summary>useTransition</summary><pre id="74d0f38c-a75d-4c8e-89c8-a5b76a7d5d75" class="code"><code>import { useState, useTransition } from &#x27;react&#x27;;
+
+
+export default function Counter() {
+  const [isPending, startTransition] = useTransition()
+  const [input, setInput] = useState(&#x27;&#x27;)
+  const [list, setList] = useState&lt;any&gt;([])
+
+  const LIST_SIZE = 40000;
+
+  const handleChange = (e: any) =&gt; {
+    setInput(e.target.value)
+    startTransition(() =&gt; {
+      const l = []
+      for (let i = 0; i &lt; LIST_SIZE; i++) {
+        l.push(e.target.value)
+      }
+      setList(l)
+    })
+  }
+
+  return (
+    &lt;&gt;
+      &lt;input type=&quot;text&quot; value={input} onChange={handleChange} /&gt;
+      {isPending
+        ? &#x27;loading...&#x27;
+        : list.map((item, index) =&gt; {
+          return &lt;p key={index}&gt;{item}&lt;/p&gt;
+        })
+
+      }
+    &lt;/&gt;
+  );
+}</code></pre></details></li></ul><ul id="a7af8256-01eb-464a-aad1-f6429b6daaa9" class="toggle"><li><details open=""><summary>useDeferredValue</summary></details></li></ul><ul id="68d86458-8e7d-4a00-b5ba-de52c7533e67" class="toggle"><li><details open=""><summary>useId</summary></details></li></ul></details></li></ul><ul id="05f1d409-94d0-4bad-bbaa-76e2a9f98d8f" class="toggle"><li><details open=""><summary>Context API</summary><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="8f1a9a6c-4dd5-4bfb-9e09-31077c9500e5"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><strong>React Context APi</strong><p id="a94a89a1-36ba-4139-99e8-c9f87a66d8ee" class="">React context allows us to pass down and use (consume) data in whatever component we need in our React app without using props.</p><p id="4fab3db7-f198-4325-99ce-16bc28c62c1d" class=""><em>In other words, React context allows us to share data (state) across our components more easily.</em></p><p id="5f554236-e147-426c-b61c-67ffd8751de1" class="">Data should be placed on React context that does not need to be updated often.</p><p id="54212f55-4e9d-4891-8262-655d4dd9237f" class="">Why? Because context was <strong>not made as an entire state management</strong> system. It was made to make <strong>consuming</strong> data easier.</p><p id="47afea85-03c0-4762-8d01-f768f8fb2a94" class=""><em>You can think of React context as the equivalent of </em><strong><em>global variables </em></strong><em>for our React components.</em></p><p id="37d76939-2fee-4e45-b3a6-22b4cd9114d2" class="">React context helps us avoid the problem of props drilling.</p><p id="5a340b2b-6012-4c13-a332-3cf9a1db2b22" class=""><strong>Props drilling</strong> is a term to describe when you pass props down multiple levels to a nested component, through components that don&#x27;t need it.</p></div></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="2ae066b0-e8d4-4db5-bb76-3b65ba05f3ad"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><strong>The Differences between React Context and the useContext hook</strong><ol type="1" id="e5cd2047-121a-43b0-aaaf-0c62aa97899b" class="numbered-list" start="1"><li>React Context:<ul id="aa7af175-b496-46be-a1e0-598a4370e9e0" class="bulleted-list"><li style="list-style-type:disc">React Context is an API that allows you to share data between components without passing it explicitly through props.</li></ul><ul id="29280bc6-eb3e-4fd3-96db-44570399e188" class="bulleted-list"><li style="list-style-type:disc">It provides a way to create a &quot;context&quot; object that holds a value and makes it accessible to any component within its subtree.</li></ul><ul id="9cfac645-5694-4d74-b044-3bbc8f42ddea" class="bulleted-list"><li style="list-style-type:disc">Context is typically used when you have data that needs to be accessed by multiple components at different levels of the component tree.</li></ul><ul id="939e42fd-0c54-4123-9d59-45da9c670fc6" class="bulleted-list"><li style="list-style-type:disc">Context consists of two main components: <code><strong>Provider</strong></code> and <code><strong>Consumer</strong></code>. The <code><strong>Provider</strong></code> component is used to provide the context value, while the <code><strong>Consumer</strong></code> component (or useContext hook) is used to access the context value.</li></ul><ul id="9d533eed-b99f-4523-ac4a-174c013367b5" class="bulleted-list"><li style="list-style-type:disc">Context is useful for avoiding prop drilling, where you would otherwise have to pass data through multiple intermediate components.</li></ul></li></ol><ol type="1" id="18cad433-896a-4c01-8bf0-c49e558b9f75" class="numbered-list" start="2"><li>useContext Hook:<ul id="44476357-d44c-497b-a9b0-07f17b9ac6ba" class="bulleted-list"><li style="list-style-type:disc">The useContext hook is a built-in hook provided by React that simplifies accessing the value from a Context object.</li></ul><ul id="f2599674-2612-4784-bd1e-26454079435b" class="bulleted-list"><li style="list-style-type:disc">It allows you to consume the context value directly in a functional component <strong>without</strong> using the <code><strong>Consumer</strong></code> component.</li></ul><ul id="6023b9c6-9dd6-4220-bf6e-3c5b3ec3b085" class="bulleted-list"><li style="list-style-type:disc">The useContext hook takes the context object as an argument and returns the current value of that context.</li></ul><ul id="0260b2dc-7073-4484-8d90-75a55f2a0615" class="bulleted-list"><li style="list-style-type:disc">It is a convenient way to access context values within functional components, avoiding the need for wrapping the component with the <code><strong>Consumer</strong></code> component.</li></ul></li></ol><p id="69abff74-afb1-42e1-8910-0aa51b3a08ee" class="">In summary, React Context provides a mechanism for creating and sharing data between components, while the useContext hook is a specific hook that simplifies accessing the context value within functional components.</p></div></figure><pre id="12f385b5-e026-454d-98cb-3d4bb4a5c8ba" class="code"><code>// Creating a Context
+const MyContext = React.createContext();
+
+// Using Context and useContext hook
+function ParentComponent() {
+  return (
+    &lt;MyContext.Provider value=&quot;Hello, World!&quot;&gt;
+      &lt;ChildComponent /&gt;
+    &lt;/MyContext.Provider&gt;
+  );
+}
+
+function ChildComponent() {
+  const value = React.useContext(MyContext);
+
+  return &lt;p&gt;{value}&lt;/p&gt;;
+}</code></pre></details></li></ul><ul id="0c2be718-9991-40d7-9aae-0f4adda4f1c3" class="toggle"><li><details open=""><summary>React.memo</summary><pre id="d57e57df-1b78-4cf7-93c4-8a6719171bc6" class="code"><code>import React from &#x27;react&#x27;;
+
+// Regular functional component
+const MyComponent = ({ count2 }: any) =&gt; {
+  console.log(&#x27;Rendering MyComponent...&#x27;);
+  return (
+    &lt;div&gt;
+      &lt;h1&gt;son&lt;/h1&gt;
+      &lt;h2&gt;{count2}&lt;/h2&gt;
+    &lt;/div&gt;
+  );
+};
+
+// Memoized version of MyComponent
+const MemoizedComponent = React.memo(MyComponent);
+
+// Parent component
+const ParentComponent = () =&gt; {
+ const [count, setCount] = React.useState(0);
+ const [count2, setCount2] = React.useState&lt;any&gt;(10);
+
+  const handleClick = () =&gt; {
+    setCount(count + 1);
+  };
+  const handleClick2 = () =&gt; {
+    setCount2(count2 + 1);
+  };
+
+  return (
+    &lt;div&gt;
+      {count}
+      &lt;button onClick={handleClick}&gt;Increment&lt;/button&gt;
+      &lt;button onClick={handleClick2}&gt;increment memo&lt;/button&gt;
+      &lt;MemoizedComponent count2={count2} /&gt;
+    &lt;/div&gt;
+  );
+};
+
+export default ParentComponent;</code></pre></details></li></ul><hr id="72fbb0e2-8cab-405b-9b40-abfd6f45f7fa"/><ul id="fc0f6584-c95e-4513-b233-66c72cb32645" class="toggle"><li><details open=""><summary>Code Splitting</summary><pre id="725d209c-2b33-455f-829f-0c4f4a491494" class="code"><code>import React, { lazy, Suspense } from &#x27;react&#x27;;
+
+// Create a lazy-loaded component
+const LazyComponent = lazy(() =&gt; import(&#x27;./LazyComponent&#x27;));
+
+function App() {
+  return (
+    &lt;div&gt;
+      &lt;h1&gt;My App&lt;/h1&gt;
+      &lt;Suspense fallback={&lt;div&gt;Loading...&lt;/div&gt;}&gt;
+        &lt;LazyComponent /&gt;
+      &lt;/Suspense&gt;
+    &lt;/div&gt;
+  );
+}
+
+export default App;</code></pre></details></li></ul><ul id="12e1d701-d8de-4906-80b1-192aafb5baa4" class="toggle"><li><details open=""><summary>Controlled Components / Uncontrolled Components</summary><p id="7fc28854-2c21-41fc-b95b-8c892798ba80" class=""><strong>Controlled Components</strong></p><p id="ca1c8490-cbca-4967-99fb-910899a28b2b" class="">A controlled component is a form element, such as an input or textarea, that is completely controlled by React. The value of the input is stored in the component&#x27;s state, and any changes to the value are handled through a change handler function. The component&#x27;s state is updated with the new value, and the component is re-rendered with the updated value.</p><p id="c200bfa3-e11c-49ac-8d6c-eac35efecafc" class="">The state is managed using the <code><strong>useState</strong></code> hook</p><p id="3279d6e0-c245-4930-9b33-4e4026c777ee" class="">In a controlled component, the value of the input is always consistent with the state of the component. This makes it easy to read and update the value of the input, and ensures that the component&#x27;s state is always in sync with the input.</p><pre id="19df8939-a425-439e-8b09-7f3d70d031a8" class="code"><code>// controlled component
+import React, { useState } from &#x27;react&#x27;;
+
+const Form = () =&gt; {
+  const [name, setName] = useState(&#x27;&#x27;);
+
+  const handleChange = (event) =&gt; {
+    setName(event.target.value);
+  };
+
+  const handleSubmit = (event) =&gt; {
+    event.preventDefault();
+    // do something with the name value
+  };
+
+  return (
+    &lt;form onSubmit={handleSubmit}&gt;
+      &lt;input type=&quot;text&quot; value={name} onChange={handleChange} /&gt;
+      &lt;button type=&quot;submit&quot;&gt;Submit&lt;/button&gt;
+    &lt;/form&gt;
+  );
+};</code></pre><p id="d89f26c9-2b8d-4ed3-ba2b-c566f12f590e" class=""><strong>Uncontrolled Components</strong>
+An uncontrolled component in React is a form element, such as an input or textarea, that manages its own state internally, without being controlled by React&#x27;s state management system. Unlike controlled components, the value of an uncontrolled component is not stored in the component&#x27;s state and is not updated through state changes or event handlers.</p><p id="0b18145f-c7cf-4fbf-90a5-0aa13c48e493" class="">In an uncontrolled component, the input element handles its own state and relies on the DOM to store and retrieve its value. You can access the input&#x27;s value through techniques like DOM references or other methods, such as retrieving the value during form submission or specific interactions.</p><p id="18f6c12b-f572-4864-b594-7d1904310488" class="">Uncontrolled components can be useful when you have a simple form or when you prefer a more direct way of handling the input value without involving React&#x27;s state management. They can be quicker to implement, as you don&#x27;t need to set up state variables or event handlers for value changes.</p><p id="445b8e48-b746-42b3-8d14-198f64c0684d" class="">However, it&#x27;s important to keep in mind that since the value is not controlled by React, the framework is not aware of changes to the input value unless you explicitly access it. This means that certain features, like form validation or syncing the input value with other components or React&#x27;s state, may require additional manual handling.</p><pre id="0d007f2b-1a45-43bc-a926-681e380b02e8" class="code"><code>// uncontrolled component
+import React, { useRef } from &#x27;react&#x27;;
+
+const Form = () =&gt; {
+  const inputRef = useRef(null);
+
+  const handleSubmit = (event) =&gt; {
+    event.preventDefault();
+    const value = inputRef.current.value;
+    // do something with the value
+  };
+
+  return (
+    &lt;form onSubmit={handleSubmit}&gt;
+      &lt;input type=&quot;text&quot; ref={inputRef} /&gt;
+      &lt;button type=&quot;submit&quot;&gt;Submit&lt;/button&gt;
+    &lt;/form&gt;
+  );
+};</code></pre></details></li></ul><ul id="c0dcd853-54b6-4158-8e99-f501efd808f1" class="toggle"><li><details open=""><summary>Best Practices </summary><ul id="543ef232-7a42-43a1-b8e9-a8f79a00c269" class="toggle"><li><details open=""><summary>use “Key” attribute </summary><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="3927c4b7-5a76-45fa-bbd2-77fafaa43267"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Key attribute helps react identify elements of the same type within the same array of children - <strong>not just in map </strong></div></figure><figure id="f6d0abeb-20a5-493c-a050-78b5836c44f9" class="image"><a href="React%204328ada6ebdc40be8989fda6e5e29209/Screenshot_from_2023-05-17_16-55-44.png"><img style="width:1318px" src="React%204328ada6ebdc40be8989fda6e5e29209/Screenshot_from_2023-05-17_16-55-44.png"/></a></figure></details></li></ul><ul id="a762cb24-e0b9-4809-af55-427177a0d0ae" class="toggle"><li><details open=""><summary>never create components inside other components</summary><figure id="56bc9939-042e-4ee9-a1fa-61a9bb8ba6cf" class="image"><a href="React%204328ada6ebdc40be8989fda6e5e29209/Screenshot_from_2023-05-17_17-01-29.png"><img style="width:643px" src="React%204328ada6ebdc40be8989fda6e5e29209/Screenshot_from_2023-05-17_17-01-29.png"/></a></figure></details></li></ul></details></li></ul><ul id="cd8b3384-4242-4ec8-920b-ee8a0a920daf" class="toggle"><li><details open=""><summary>Patterns</summary><ul id="0aaea27f-b2fc-421f-8076-50939503f5e2" class="toggle"><li><details open=""><summary>Render Props</summary><pre id="5370d9b4-4a48-4df0-8974-85c46bb2fa13" class="code"><code>import React, { useState } from &#x27;react&#x27;;
+
+// Counter component that uses the Render Props pattern
+const Counter = ({ render }) =&gt; {
+  const [count, setCount] = useState(0);
+
+  const increment = () =&gt; {
+    setCount(count + 1);
+  };
+
+  const decrement = () =&gt; {
+    setCount(count - 1);
+  };
+
+  // Call the render function with the necessary data
+  return render(count, increment, decrement);
+};
+
+// Example usage of the Counter component
+const App = () =&gt; {
+  return (
+    &lt;div&gt;
+      &lt;h1&gt;Counter App&lt;/h1&gt;
+      &lt;Counter
+        render={(count, increment, decrement) =&gt; (
+          &lt;div&gt;
+            &lt;p&gt;Count: {count}&lt;/p&gt;
+            &lt;button onClick={increment}&gt;Increment&lt;/button&gt;
+            &lt;button onClick={decrement}&gt;Decrement&lt;/button&gt;
+          &lt;/div&gt;
+        )}
+      /&gt;
+    &lt;/div&gt;
+  );
+};
+
+export default App;</code></pre></details></li></ul><ul id="a9d627fa-0593-4164-84e4-07c9f9c7d67f" class="toggle"><li><details open=""><summary>High Order Component (HOC)</summary><pre id="0dfd05d2-c757-4a10-83a7-d26a8a205881" class="code"><code>// Creating the HOC:
+import React, { useEffect, useState } from &#x27;react&#x27;;
+import { useHistory } from &#x27;react-router-dom&#x27;; // Assume using React Router for navigation
+
+const withAuthentication = (WrappedComponent) =&gt; {
+  return function WithAuthentication(props) {
+    const [authenticated, setAuthenticated] = useState(false);
+    const history = useHistory();
+
+    useEffect(() =&gt; {
+      // Simulate authentication check (you might replace this with an API call)
+      const isAuthenticated = checkAuthStatus();
+
+      if (!isAuthenticated) {
+        // Redirect to login page if not authenticated
+        history.push(&#x27;/login&#x27;);
+      } else {
+        setAuthenticated(true);
+      }
+    }, []);
+
+    return authenticated ? &lt;WrappedComponent {...props} /&gt; : null;
+  };
+};
+
+export default withAuthentication;</code></pre><pre id="cff03008-bd8a-4464-831b-b080d1114fc4" class="code"><code>// Using the HOC:
+import React from &#x27;react&#x27;;
+import withAuthentication from &#x27;./withAuthentication&#x27;; // Path to your HOC
+
+const Dashboard = () =&gt; {
+  return (
+    &lt;div&gt;
+      &lt;h1&gt;Welcome to the Dashboard&lt;/h1&gt;
+      {/* Dashboard content */}
+    &lt;/div&gt;
+  );
+};
+
+const AuthenticatedDashboard = withAuthentication(Dashboard);
+
+const App = () =&gt; {
+  return (
+    &lt;div&gt;
+      {/* Other components */}
+      &lt;AuthenticatedDashboard /&gt;
+      {/* Other components */}
+    &lt;/div&gt;
+  );
+};
+
+export default App;</code></pre><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="d429ae7a-f970-4dd8-ac7a-345da22599f9"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">n this example, the <code><strong>withAuthentication</strong></code> HOC checks if the user is authenticated before rendering the wrapped <code><strong>Dashboard</strong></code> component. If the user is not authenticated, it redirects them to the login page. Otherwise, it renders the <code><strong>Dashboard</strong></code> component.</div></figure></details></li></ul></details></li></ul><ul id="b57ffa6d-d8ab-459e-9b2c-3695c885eef5" class="toggle"><li><details open=""><summary>Code Examples</summary><pre id="df2a3314-0a50-4eac-8cff-6de1b6bc498b" class="code"><code>// React implementation from scratch - render, createDOM, updateDOM, reconcile, createElement
+let _Component = null;
+let _root = null;
+let _hooks = null;
+
+export let render = hooks =&gt; (Component = _Component, root = _root) =&gt; {
+  if (JSON.stringify(hooks) === _hooks) {
+    return; // shitty memoization!
+  } else {
+    _hooks = JSON.stringify(hooks);
+  }
+  // nuke the existing rendered elements
+  while (root.firstChild) {
+    root.removeChild(root.firstChild);
+  }
+  const Comp = reconcile(Component, root);
+  _Component = Component;
+  _root = root;
+  const dom = createDom(Comp);
+  // mount the new ones
+  root.appendChild(dom);
+};
+
+export function createElement(type, props, ...children) {
+  return {
+    type,
+    props: {
+      ...props,
+      children: children.map(child =&gt;
+        typeof child === &quot;object&quot; ? child : createTextElement(child)
+      )
+    }
+  };
+}
+function createTextElement(text) {
+  return {
+    type: &quot;TEXT_ELEMENT&quot;,
+    props: {
+      nodeValue: text,
+      children: []
+    }
+  };
+}
+
+// recursive
+export function createDom(fiber) {
+  const dom =
+    fiber.type === &quot;TEXT_ELEMENT&quot;
+      ? document.createTextNode(&quot;&quot;)
+      : document.createElement(fiber.type);
+  const props = fiber.props || {};
+  updateDom(dom, {}, props);
+  if (props.children) {
+    props.children.forEach(child =&gt; {
+      // recursion
+      if (Array.isArray(child)) {
+        child.forEach(x =&gt; {
+          dom.appendChild(createDom(x));
+        });
+      } else {
+        dom.appendChild(createDom(child));
+      }
+    });
+  }
+  return dom;
+}
+const isEvent = key =&gt; key.startsWith(&quot;on&quot;);
+const isProperty = key =&gt; key !== &quot;children&quot; &amp;&amp; !isEvent(key);
+const isNew = (prev, next) =&gt; key =&gt; prev[key] !== next[key];
+const isGone = (prev, next) =&gt; key =&gt; !(key in next);
+function updateDom(dom, prevProps, nextProps) {
+  //Remove old or changed event listeners
+  Object.keys(prevProps)
+    .filter(isEvent)
+    .filter(key =&gt; !(key in nextProps) || isNew(prevProps, nextProps)(key))
+    .forEach(name =&gt; {
+      const eventType = name.toLowerCase().substring(2);
+      dom.removeEventListener(eventType, prevProps[name]);
+    });
+  // Remove old properties
+  Object.keys(prevProps)
+    .filter(isProperty)
+    .filter(isGone(prevProps, nextProps))
+    .forEach(name =&gt; {
+      dom[name] = &quot;&quot;;
+    });
+  // Set new or changed properties
+  Object.keys(nextProps)
+    .filter(isProperty)
+    .filter(isNew(prevProps, nextProps))
+    .forEach(name =&gt; {
+      dom[name] = nextProps[name];
+    });
+  // Add event listeners
+  Object.keys(nextProps)
+    .filter(isEvent)
+    .filter(isNew(prevProps, nextProps))
+    .forEach(name =&gt; {
+      const eventType = name.toLowerCase().substring(2);
+      dom.addEventListener(eventType, nextProps[name]);
+    });
+}
+
+// recursive funciton
+export function reconcile(Component, root) {
+  const type = Component.type;
+  if (Array.isArray(Component)) {
+    return Component.map(child =&gt; reconcile(child, root));
+  }
+  const Comp = typeof type === &quot;string&quot; ? Component : type();
+  if (Comp.props &amp;&amp; Comp.props.children) {
+    Comp.props.children.forEach((child, idx) =&gt; {
+      if (typeof child.type !== &quot;string&quot;) {
+        // recursive call for children
+        Comp.props.children[idx] = reconcile(Comp.props.children[idx], root);
+      }
+    });
+  }
+  return Comp;
+}</code></pre><pre id="fab4c7cb-552e-4978-88a0-adb60c932955" class="code"><code>// React Hooks implementation
+import { createElement, render } from &quot;./utils&quot;; // the functions are located above
+
+const React = (() =&gt; {
+  let hooks = [];
+  let idx = 0;
+
+  function workLoop() {
+    idx = 0;
+    render(hooks)();
+    setTimeout(workLoop, 300);
+  }
+  setTimeout(workLoop, 300);
+
+  function useState(initVal) {
+    let state = hooks[idx] || initVal;
+    let _idx = idx;
+    let setState = newVal =&gt; {
+      hooks[_idx] = newVal;
+    };
+    idx++;
+    return [state, setState];
+  }
+
+  function useRef(val) {
+    return useState({ current: val })[0];
+  }
+
+  function useEffect(cb, depArray) {
+    const oldDeps = hooks[idx];
+    let hasChanged = true;
+    if (oldDeps) {
+      hasChanged = depArray.some(
+        (dep, i) =&gt; !Object.is(dep, oldDeps[i])
+      );
+    }
+    if (hasChanged) cb();
+    hooks[idx] = depArray;
+  }
+
+  return {
+    useState,
+    render: render(hooks),
+    useEffect,
+    useRef,
+    createElement
+  };
+})();
+
+function Component() {
+  const [count, setCount] = React.useState(1);
+  const list = useDogs(count);
+  return (
+    &lt;main&gt;
+      &lt;h1&gt;
+        {&quot; &quot;}
+        This is &lt;i&gt;Not&lt;/i&gt; React{&quot; &quot;}
+      &lt;/h1&gt;
+      &lt;button onClick={() =&gt; setCount(count + 1)}&gt;
+        Click me!!!! {count}
+      &lt;/button&gt;
+      {list.map(item =&gt; (
+        &lt;img src={item} /&gt;
+      ))}
+    &lt;/main&gt;
+  );
+}
+
+function useDogs(count) {
+  const [list, setList] = React.useState([]);
+  React.useEffect(
+    () =&gt; {
+      fetch(
+        &quot;https://dogceo.netlify.com/.netlify/functions/pics?count=&quot; +
+          count
+      )
+        .then(x =&gt; x.json())
+        .then(x =&gt; setList(x));
+    },
+    [count]
+  );
+  return list;
+}
+
+// var app = React.render(Component);
+// app.click();
+// var app = React.render(Component);
+// app.type(&quot;Vue&quot;);
+// var app = React.render(Component);
+
+const rootElement = document.getElementById(&quot;root&quot;);
+React.render(&lt;Component /&gt;, rootElement);</code></pre></details></li></ul><ul id="7cc0116c-461e-4049-9960-482bdc21979e" class="toggle"><li><details open=""><summary>Interview Questions</summary><ol type="1" id="86e0f8f6-8c8c-4b6c-8887-308338cf0e12" class="numbered-list" start="1"><li><strong>JSX</strong> =&gt;  syntactic sugar of createElement.</li></ol><ol type="1" id="1285fddd-73f0-44e9-8f89-1dd46c9b9901" class="numbered-list" start="2"><li><strong>Class, classname</strong> =&gt;  React compiles to JavaScript and Class is reserved word.</li></ol><ol type="1" id="00694fe8-592a-4224-b90a-90ca75e042b2" class="numbered-list" start="3"><li><strong>DataFlow </strong>=&gt; Unidirectional, you passing data from father to child (above to bottom).</li></ol><ol type="1" id="5f563a08-a192-4eff-b71f-2c00e303abf4" class="numbered-list" start="4"><li><strong>Ternary or &amp;&amp; operator to conditionally render React components</strong> =&gt; use ternary operator (&amp;&amp; have falsy thing → const a = [ ], a.length &amp;&amp; &lt;div&gt;&lt;/div will render 0)</li></ol><ol type="1" id="d6b17872-73a1-4a7c-9970-809cc8259101" class="numbered-list" start="5"><li><strong>Higher Order Component (HOC) </strong>=&gt; in React is a function that takes a component and returns a new component with enhanced functionality.</li></ol><ol type="1" id="ec19c877-f161-48cd-83c1-8142c6e89e52" class="numbered-list" start="6"><li><strong>Render Prop </strong>=&gt; is a technique where a function is passed as a prop to a component, allowing the component to render content provided by that function.</li></ol><ol type="1" id="7f2038a4-0cd5-4cfa-8bbf-60e3bdbf5572" class="numbered-list" start="7"><li>C<strong>ustom Hook </strong>=&gt; in React is a JavaScript function that allows you to reuse stateful logic across multiple components.</li></ol><ol type="1" id="7e6cefdf-40f7-4db1-ad06-5fcb96405fe4" class="numbered-list" start="8"><li><strong>Fragments</strong> =&gt; group multiple components or elements without adding an extra DOM element, allowing the return of multiple elements without a single parent wrapper, keeping the HTML structure clean and avoiding unnecessary nesting.</li></ol><ol type="1" id="36611a24-125a-4984-86c2-154ceb800144" class="numbered-list" start="9"><li><strong>Synchronous vs Asynchronous </strong>=&gt; Synchronous code is executed in sequence, one operation at a time, blocking the execution until the current operation is completed. Asynchronous code, on the other hand, allows multiple operations to be executed concurrently or without blocking, often using callbacks, promises, or async/await syntax.</li></ol><ol type="1" id="a8893ebb-a365-48fc-b83f-af24fb990e21" class="numbered-list" start="10"><li><strong>Virtual Dom </strong>=&gt; is a lightweight copy of the actual DOM that allows efficient updates and reconciliation of changes in React components.</li></ol></details></li></ul><ul id="6eacd2de-a04a-417f-b849-989ce0ca8c34" class="toggle"><li><details open=""><summary>Resources</summary><table id="49715535-e5e5-41b3-935f-d3a51a9a9306" class="simple-table"><tbody><tr id="f9044704-4ced-4b31-959d-2b3a547503c4"><td id="?q@L" class="" style="width:264px">Awesome React</td><td id="FLPg" class="" style="width:515px"><a href="https://awesomereact.com/">https://awesomereact.com/</a></td></tr><tr id="21f2836c-7a85-4093-af41-a6fbb8622617"><td id="?q@L" class="" style="width:264px">Nadia makarevich - developer way</td><td id="FLPg" class="" style="width:515px"><a href="https://www.youtube.com/@developerwaypatterns">https://www.youtube.com/@developerwaypatterns</a></td></tr><tr id="bcaf892c-bb4d-4c33-aef4-134583733e8b"><td id="?q@L" class="" style="width:264px">REACT.gg</td><td id="FLPg" class="" style="width:515px"><a href="https://react.gg/visualized">https://react.gg/visualized</a></td></tr><tr id="e7c29c54-b5ef-441b-8c23-91f60f6cf7ad"><td id="?q@L" class="" style="width:264px"><strong>Ace Your Next React Interview - </strong>Andreas Sujono</td><td id="FLPg" class="" style="width:515px"><a href="https://levelup.gitconnected.com/ace-your-next-react-interview-9227fc8ca105">https://levelup.gitconnected.com/ace-your-next-react-interview-9227fc8ca105</a></td></tr><tr id="82ba7fbf-af29-4712-82fb-3e291ff4407d"><td id="?q@L" class="" style="width:264px">Lin Clark - A Cartoon Intro to Fiber</td><td id="FLPg" class="" style="width:515px"><a href="https://www.youtube.com/watch?v=ZCuYPiUIONs&amp;ab_channel=MetaDevelopers">https://www.youtube.com/watch?v=ZCuYPiUIONs&amp;ab_channel=MetaDevelopers</a></td></tr><tr id="dbc70836-a982-48e5-a320-802a740d0eac"><td id="?q@L" class="" style="width:264px">Can Swyx recreate React Hooks and useState in under 30 min? - JSConf.Asia</td><td id="FLPg" class="" style="width:515px"><a href="https://www.youtube.com/watch?v=KJP1E-Y-xyo&amp;ab_channel=JSConf">https://www.youtube.com/watch?v=KJP1E-Y-xyo&amp;ab_channel=JSConf</a></td></tr><tr id="f8729971-4adf-4fb0-aeb5-19da1858c8c1"><td id="?q@L" class="" style="width:264px">Understanding React&#x27;s UI Rendering Process</td><td id="FLPg" class="" style="width:515px"><a href="https://www.youtube.com/watch?v=i793Qm6kv3U&amp;ab_channel=CrossComm%2CInc">https://www.youtube.com/watch?v=i793Qm6kv3U&amp;ab_channel=CrossComm%2CInc</a>.</td></tr><tr id="aeabecad-861e-4772-ac90-f8340bdc0044"><td id="?q@L" class="" style="width:264px">How React ACTUALLY works (DEEP DIVE 2023)</td><td id="FLPg" class="" style="width:515px"><a href="https://www.youtube.com/watch?v=za2FZ8QCE18&amp;ab_channel=FrontStart">https://www.youtube.com/watch?v=za2FZ8QCE18&amp;ab_channel=FrontStart</a></td></tr><tr id="375adf4d-becb-4c2f-9f23-16f52871de2a"><td id="?q@L" class="" style="width:264px">How React 18 Improves Application Performance</td><td id="FLPg" class="" style="width:515px"><a href="https://vercel.com/blog/how-react-18-improves-application-performance">https://vercel.com/blog/how-react-18-improves-application-performance</a></td></tr></tbody></table></details></li></ul><p id="fd8f595e-e121-443c-8f7e-cda5f74abeef" class="">
+</p><p id="9b336cf8-33bc-4ab8-b9e1-82c0a341d510" class="">
+</p><p id="9e455292-8e8b-4653-89ec-27eb761dfbe6" class="">
+</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

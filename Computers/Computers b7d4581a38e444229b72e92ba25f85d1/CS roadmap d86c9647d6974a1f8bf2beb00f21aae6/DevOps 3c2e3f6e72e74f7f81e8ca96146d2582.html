@@ -1,0 +1,779 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>DevOps</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-interactiveBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="3c2e3f6e-72e7-4f7f-81e8-ca96146d2582" class="page sans"><header><img class="page-cover-image" src="https://www.notion.so/images/page-cover/nasa_ibm_type_704.jpg" style="object-position:center 19.999999999999996%"/><div class="page-header-icon page-header-icon-with-cover"><span class="icon">🛠️</span></div><h1 class="page-title">DevOps</h1><p class="page-description"></p></header><div class="page-body"><ul id="8e148889-372e-44b8-9399-c114cb8bfdd6" class="toggle"><li><details open=""><summary>AWS</summary><ul id="d0d76847-a245-4a14-b534-324617ba2257" class="toggle"><li><details open=""><summary>ELB / Elastic Load Balancer</summary></details></li></ul><ul id="50816097-b654-4eb8-a59c-bb3b7ce39319" class="toggle"><li><details open=""><summary>EC2 / Elastic Compute Cloud</summary></details></li></ul><ul id="2fff7aa5-132a-4204-b04a-2206c489c901" class="toggle"><li><details open=""><summary>S3 / Simple Storage Service</summary></details></li></ul><ul id="109e9ad1-900d-4dba-9418-13b587337355" class="toggle"><li><details open=""><summary>RDS / Relational Database Service</summary></details></li></ul><ul id="09475fbf-4a0f-4457-98ee-6323f4d0ab59" class="toggle"><li><details open=""><summary>VPC / Virtual Private Cloud</summary></details></li></ul><ul id="c637a86f-1f93-46ac-acb5-2f611cce9496" class="toggle"><li><details open=""><summary>Route 53 / DNS Service</summary></details></li></ul><ul id="81068bd9-404e-4eea-8973-49a2a10cf4b6" class="toggle"><li><details open=""><summary>ECS / Elastic Container Service</summary></details></li></ul><ul id="21dee7d0-9085-475a-b721-1f6ea959f4c2" class="toggle"><li><details open=""><summary>CloudFront</summary></details></li></ul><figure id="8946924d-9eeb-4959-98cf-d6b233aff6f0" class="image"><a href="DevOps%203c2e3f6e72e74f7f81e8ca96146d2582/1687177177295.gif"><img style="width:1620px" src="DevOps%203c2e3f6e72e74f7f81e8ca96146d2582/1687177177295.gif"/></a></figure></details></li></ul><ul id="5493995e-5a4d-4094-8aae-b3e5efa4f0cd" class="toggle"><li><details open=""><summary>Docker</summary><ul id="3b57f366-8993-43c9-8e6f-b587f1d77f41" class="toggle"><li><details open=""><summary>Docker Image</summary><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="e1982ec4-80db-4c51-83d5-c444c902f003"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">A Docker image is like a snapshot or a template of a specific environment containing everything needed to run a particular application. It includes the application&#x27;s code, dependencies, system libraries, and configuration files. You can think of it as a &quot;frozen&quot; state of an application that is ready to be deployed and executed.<p id="c600da89-bf3e-4be6-9286-91fc3f1b8cfe" class="">For example, imagine you have a simple web application built with Node.js. A Docker image for this application would encapsulate the Node.js runtime, the application code, and any required dependencies like Express or MongoDB. It&#x27;s a self-contained unit that can be used to create and run multiple instances of the application.</p></div></figure></details></li></ul><ul id="ed5c6386-0590-494c-8801-6bd8eb7484fa" class="toggle"><li><details open=""><summary>Docker Container</summary><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="ac2b082e-bb26-408e-b9a2-fc5c1cb17284"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">A Docker container is a running instance of a Docker image. It can be considered as a lightweight, isolated, and executable environment that runs the application. Containers provide an additional layer of abstraction, allowing the application to run consistently across different environments and systems.<p id="a9fa61fb-2abd-4f8d-8928-8e5ee129db97" class="">Continuing with the previous example, if the Docker image represents the template of the web application, a Docker container would be a specific instance of that application running in its own isolated environment. You can have multiple containers running from the same image, each with its own resources and isolated file system, but all sharing the same underlying image blueprint.</p><p id="c7e62f65-c0b2-48f7-bf49-79be9fa3c642" class="">Docker containers are portable and can be easily started, stopped, moved, and scaled up or down as needed. They provide consistent behavior regardless of the underlying host system or dependencies, ensuring the application runs reliably across different development, testing, and production environments.</p></div></figure></details></li></ul><ul id="e37a239e-102b-4794-aa47-c7cae16370d7" class="toggle"><li><details open=""><summary>Docker Volume</summary><pre id="f2537b05-7330-4b2b-abc5-0785d4caaf59" class="code"><code># Create a Docker volume
+docker volume create mydata
+
+# Run a container with the volume
+docker run -v mydata:/data myimage</code></pre></details></li></ul><ul id="63b2c83e-bfaa-4071-b7b3-54aebd78320d" class="toggle"><li><details open=""><summary>Docker Compose</summary><pre id="ad16c6dd-31d5-4f42-8803-15c9d63d57c0" class="code"><code>version: &#x27;3&#x27;
+services:
+  frontend:
+    build: ./frontend
+    ports:
+      - 80:80
+  backend:
+    build: ./backend
+    ports:
+      - 3000:3000
+    depends_on:
+      - database
+  database:
+    image: mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: mydb</code></pre></details></li></ul><ul id="007ad22e-42c1-42d9-9fcc-826a631d034a" class="toggle"><li><details open=""><summary>Port Forwarding</summary><hr id="c6d9826d-6ebb-47ac-9c9a-c0e61d6cd3d5"/><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="30a4a145-2498-462b-8d2b-14980c241de7"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Let&#x27;s say you have a web application running inside a Docker container that listens on port 8080. To expose this port to the host machine, you can use the <code><strong>EXPOSE</strong></code> instruction in the Dockerfile.
+
+In the below example, the <code><strong>EXPOSE</strong></code> instruction informs Docker that the container will listen on port 8080, allowing external access. However, it <strong>doesn&#x27;t</strong> actually publish the port to the host machine.</div></figure><pre id="5ec8c074-8538-4176-b941-9511a0d305d7" class="code"><code>FROM node:14
+
+# Set working directory and copy application files
+WORKDIR /app
+COPY . .
+
+# Install dependencies and build the application
+RUN npm install
+RUN npm run build
+
+# Expose port 8080
+EXPOSE 8080
+
+# Start the application
+CMD [ &quot;npm&quot;, &quot;start&quot; ]</code></pre><hr id="3d62b0db-00f3-4d77-9209-0d7d4232052b"/><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="017e90d8-e453-407c-99ea-a8dd38aef7ac"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">To publish the port and enable port forwarding, you can use the <code><strong>-p</strong></code> or <code><strong>--publish</strong></code> flag when running the container:
+<p id="da5acf97-9a23-4d44-887b-9b2ac92b6781" class="">This command below maps port 8080 on the host machine to port 8080 inside the container. Now, the web application running in the container can be accessed from the host machine by visiting <code><strong>http://localhost:8080</strong></code> in a web browser.</p><p id="a3de1328-9709-4acf-b1d5-c5990fa11c00" class="">By combining the <code><strong>EXPOSE</strong></code> instruction in the Dockerfile and the <code><strong>-p</strong></code> flag when running the container, you can easily configure and enable port forwarding in Docker.</p></div></figure><pre id="1c39f0bc-70b1-48c9-b33c-34719e324c7a" class="code"><code>docker run -p 8080:8080 myapp</code></pre><p id="3ab5de72-3147-4f82-a828-a2c4ddc771c4" class="">
+</p></details></li></ul><ul id="4b8f04a4-9882-4881-977a-30aa93257a7d" class="toggle"><li><details open=""><summary>Docker Code Examples</summary><pre id="776f1e47-19b3-4baa-a54b-acdd1a0f3a75" class="code"><code>// Create a file named Dockerfile in the root directory of your React project with the following content:
+
+# Base image
+FROM node:14 as build
+
+# Set working directory
+WORKDIR /app
+
+# Copy package.json and package-lock.json
+COPY package*.json ./
+
+# Install dependencies
+RUN npm install
+
+# Copy project files
+COPY . .
+
+# Build the React app
+RUN npm run build
+
+# Production image
+FROM node:14-alpine
+
+# Set working directory
+WORKDIR /app
+
+# Copy built React app from the build stage
+COPY --from=build /app/build ./build
+
+# Install server dependencies
+RUN npm install express
+
+# Copy the server code
+COPY server.js ./
+
+# Expose the desired port (change if necessary)
+EXPOSE 5000
+
+# Command to run the server
+CMD [&quot;node&quot;, &quot;server.js&quot;]</code></pre><pre id="b552f687-8d6f-4d92-adc9-8b43f913e291" class="code"><code>// In the root directory of your NestJS backend project, create another file named Dockerfile with the following content:
+# Base image
+FROM node:14
+
+# Set working directory
+WORKDIR /app
+
+# Copy package.json and package-lock.json
+COPY package*.json ./
+
+# Install dependencies
+RUN npm install
+
+# Copy project files
+COPY . .
+
+# Expose the desired port (change if necessary)
+EXPOSE 3000
+
+# Command to start the NestJS server
+CMD [&quot;npm&quot;, &quot;start&quot;]</code></pre><pre id="4dac98e2-57f3-4b5b-b2bb-34c55b5d7e02" class="code"><code>docker build -t react-app // Build the Docker image react
+
+docker build -t nest-app // Build the Docker image nest
+
+docker run -p 5000:5000 react-app // Run the Docker containers react
+
+docker run -p 3000:3000 nest-app // Run the Docker containers nest</code></pre></details></li></ul><ul id="7e1eebc3-28f0-4785-b62e-d5435872b66d" class="toggle"><li><details open=""><summary>Resources  </summary><figure id="b3fb8712-ba04-4e2f-90e6-7b05a84ee6b1"><a href="https://www.linkedin.com/posts/vikasrajputin_as-of-2023-docker-is-one-of-the-most-in-demand-activity-7094173564077023232-niS4/?utm_source=share&amp;utm_medium=member_android" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Vikas Rajput on LinkedIn: As of 2023, Docker is one of the most in-demand skills for a backend… | 48 comments</div><div class="bookmark-description">As of 2023, Docker is one of the most in-demand skills for a backend engineer.  Here&amp;#39;s a simple and guided roadmap (with free resources):  1. Introduction to… | 48 comments on LinkedIn</div></div><div class="bookmark-href"><img src="https://static.licdn.com/aero-v1/sc/h/al2o9zrvru7aqj8e1x2rzsrca" class="icon bookmark-icon"/>https://www.linkedin.com/posts/vikasrajputin_as-of-2023-docker-is-one-of-the-most-in-demand-activity-7094173564077023232-niS4/?utm_source=share&amp;utm_medium=member_android</div></div><img src="https://media.licdn.com/dms/image/D4D22AQGQiY_qcGyd5w/feedshare-shrink_2048_1536/0/1691273833867?e=1694649600&amp;v=beta&amp;t=HMPt30SjYGTrfkOO2FxMU220keSMm7jzXw4vCNUuB6s" class="bookmark-image"/></a></figure></details></li></ul><figure id="9491a79a-410b-42a0-8fae-b723191a88e7" class="image"><a href="DevOps%203c2e3f6e72e74f7f81e8ca96146d2582/Screenshot_20230719-203551__01.jpg"><img style="width:1080px" src="DevOps%203c2e3f6e72e74f7f81e8ca96146d2582/Screenshot_20230719-203551__01.jpg"/></a></figure><figure id="e9026223-82ab-44c3-a76a-90ac141e475b" class="image"><a href="DevOps%203c2e3f6e72e74f7f81e8ca96146d2582/1696080778596.gif"><img style="width:1250px" src="DevOps%203c2e3f6e72e74f7f81e8ca96146d2582/1696080778596.gif"/></a></figure><figure id="8ef37dcc-afe0-40f4-8cc6-0cab0c2705dd" class="image"><a href="DevOps%203c2e3f6e72e74f7f81e8ca96146d2582/1697211916525.jpeg"><img style="width:800px" src="DevOps%203c2e3f6e72e74f7f81e8ca96146d2582/1697211916525.jpeg"/></a></figure></details></li></ul><ul id="59f7c9c2-79db-43c6-a119-7ad9346a7a1a" class="toggle"><li><details open=""><summary>Kubernetes</summary><figure id="b4ec52c7-95f7-4738-98d5-802d398649ff" class="image"><a href="DevOps%203c2e3f6e72e74f7f81e8ca96146d2582/1687707733588.jpeg"><img style="width:1280px" src="DevOps%203c2e3f6e72e74f7f81e8ca96146d2582/1687707733588.jpeg"/></a></figure><figure id="8b02beb9-69ec-4bed-b93d-2872be33eb45" class="image"><a href="DevOps%203c2e3f6e72e74f7f81e8ca96146d2582/unnamed_(2).jpg"><img style="width:1463px" src="DevOps%203c2e3f6e72e74f7f81e8ca96146d2582/unnamed_(2).jpg"/></a></figure></details></li></ul><ul id="f577fad0-0fdf-4a41-b01d-704aabedc898" class="toggle"><li><details open=""><summary>Jenkins</summary><figure id="fed901bb-f788-4f7e-84d1-05072a8e4523" class="image"><a href="DevOps%203c2e3f6e72e74f7f81e8ca96146d2582/Screenshot_from_2023-06-18_15-54-54.png"><img style="width:1121px" src="DevOps%203c2e3f6e72e74f7f81e8ca96146d2582/Screenshot_from_2023-06-18_15-54-54.png"/></a></figure><figure id="fbbe1e32-fcbb-42a6-a89e-eda02a302241" class="image"><a href="DevOps%203c2e3f6e72e74f7f81e8ca96146d2582/Screenshot_from_2023-06-18_15-57-03.png"><img style="width:1256px" src="DevOps%203c2e3f6e72e74f7f81e8ca96146d2582/Screenshot_from_2023-06-18_15-57-03.png"/></a></figure><figure id="04948492-5d33-48ae-81c0-c35914b7d915" class="image"><a href="DevOps%203c2e3f6e72e74f7f81e8ca96146d2582/Screenshot_from_2023-06-18_16-09-06.png"><img style="width:1256px" src="DevOps%203c2e3f6e72e74f7f81e8ca96146d2582/Screenshot_from_2023-06-18_16-09-06.png"/></a></figure></details></li></ul><ul id="d6c6943d-ec16-40b6-affb-833e6b5dd4ee" class="toggle"><li><details open=""><summary>Terraform</summary></details></li></ul><ul id="4ea2848b-9553-4d5a-8724-b2f30221016d" class="toggle"><li><details open=""><summary>Kafka</summary></details></li></ul><ul id="20c7dc99-577e-406e-a5f3-6e719cb34e15" class="toggle"><li><details open=""><summary>Apache </summary></details></li></ul><ul id="6e205743-0a81-4c84-81ec-5cfd5202a2c7" class="toggle"><li><details open=""><summary>CI/CD (Continues Integration/Continues Delivery)</summary><figure id="778142a9-eca4-40ad-8765-b4ec6dbefc3c" class="image"><a href="DevOps%203c2e3f6e72e74f7f81e8ca96146d2582/FqMvblwaAAI7zoh.jpeg"><img style="width:1617px" src="DevOps%203c2e3f6e72e74f7f81e8ca96146d2582/FqMvblwaAAI7zoh.jpeg"/></a></figure><figure id="14fd7a98-8b29-4f8d-968f-86850e926120" class="image"><a href="DevOps%203c2e3f6e72e74f7f81e8ca96146d2582/Screenshot_20230724-095814__01.jpg"><img style="width:1080px" src="DevOps%203c2e3f6e72e74f7f81e8ca96146d2582/Screenshot_20230724-095814__01.jpg"/></a></figure><figure id="9f117c68-b673-4af1-bd6b-2bca442990e1" class="image"><a href="DevOps%203c2e3f6e72e74f7f81e8ca96146d2582/Screenshot_20230801-204556__01.jpg"><img style="width:1080px" src="DevOps%203c2e3f6e72e74f7f81e8ca96146d2582/Screenshot_20230801-204556__01.jpg"/></a></figure><figure id="65706f0f-55ae-4022-bd6b-c839b90e370c" class="image"><a href="DevOps%203c2e3f6e72e74f7f81e8ca96146d2582/1693226706367.gif"><img style="width:1080px" src="DevOps%203c2e3f6e72e74f7f81e8ca96146d2582/1693226706367.gif"/></a></figure><figure id="b500e72a-61a4-4acd-a2d6-500de650aa4b" class="image"><a href="DevOps%203c2e3f6e72e74f7f81e8ca96146d2582/1695610674835.gif"><img style="width:800px" src="DevOps%203c2e3f6e72e74f7f81e8ca96146d2582/1695610674835.gif"/></a></figure></details></li></ul></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
